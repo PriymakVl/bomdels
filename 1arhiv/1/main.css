@@ -1,0 +1,295 @@
+/* CSS Document */
+
+body{
+
+background:url(images/top.jpg) top left repeat-x;
+
+font-size:12px;
+
+}
+
+
+
+#wrapper{
+
+margin-left: auto;
+
+margin-right:auto;
+
+margin-top:0px;
+
+width: 770px;
+
+text-align:left;
+
+font-family: Arial;
+
+}
+
+a:link, a:visited{
+
+color:#da9206;
+
+}
+
+a:hover{
+
+color:#666666;
+
+}
+
+.logo{
+
+color:#FFFFFF;
+
+font-weight:bold;
+
+font-size:20px;
+
+}
+
+.logo span{
+
+color:#da9206;
+
+font-weight:normal;
+
+letter-spacing:10px;
+
+}
+
+
+
+/* ......................................Top Nav........................................................... */
+
+
+#nav {
+
+position:absolute;
+
+top:100px;
+
+margin-bottom:0;
+	
+padding:0;
+
+width: 770px;
+	
+
+}
+
+
+ul#menu{
+
+margin:0;
+	
+padding:0;
+	
+list-style-type:none;
+	
+position:relative;
+	
+display:block;
+	
+height:40px;
+	
+font-size:12px;
+	
+font-weight:normal;
+
+}
+
+
+
+#menu li{
+
+display:block;
+	
+float:left;
+	
+margin:0;
+	
+padding:0;
+
+background:url("images/divider.jpg") center right no-repeat;
+	
+}
+	
+	
+
+#menu li a{
+
+display:block;
+	
+float:left;
+
+color:#333333;
+	
+text-decoration:none;
+	
+font-weight:normal;
+	
+padding:14px 25px 0 25px;
+	
+height:26px;
+	
+margin:0;	
+
+}
+	
+	
+#menu li a:hover{
+
+background: url("images/hover.jpg") no-repeat top right;	
+	
+}
+	
+	
+.clear{
+
+clear:both;
+
+}
+
+
+
+/* ......................................Content........................................................... */
+
+
+
+#content{
+
+position:absolute;
+
+top:150px;
+
+margin-top:20px;
+
+width: 770px;
+
+line-height:1.5em;
+
+}
+
+
+h1{
+
+color:#333333;
+
+font-weight:normal;
+
+font-size:18px;
+
+}
+
+
+#content p{
+
+margin-bottom:30px;
+
+}
+
+.line{
+
+border-top:1px solid #999999;
+
+margin-top:15px;
+
+margin-bottom:15px;
+
+}
+
+
+.left_box1{
+
+margin-top:5px;
+
+margin-bottom:5px;
+
+line-height:normal;
+
+float:left;
+
+width:182px;
+
+margin-right:10px;
+
+background-color:#CCCCCC;
+
+
+}
+
+#content .left_box1 p{
+
+margin-bottom:0;
+
+
+}
+
+
+/* ......................................Content 2.......................................................... */
+
+.thetext{
+
+padding:10px;
+
+margin:0;
+
+}
+
+.thetext span{
+
+color:#666666;
+
+font-size:16px;
+
+margin:0;
+
+}
+
+
+
+
+
+/* ......................................Footer........................................................... */
+
+
+#footer{
+
+color:#333333;
+
+margin-bottom:20px;
+
+}
+
+
+#footer span{
+
+color:#da9206;
+
+}
+
+
+#footer a:link, #footer a:visited{
+
+color:#999999;
+
+text-decoration:none;
+
+}
+
+
+#footer a:hover{
+
+color: #fb6030;
+
+text-decoration:underline;
+
+}
+
+
+
+
+
+
+

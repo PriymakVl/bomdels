@@ -1,0 +1,300 @@
+/*Style sheet for Fresh Air 800x600 must be included with HTML.*/
+/*Styles for body.*/
+body
+{
+	margin:0 auto;
+	padding:0;
+	font:76% Verdana, Helvetica, Tahoma, Arial, sans-serif;
+	background-color:#999;
+	color:#494949;
+}
+
+/*Styles for main content which will be wrapped to center. */
+#MainWrapperBlock
+{
+	margin:0px auto;
+	width:750px;
+	background-color:#ffffff;
+}
+
+#WrapperGray
+{
+	margin:0px auto;
+	padding:5px 5px 5px 5px;
+	width:740px;
+	background-color:#ffffff;
+	border:solid 2px #666;
+}
+
+/*Styles for the headers at the top. */
+#Header
+{
+	margin: 0px auto;
+	height:130px;
+	width:730px;
+	background-color: #B4D9CC;
+	border:1px solid #666;
+}
+
+#InnerHeader
+{
+	margin: 0px auto;
+	height:110px;
+	width:710px;
+	border:10px solid #B4D9CC;
+	text-align: left;
+	background-color: #6AB49A;
+}
+
+/*Styles for the Title of the page with shadow effect. */
+#Title
+{
+	margin:-72px 0 0 0;
+	padding:10px 0 0 19px;
+	background-color:Transparent;
+}
+#Title a
+{
+	color:#ffffff;
+	text-decoration:none;
+	background-color:inherit;
+	font-size:4em;
+	font-weight:normal;
+	font-family:inherit;
+}
+
+#InnerHeader h1
+{
+	margin:0 auto;
+	padding:10px 0 0 20px;
+	color:#000;
+	font-size:4em;
+	font-weight:normal;
+	font-family:inherit;
+}
+#InnerHeader h2
+{
+	margin:0 auto;
+	padding:5px 0 0 20px;
+	color:#ffffff;
+	background-color: #6AB49A;
+	font-size:1.6em;
+	font-weight:normal;
+}
+
+/*Styles for the horizontal menu*/
+#navcontainer1 
+{
+text-align: right;
+margin: 5px;
+}
+
+#navlist1 li
+{
+display: inline;
+list-style-type: none;
+padding-left: 20px;
+}
+
+#navlist2
+{
+margin: 0;
+padding: 0 0 20px 10px;
+border-bottom: 1px solid #000;
+}
+
+#navlist2 ul, #navlist2 li
+{
+margin: 0;
+padding: 0;
+display: inline;
+list-style-type: none;
+}
+
+#navlist2 a:link, #navlist2 a:visited
+{
+float: left;
+line-height: 16px;
+font-weight: bold;
+font-size: 14px;
+margin: 0 10px 4px 10px;
+text-decoration: none;
+color: #666;
+}
+
+#navlist2 a:link#current, #navlist2 a:visited#current, #navlist2 a:hover
+{
+border-bottom: 4px solid #000;
+padding-bottom: 2px;
+background: transparent;
+color: #000;
+}
+
+#navlist2 a:hover { color: #000; }
+
+
+/*Styles for the container that wraps the contents to left side. */
+#LeftContainer
+{
+	margin: 0 28% 0 0;
+}
+
+#WrapText
+{
+float:left;
+margin: 10px;
+padding: 10px;
+border:1px solid black;
+background:#6AB49A;
+}
+
+/*Styles for the main contents in the page. */
+#LeftContents
+{
+	padding: 0 20px 0 10px;
+	line-height: 1.5em;
+	font-family: Arial, Verdana, Helvetica, Tahoma, sans-serif;
+	text-align: justify;
+	color: #494949;
+	font-size: 1.0em;
+}
+#LeftContents h2
+{
+	margin:0 auto;
+	padding:5px 0 5px 10px;
+	background-color:#B4D9CC;
+	font-family: "Century Gothic", Arial, Helvetica, Tahoma, sans-serif;
+	border:1px solid #666;
+	text-align: left;
+	color:#000000;
+	font-size: 1.4em;
+}
+#LeftContents p
+{
+	margin: 5px;
+	padding: 0 0 10px 5px;
+	background-color:inherit;
+}
+#LeftContents a
+{
+	background-color:inherit;
+	text-decoration: none;
+	color: #000066;
+}
+
+#LeftContents a:hover
+{
+	background-color:inherit;
+	text-decoration: underline;
+	color: #000066;
+}
+
+/*The general class for the contents in the right column. */
+#RightColumn
+{
+	margin:0 auto;
+	padding:0 5px 0 0;
+	width:28%;
+	float:right;
+	background-color: #ffffff;
+}
+
+/*Styles for the right columms. */
+.RightContents
+{
+	margin: 0px auto 10px auto;
+	background-color:#ECF5F2;
+	border:1px solid #6AB49A;
+	line-height:1.4em;
+	text-align: left;
+}
+
+.RightContents h3
+{
+	margin:0 auto;
+	padding: 5px 5px 5px 5px;
+	background-color:#B4D9CC;
+	font-family: "Century Gothic", Arial, Helvetica, Tahoma, sans-serif;
+	text-align: left;
+	color:#000000;
+	font-size: 1.4em;
+}
+
+.RightContents p
+{
+	padding:5px 10px 5px 10px;
+	margin: 0 0 14px 0;
+	font-family: Arial, Verdana, Helvetica, Tahoma, sans-serif;
+	text-align: left;
+	background-color:inherit;
+	color: #494949;
+	font-size: 1.0em;
+}
+
+.RightContents p a
+{
+	background-color:inherit;
+	text-decoration: none;
+	color: #000066;
+}
+
+.RightContents p a:hover
+{
+	background-color:inherit;
+	text-decoration: underline;
+	color: #000066;
+}
+
+/*Styles for Quick links. */
+.RightContents ul li
+{
+	list-style-type: square;
+	padding-bottom: 5px;
+}
+
+.RightContents ul li a
+{
+	background-color:inherit;
+	text-decoration: underline;
+	color: #000066;
+	font-size: 1.0em;
+}
+
+.RightContents ul li a:hover
+{
+	background-color:inherit;
+	color: #666;
+}
+
+/*Styles for the page footer. */
+#Footer
+{
+	margin:6px 0 0 0;
+	padding:5px 0 5px 10px;
+	background-color:#6AB49A;
+	border:solid 1px #666;
+	text-align: center;
+	color: #000;
+	font-size: 1.0em;
+}
+
+#Footer a
+{
+	background-color: #6AB49A;
+	text-decoration: underline;
+	color:#000;
+}
+
+#Footer1
+{
+	text-align: left;
+	float: left;
+}
+
+#Footer2
+{
+	text-align: right;
+	padding-right: 10px;
+	font-size: 0.9em;
+}
+
