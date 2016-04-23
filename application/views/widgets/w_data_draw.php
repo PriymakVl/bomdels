@@ -1,57 +1,74 @@
 <div class="content">
     <? if(isset($draw)): ?>
-    <h2><?=$info?></h2>
+    <h2><span style="color: green;">Основная</span><a href="#">Дополнительная</a><a href="#">Обеспечение</a><a href="#">Чертеж</a></h2>
     <table class="draw-info">
         <tr>
-            <th >Наименование</th>
-            <th >Значение</th>
+            <thead>
+                <td width="30"><input type="checkbox" /></td>
+                <th >Наименование</th>
+                <th width="300">Значение</th>
+            </thead>
         </tr>
         <tr>
-            <td>Код</td>
-            <td><?=$draw['code']?></td>
-        </tr>
-        <tr>
+            <td><input type="checkbox" /></td>
             <td>Название</td>
-            <td><?=$draw['rus']?></td>
+            <td>
+                <? if ($draw->sub_id): ?>
+                    <a href="/list?id=<?=$draw->id?>"><?=$draw->rus?></a>
+                <? else: ?>
+                    <?=$draw->rus?>
+                <? endif; ?>
+            </td>
         </tr>
         <tr>
-            <td>Title</td>
-            <td><?=$draw['eng']?></td>
+            <td><input type="checkbox" /></td>
+            <td>Код</td>
+            <td>
+                <? if ($draw->image): ?>
+                        <a href="/view?id=<?=$draw->id?>"><?=$draw->code?></a>
+                    <? else: ?>
+                        <?=$draw->code?>
+                <? endif; ?>
+            </td>
+        </tr>
+        <? if($draw->variant): ?>
+            <tr>
+                <td><input type="checkbox" /></td>
+                <td>Вариант</td>
+                <td><?=$draw->variant?></td>
+            </tr>
+        <? endif; ?>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>Сборочный узел</td>
+            <td><a href="/specification?id=<?=$draw->parent['id']?>"><?=$draw->parent['rus']?></td>
         </tr>
         <tr>
-            <td>Родитель</td>
-            <td><?=$draw['parent_code']?></td>
+            <td><input type="checkbox" /></td>
+            <td>Количество деталей в узле</td>
+            <td>1</td>
         </tr>
         <tr>
+            <td><input type="checkbox" /></td>
+            <td>Материал</td>
+            <td><?=$draw->material?></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>Аналог</td>
+            <td><a href="#"><?=$draw->analog?></a></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
             <td>Вес</td>
-            <td><?=$draw['weight']?></td>
+            <td><?=$draw->weight?></td>
         </tr>
         <tr>
+            <td><input type="checkbox" /></td>
             <td>Тип</td>
-            <td>???</td>
+            <td>Стандартное изделие</td>
         </tr>
         <tr>
-            <td>Заказ</td>
-            <td>27.345.1</td>
-        </tr>
-        <tr>
-            <td>Заявка</td>
-            <td>834 от 2.05.15</td>
-        </tr>
-        <tr>
-            <td>Дата последней замены</td>
-            <td>5.</td>
-        </tr>
-        <tr>
-            <td>Запас</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>Пометки</td>
-            </td><?=$draw['note']?></td>
-        </tr>
     </table>
-    <? else: ?>
-    <p>Ничего не найдено</p>
     <? endif; ?>
 </div>

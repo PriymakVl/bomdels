@@ -6,19 +6,45 @@ class Model_Drawing extends Model {
     
     public function getDrawById($id)
     {
-       $sql = "SELECT * FROM ".$this->tableName." WHERE `id` = :id";
+       $sql = "SELECT * FROM $this->tableName WHERE `id` = :id";
        //return DB::select('*')->from('words')->limit($limit)->execute('alternate');
        $query = DB::query(Database::SELECT, $sql)->bind(':id', $id);
        $res = $query->execute()->as_array();
        return $res[0];
     }
     
-    public function getDrawsByParentId($id)
+    public function searchDrawByPartCode($code) 
     {
-       $sql = "SELECT * FROM ".$this->tableName." WHERE `parent_id` = :id";
-       $res = DB::query(Database::SELECT, $sql)->bind(':id', $id);
-       return $res->execute()->as_array();
+        if(!$code) return false;
+        $code = "%".$code."%";
+        $sql = "SELECT `id` FROM $this->tableName WHERE `code` LIKE :code LIMIT 1";
+        $query = DB::query(Database::SELECT, $sql)->bind(':code', $code); 
+        return $query->execute()->get('id');
+        //в дальнейшем реализовать если будеть находить несколько значений
     }
+    
+    public function getDrawByCode($code) 
+    {
+        $sql = "SELECT * FROM $this->tableName WHERE `code` = :code LIMIT 1";
+        $query = DB::query(Database::SELECT, $sql)->bind(':code', $code); 
+        $res = $query->execute()->as_array();
+        return $res[0];
+    }
+    
+    public function getIdSubDrawsByCode($code) 
+    {
+        $sql = "SELECT `id` FROM $this->tableName WHERE `parent_code` = :code AND `status` = :status ORDER BY `item`";
+        $query = DB::query(Database::SELECT, $sql)->bind(':code', $code)->param(':status', 1); 
+        $res = $query->execute()->as_array();
+        return $res;        
+    }
+    
+//    public function getDrawsByParentId($id)
+//    {
+//       $sql = "SELECT * FROM ".$this->tableName." WHERE `parent_id` = :id";
+//       $res = DB::query(Database::SELECT, $sql)->bind(':id', $id);
+//       return $res->execute()->as_array();
+//    }
     
     public function getMain()
     {
@@ -35,6 +61,8 @@ class Model_Drawing extends Model {
         $data['rating'] = 4;
         $data['type'] = 1;
         $data['category'] = 1;
+        $data['materil'] = 'E1000';
+        $data['analog'] = 'Ct 45';
         
         $sql = "INSERT INTO ".$this->tableName." (image, code, variant, eng, rus, cat_id, item, parent_id, parent_code, type, note, rating) 
         VALUES (:image, :code, :variant, :eng, :rus, :cat, :item, :parent_id, :parent_code, :type, :note, :rating)";
@@ -42,7 +70,8 @@ class Model_Drawing extends Model {
         $query->bind(':code', $data['code'])->bind(':eng', $data['Title'])->bind(':image', $data['image']);
         $query->bind(':cat', $data['category'])->bind(':rus', $data['Title'])->bind(':item', $data['Item']);
         $query->bind(':type', $data['type'])->bind(':variant', $data['variant'])->bind(':rating', $data['rating']);
-        $query->bind(':parent_code', $data['Owner'])->bind(':parent_id', $data['parent_id'])->bind(':note', $data['note']);
+        $query->bind(':parent_code', $data['Owner'])->bind(':parent_id', $data['parent_id']);
+        $query->bind(':material', $data['material'])->bind('weight', $data['Weight'])->bind('analog', $data['analog']);
         $res = $query->execute();
         return $res[0];
     }
