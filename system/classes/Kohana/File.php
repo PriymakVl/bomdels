@@ -31,8 +31,8 @@ class Kohana_File {
 
 		if (preg_match('/^(?:jpe?g|png|[gt]if|bmp|swf)$/', $extension))
 		{
-			// Use getimagesize() to find the mime type on images
-			$file = getimagesize($filename);
+			// Use getdrawingsize() to find the mime type on drawings
+			$file = getdrawingsize($filename);
 
 			if (isset($file['mime']))
 				return $file['mime'];
@@ -64,7 +64,7 @@ class Kohana_File {
 	/**
 	 * Return the mime type of an extension.
 	 *
-	 *     $mime = File::mime_by_ext('png'); // "image/png"
+	 *     $mime = File::mime_by_ext('png'); // "drawing/png"
 	 *
 	 * @param   string  $extension  php, pdf, txt, etc
 	 * @return  string  mime type on success

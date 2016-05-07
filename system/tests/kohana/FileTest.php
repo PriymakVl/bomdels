@@ -25,7 +25,7 @@ class Kohana_FileTest extends Unittest_TestCase
 	{
 		return array(
 			// $value, $result
-			array(Kohana::find_file('tests', 'test_data/github', 'png'), 'image/png'),
+			array(Kohana::find_file('tests', 'test_data/github', 'png'), 'drawing/png'),
 		);
 	}
 

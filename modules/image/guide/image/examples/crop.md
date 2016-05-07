@@ -1,6 +1,6 @@
-# Crop Profile Image
+# Crop Profile drawing
 
-This example is very similar to our previous example and even uses the same upload logics. The only difference is that the uploaded image is cropped to square from the center whose dimension is half the original height of the image. 
+This example is very similar to our previous example and even uses the same upload logics. The only difference is that the uploaded drawing is cropped to square from the center whose dimension is half the original height of the drawing. 
 
 ## Controller
 
@@ -27,13 +27,13 @@ class Controller_Crop extends Controller {
 		{
 			if (isset($_FILES['avatar']))
 			{
-				$filename = $this->_save_image($_FILES['avatar']);
+				$filename = $this->_save_drawing($_FILES['avatar']);
 			}
 		}
 		
 		if ( ! $filename)
 		{
-			$error_message = 'There was a problem while uploading the image.
+			$error_message = 'There was a problem while uploading the drawing.
 				Make sure it is uploaded and must be JPG/PNG/GIF file.';
 		}
 		
@@ -42,25 +42,25 @@ class Controller_Crop extends Controller {
 		$this->response->body($view);
 	}
 	
-	protected function _save_image($image)
+	protected function _save_drawing($drawing)
 	{
 		if (
-			! Upload::valid($image) OR
-			! Upload::not_empty($image) OR
-			! Upload::type($image, array('jpg', 'jpeg', 'png', 'gif')))
+			! Upload::valid($drawing) OR
+			! Upload::not_empty($drawing) OR
+			! Upload::type($drawing, array('jpg', 'jpeg', 'png', 'gif')))
 		{
 			return FALSE;
 		}
 		
 		$directory = DOCROOT.'uploads/';
 		
-		if ($file = Upload::save($image, NULL, $directory))
+		if ($file = Upload::save($drawing, NULL, $directory))
 		{
 			$filename = strtolower(Text::random('alnum', 20)).'.jpg';
 			
-			$img = Image::factory($file);
+			$img = drawing::factory($file);
 			
-			// Crop the image square half the height and crop from center
+			// Crop the drawing square half the height and crop from center
 			$new_height = (int) $img->height / 2;
 			
 			$img->crop($new_height, $new_height)
@@ -78,9 +78,9 @@ class Controller_Crop extends Controller {
 }
 ~~~
 
-The `index` action displays the upload form whereas the `do` action will process the uploaded image and provides feedback to the user.
+The `index` action displays the upload form whereas the `do` action will process the uploaded drawing and provides feedback to the user.
 
-In `do` action, it checks if the request method was `POST`, then delegates the process to `_save_image()` method which in turn performs various checks and finally crops and saves the image to the `uploads` directory.
+In `do` action, it checks if the request method was `POST`, then delegates the process to `_save_drawing()` method which in turn performs various checks and finally crops and saves the drawing to the `uploads` directory.
 
 ## Views
 
@@ -89,10 +89,10 @@ For the upload form (the `index` action), the view is located at `views/crop/ind
 ~~~
 <html>
 	<head>
-		<title>Upload Profile Image</title>
+		<title>Upload Profile drawing</title>
 	</head>
 	<body>
-		<h1>Upload your profile image</h1>
+		<h1>Upload your profile drawing</h1>
 		<form id="upload-form" action="<?php echo URL::site('crop/do') ?>" method="post" enctype="multipart/form-data">
 			<p>Choose file:</p>
 			<p><input type="file" name="avatar" id="avatar" /></p>
@@ -107,7 +107,7 @@ View for `crop/do` action goes to `views/crop/do.php`.
 ~~~
 <html>
 	<head>
-		<title>Upload Profile Image Result</title>
+		<title>Upload Profile drawing Result</title>
 	</head>
 	<body>
 		<?php if ($uploaded_file): ?>
@@ -128,13 +128,13 @@ View for `crop/do` action goes to `views/crop/do.php`.
 
 Below are screenshots for this example.
 
-![Original image](crop_orig.jpg)
+![Original drawing](crop_orig.jpg)
 
-_Original image to upload_
+_Original drawing to upload_
 
-![Upload image form](crop_form.jpg)
+![Upload drawing form](crop_form.jpg)
 
-_Upload image form_
+_Upload drawing form_
 
 ![Upload result page](crop_result.jpg)
 

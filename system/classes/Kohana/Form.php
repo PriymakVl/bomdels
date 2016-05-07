@@ -146,7 +146,7 @@ class Kohana_Form {
 	/**
 	 * Creates a file upload form input. No input value can be specified.
 	 *
-	 *     echo Form::file('image');
+	 *     echo Form::file('drawing');
 	 *
 	 * @param   string  $name       input name
 	 * @param   array   $attributes html attributes
@@ -359,9 +359,9 @@ class Kohana_Form {
 	}
 
 	/**
-	 * Creates a image form input.
+	 * Creates a drawing form input.
 	 *
-	 *     echo Form::image(NULL, NULL, array('src' => 'media/img/login.png'));
+	 *     echo Form::drawing(NULL, NULL, array('src' => 'media/img/login.png'));
 	 *
 	 * @param   string  $name       input name
 	 * @param   string  $value      input value
@@ -370,7 +370,7 @@ class Kohana_Form {
 	 * @return  string
 	 * @uses    Form::input
 	 */
-	public static function image($name, $value, array $attributes = NULL, $index = FALSE)
+	public static function drawing($name, $value, array $attributes = NULL, $index = FALSE)
 	{
 		if ( ! empty($attributes['src']))
 		{
@@ -381,14 +381,14 @@ class Kohana_Form {
 			}
 		}
 
-		$attributes['type'] = 'image';
+		$attributes['type'] = 'drawing';
 
 		return Form::input($name, $value, $attributes);
 	}
 
 	/**
 	 * Creates a button form input. Note that the body of a button is NOT escaped,
-	 * to allow images and other HTML to be used.
+	 * to allow drawings and other HTML to be used.
 	 *
 	 *     echo Form::button('save', 'Save Profile', array('type' => 'submit'));
 	 *

@@ -1,14 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Image manipulation support. Allows images to be resized, cropped, etc.
+ * drawing manipulation support. Allows drawings to be resized, cropped, etc.
  *
- * @package    Kohana/Image
+ * @package    Kohana/drawing
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license.html
  */
-abstract class Kohana_Image {
+abstract class Kohana_drawing {
 
 	// Resizing constraints
 	const NONE    = 0x01;
@@ -23,8 +23,8 @@ abstract class Kohana_Image {
 	const VERTICAL   = 0x12;
 
 	/**
-	 * @deprecated - provide an image.default_driver value in your configuration instead
-	 * @var  string  default driver: GD, ImageMagick, etc
+	 * @deprecated - provide an drawing.default_driver value in your configuration instead
+	 * @var  string  default driver: GD, drawingMagick, etc
 	 */
 	public static $default_driver = 'GD';
 
@@ -32,60 +32,60 @@ abstract class Kohana_Image {
 	protected static $_checked = FALSE;
 
 	/**
-	 * Loads an image and prepares it for manipulation.
+	 * Loads an drawing and prepares it for manipulation.
 	 *
-	 *     $image = Image::factory('upload/test.jpg');
+	 *     $drawing = drawing::factory('upload/test.jpg');
 	 *
-	 * @param   string   $file    image file path
-	 * @param   string   $driver  driver type: GD, ImageMagick, etc
-	 * @return  Image
-	 * @uses    Image::$default_driver
+	 * @param   string   $file    drawing file path
+	 * @param   string   $driver  driver type: GD, drawingMagick, etc
+	 * @return  drawing
+	 * @uses    drawing::$default_driver
 	 */
 	public static function factory($file, $driver = NULL)
 	{
 		if ($driver === NULL)
 		{
 			// Use the driver from configuration file or default one
-			$configured_driver = Kohana::$config->load('image.default_driver');
-			$driver = ($configured_driver) ? $configured_driver : Image::$default_driver;
+			$configured_driver = Kohana::$config->load('drawing.default_driver');
+			$driver = ($configured_driver) ? $configured_driver : drawing::$default_driver;
 		}
 
 		// Set the class name
-		$class = 'Image_'.$driver;
+		$class = 'drawing_'.$driver;
 
 		return new $class($file);
 	}
 
 	/**
-	 * @var  string  image file path
+	 * @var  string  drawing file path
 	 */
 	public $file;
 
 	/**
-	 * @var  integer  image width
+	 * @var  integer  drawing width
 	 */
 	public $width;
 
 	/**
-	 * @var  integer  image height
+	 * @var  integer  drawing height
 	 */
 	public $height;
 
 	/**
-	 * @var  integer  one of the IMAGETYPE_* constants
+	 * @var  integer  one of the drawingTYPE_* constants
 	 */
 	public $type;
 
 	/**
-	 * @var  string  mime type of the image
+	 * @var  string  mime type of the drawing
 	 */
 	public $mime;
 
 	/**
-	 * Loads information about the image. Will throw an exception if the image
-	 * does not exist or is not an image.
+	 * Loads information about the drawing. Will throw an exception if the drawing
+	 * does not exist or is not an drawing.
 	 *
-	 * @param   string  $file  image file path
+	 * @param   string  $file  drawing file path
 	 * @return  void
 	 * @throws  Kohana_Exception
 	 */
@@ -96,32 +96,32 @@ abstract class Kohana_Image {
 			// Get the real path to the file
 			$file = realpath($file);
 
-			// Get the image information
-			$info = getimagesize($file);
+			// Get the drawing information
+			$info = getdrawingsize($file);
 		}
 		catch (Exception $e)
 		{
-			// Ignore all errors while reading the image
+			// Ignore all errors while reading the drawing
 		}
 
 		if (empty($file) OR empty($info))
 		{
-			throw new Kohana_Exception('Not an image or invalid image: :file',
+			throw new Kohana_Exception('Not an drawing or invalid drawing: :file',
 				array(':file' => Debug::path($file)));
 		}
 
-		// Store the image information
+		// Store the drawing information
 		$this->file   = $file;
 		$this->width  = $info[0];
 		$this->height = $info[1];
 		$this->type   = $info[2];
-		$this->mime   = image_type_to_mime_type($this->type);
+		$this->mime   = drawing_type_to_mime_type($this->type);
 	}
 
 	/**
-	 * Render the current image.
+	 * Render the current drawing.
 	 *
-	 *     echo $image;
+	 *     echo $drawing;
 	 *
 	 * [!!] The output of this function is binary and must be rendered with the
 	 * appropriate Content-Type header or it will not be displayed correctly!
@@ -132,7 +132,7 @@ abstract class Kohana_Image {
 	{
 		try
 		{
-			// Render the current image
+			// Render the current drawing
 			return $this->render();
 		}
 		catch (Exception $e)
@@ -146,55 +146,55 @@ abstract class Kohana_Image {
 				Kohana::$log->add(Log::ERROR, $error);
 			}
 
-			// Showing any kind of error will be "inside" image data
+			// Showing any kind of error will be "inside" drawing data
 			return '';
 		}
 	}
 
 	/**
-	 * Resize the image to the given size. Either the width or the height can
-	 * be omitted and the image will be resized proportionally.
+	 * Resize the drawing to the given size. Either the width or the height can
+	 * be omitted and the drawing will be resized proportionally.
 	 *
 	 *     // Resize to 200 pixels on the shortest side
-	 *     $image->resize(200, 200);
+	 *     $drawing->resize(200, 200);
 	 *
 	 *     // Resize to 200x200 pixels, keeping aspect ratio
-	 *     $image->resize(200, 200, Image::INVERSE);
+	 *     $drawing->resize(200, 200, drawing::INVERSE);
 	 *
 	 *     // Resize to 500 pixel width, keeping aspect ratio
-	 *     $image->resize(500, NULL);
+	 *     $drawing->resize(500, NULL);
 	 *
 	 *     // Resize to 500 pixel height, keeping aspect ratio
-	 *     $image->resize(NULL, 500);
+	 *     $drawing->resize(NULL, 500);
 	 *
 	 *     // Resize to 200x500 pixels, ignoring aspect ratio
-	 *     $image->resize(200, 500, Image::NONE);
+	 *     $drawing->resize(200, 500, drawing::NONE);
 	 *
 	 * @param   integer  $width   new width
 	 * @param   integer  $height  new height
 	 * @param   integer  $master  master dimension
 	 * @return  $this
-	 * @uses    Image::_do_resize
+	 * @uses    drawing::_do_resize
 	 */
 	public function resize($width = NULL, $height = NULL, $master = NULL)
 	{
 		if ($master === NULL)
 		{
 			// Choose the master dimension automatically
-			$master = Image::AUTO;
+			$master = drawing::AUTO;
 		}
-		// Image::WIDTH and Image::HEIGHT deprecated. You can use it in old projects,
+		// drawing::WIDTH and drawing::HEIGHT deprecated. You can use it in old projects,
 		// but in new you must pass empty value for non-master dimension
-		elseif ($master == Image::WIDTH AND ! empty($width))
+		elseif ($master == drawing::WIDTH AND ! empty($width))
 		{
-			$master = Image::AUTO;
+			$master = drawing::AUTO;
 
 			// Set empty height for backward compatibility
 			$height = NULL;
 		}
-		elseif ($master == Image::HEIGHT AND ! empty($height))
+		elseif ($master == drawing::HEIGHT AND ! empty($height))
 		{
-			$master = Image::AUTO;
+			$master = drawing::AUTO;
 
 			// Set empty width for backward compatibility
 			$width = NULL;
@@ -202,7 +202,7 @@ abstract class Kohana_Image {
 
 		if (empty($width))
 		{
-			if ($master === Image::NONE)
+			if ($master === drawing::NONE)
 			{
 				// Use the current width
 				$width = $this->width;
@@ -210,13 +210,13 @@ abstract class Kohana_Image {
 			else
 			{
 				// If width not set, master will be height
-				$master = Image::HEIGHT;
+				$master = drawing::HEIGHT;
 			}
 		}
 
 		if (empty($height))
 		{
-			if ($master === Image::NONE)
+			if ($master === drawing::NONE)
 			{
 				// Use the current height
 				$height = $this->height;
@@ -224,33 +224,33 @@ abstract class Kohana_Image {
 			else
 			{
 				// If height not set, master will be width
-				$master = Image::WIDTH;
+				$master = drawing::WIDTH;
 			}
 		}
 
 		switch ($master)
 		{
-			case Image::AUTO:
+			case drawing::AUTO:
 				// Choose direction with the greatest reduction ratio
-				$master = ($this->width / $width) > ($this->height / $height) ? Image::WIDTH : Image::HEIGHT;
+				$master = ($this->width / $width) > ($this->height / $height) ? drawing::WIDTH : drawing::HEIGHT;
 			break;
-			case Image::INVERSE:
+			case drawing::INVERSE:
 				// Choose direction with the minimum reduction ratio
-				$master = ($this->width / $width) > ($this->height / $height) ? Image::HEIGHT : Image::WIDTH;
+				$master = ($this->width / $width) > ($this->height / $height) ? drawing::HEIGHT : drawing::WIDTH;
 			break;
 		}
 
 		switch ($master)
 		{
-			case Image::WIDTH:
+			case drawing::WIDTH:
 				// Recalculate the height based on the width proportions
 				$height = $this->height * $width / $this->width;
 			break;
-			case Image::HEIGHT:
+			case drawing::HEIGHT:
 				// Recalculate the width based on the height proportions
 				$width = $this->width * $height / $this->height;
 			break;
-			case Image::PRECISE:
+			case drawing::PRECISE:
 				// Resize to precise size
 				$ratio = $this->width / $this->height;
 
@@ -275,21 +275,21 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Crop an image to the given size. Either the width or the height can be
+	 * Crop an drawing to the given size. Either the width or the height can be
 	 * omitted and the current width or height will be used.
 	 *
 	 * If no offset is specified, the center of the axis will be used.
 	 * If an offset of TRUE is specified, the bottom of the axis will be used.
 	 *
-	 *     // Crop the image to 200x200 pixels, from the center
-	 *     $image->crop(200, 200);
+	 *     // Crop the drawing to 200x200 pixels, from the center
+	 *     $drawing->crop(200, 200);
 	 *
 	 * @param   integer  $width     new width
 	 * @param   integer  $height    new height
 	 * @param   mixed    $offset_x  offset from the left
 	 * @param   mixed    $offset_y  offset from the top
 	 * @return  $this
-	 * @uses    Image::_do_crop
+	 * @uses    drawing::_do_crop
 	 */
 	public function crop($width, $height, $offset_x = NULL, $offset_y = NULL)
 	{
@@ -359,17 +359,17 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Rotate the image by a given amount.
+	 * Rotate the drawing by a given amount.
 	 *
 	 *     // Rotate 45 degrees clockwise
-	 *     $image->rotate(45);
+	 *     $drawing->rotate(45);
 	 *
 	 *     // Rotate 90% counter-clockwise
-	 *     $image->rotate(-90);
+	 *     $drawing->rotate(-90);
 	 *
 	 * @param   integer  $degrees  degrees to rotate: -360-360
 	 * @return  $this
-	 * @uses    Image::_do_rotate
+	 * @uses    drawing::_do_rotate
 	 */
 	public function rotate($degrees)
 	{
@@ -402,24 +402,24 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Flip the image along the horizontal or vertical axis.
+	 * Flip the drawing along the horizontal or vertical axis.
 	 *
-	 *     // Flip the image from top to bottom
-	 *     $image->flip(Image::HORIZONTAL);
+	 *     // Flip the drawing from top to bottom
+	 *     $drawing->flip(drawing::HORIZONTAL);
 	 *
-	 *     // Flip the image from left to right
-	 *     $image->flip(Image::VERTICAL);
+	 *     // Flip the drawing from left to right
+	 *     $drawing->flip(drawing::VERTICAL);
 	 *
-	 * @param   integer  $direction  direction: Image::HORIZONTAL, Image::VERTICAL
+	 * @param   integer  $direction  direction: drawing::HORIZONTAL, drawing::VERTICAL
 	 * @return  $this
-	 * @uses    Image::_do_flip
+	 * @uses    drawing::_do_flip
 	 */
 	public function flip($direction)
 	{
-		if ($direction !== Image::HORIZONTAL)
+		if ($direction !== drawing::HORIZONTAL)
 		{
 			// Flip vertically
-			$direction = Image::VERTICAL;
+			$direction = drawing::VERTICAL;
 		}
 
 		$this->_do_flip($direction);
@@ -428,14 +428,14 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Sharpen the image by a given amount.
+	 * Sharpen the drawing by a given amount.
 	 *
-	 *     // Sharpen the image by 20%
-	 *     $image->sharpen(20);
+	 *     // Sharpen the drawing by 20%
+	 *     $drawing->sharpen(20);
 	 *
 	 * @param   integer  $amount  amount to sharpen: 1-100
 	 * @return  $this
-	 * @uses    Image::_do_sharpen
+	 * @uses    drawing::_do_sharpen
 	 */
 	public function sharpen($amount)
 	{
@@ -448,18 +448,18 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Add a reflection to an image. The most opaque part of the reflection
+	 * Add a reflection to an drawing. The most opaque part of the reflection
 	 * will be equal to the opacity setting and fade out to full transparent.
 	 * Alpha transparency is preserved.
 	 *
 	 *     // Create a 50 pixel reflection that fades from 0-100% opacity
-	 *     $image->reflection(50);
+	 *     $drawing->reflection(50);
 	 *
 	 *     // Create a 50 pixel reflection that fades from 100-0% opacity
-	 *     $image->reflection(50, 100, TRUE);
+	 *     $drawing->reflection(50, 100, TRUE);
 	 *
 	 *     // Create a 50 pixel reflection that fades from 0-60% opacity
-	 *     $image->reflection(50, 60, TRUE);
+	 *     $drawing->reflection(50, 60, TRUE);
 	 *
 	 * [!!] By default, the reflection will be go from transparent at the top
 	 * to opaque at the bottom.
@@ -468,7 +468,7 @@ abstract class Kohana_Image {
 	 * @param   integer   $opacity  reflection opacity: 0-100
 	 * @param   boolean   $fade_in  TRUE to fade in, FALSE to fade out
 	 * @return  $this
-	 * @uses    Image::_do_reflection
+	 * @uses    drawing::_do_reflection
 	 */
 	public function reflection($height = NULL, $opacity = 100, $fade_in = FALSE)
 	{
@@ -487,24 +487,24 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Add a watermark to an image with a specified opacity. Alpha transparency
+	 * Add a watermark to an drawing with a specified opacity. Alpha transparency
 	 * will be preserved.
 	 *
 	 * If no offset is specified, the center of the axis will be used.
 	 * If an offset of TRUE is specified, the bottom of the axis will be used.
 	 *
-	 *     // Add a watermark to the bottom right of the image
-	 *     $mark = Image::factory('upload/watermark.png');
-	 *     $image->watermark($mark, TRUE, TRUE);
+	 *     // Add a watermark to the bottom right of the drawing
+	 *     $mark = drawing::factory('upload/watermark.png');
+	 *     $drawing->watermark($mark, TRUE, TRUE);
 	 *
-	 * @param   Image    $watermark  watermark Image instance
+	 * @param   drawing    $watermark  watermark drawing instance
 	 * @param   integer  $offset_x   offset from the left
 	 * @param   integer  $offset_y   offset from the top
 	 * @param   integer  $opacity    opacity of watermark: 1-100
 	 * @return  $this
-	 * @uses    Image::_do_watermark
+	 * @uses    drawing::_do_watermark
 	 */
-	public function watermark(Image $watermark, $offset_x = NULL, $offset_y = NULL, $opacity = 100)
+	public function watermark(drawing $watermark, $offset_x = NULL, $offset_y = NULL, $opacity = 100)
 	{
 		if ($offset_x === NULL)
 		{
@@ -547,19 +547,19 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Set the background color of an image. This is only useful for images
+	 * Set the background color of an drawing. This is only useful for drawings
 	 * with alpha transparency.
 	 *
-	 *     // Make the image background black
-	 *     $image->background('#000');
+	 *     // Make the drawing background black
+	 *     $drawing->background('#000');
 	 *
-	 *     // Make the image background black with 50% opacity
-	 *     $image->background('#000', 50);
+	 *     // Make the drawing background black with 50% opacity
+	 *     $drawing->background('#000', 50);
 	 *
 	 * @param   string   $color    hexadecimal color value
 	 * @param   integer  $opacity  background opacity: 0-100
 	 * @return  $this
-	 * @uses    Image::_do_background
+	 * @uses    drawing::_do_background
 	 */
 	public function background($color, $opacity = 100)
 	{
@@ -587,24 +587,24 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Save the image. If the filename is omitted, the original image will
+	 * Save the drawing. If the filename is omitted, the original drawing will
 	 * be overwritten.
 	 *
-	 *     // Save the image as a PNG
-	 *     $image->save('saved/cool.png');
+	 *     // Save the drawing as a PNG
+	 *     $drawing->save('saved/cool.png');
 	 *
-	 *     // Overwrite the original image
-	 *     $image->save();
+	 *     // Overwrite the original drawing
+	 *     $drawing->save();
 	 *
 	 * [!!] If the file exists, but is not writable, an exception will be thrown.
 	 *
 	 * [!!] If the file does not exist, and the directory is not writable, an
 	 * exception will be thrown.
 	 *
-	 * @param   string   $file     new image path
-	 * @param   integer  $quality  quality of image: 1-100
+	 * @param   string   $file     new drawing path
+	 * @param   integer  $quality  quality of drawing: 1-100
 	 * @return  boolean
-	 * @uses    Image::_save
+	 * @uses    drawing::_save
 	 * @throws  Kohana_Exception
 	 */
 	public function save($file = NULL, $quality = 100)
@@ -642,25 +642,25 @@ abstract class Kohana_Image {
 	}
 
 	/**
-	 * Render the image and return the binary string.
+	 * Render the drawing and return the binary string.
 	 *
-	 *     // Render the image at 50% quality
-	 *     $data = $image->render(NULL, 50);
+	 *     // Render the drawing at 50% quality
+	 *     $data = $drawing->render(NULL, 50);
 	 *
-	 *     // Render the image as a PNG
-	 *     $data = $image->render('png');
+	 *     // Render the drawing as a PNG
+	 *     $data = $drawing->render('png');
 	 *
-	 * @param   string   $type     image type to return: png, jpg, gif, etc
-	 * @param   integer  $quality  quality of image: 1-100
+	 * @param   string   $type     drawing type to return: png, jpg, gif, etc
+	 * @param   integer  $quality  quality of drawing: 1-100
 	 * @return  string
-	 * @uses    Image::_do_render
+	 * @uses    drawing::_do_render
 	 */
 	public function render($type = NULL, $quality = 100)
 	{
 		if ($type === NULL)
 		{
-			// Use the current image type
-			$type = image_type_to_extension($this->type, FALSE);
+			// Use the current drawing type
+			$type = drawing_type_to_extension($this->type, FALSE);
 		}
 
 		return $this->_do_render($type, $quality);
@@ -723,13 +723,13 @@ abstract class Kohana_Image {
 	/**
 	 * Execute a watermarking.
 	 *
-	 * @param   Image    $image     watermarking Image
+	 * @param   drawing    $drawing     watermarking drawing
 	 * @param   integer  $offset_x  offset from the left
 	 * @param   integer  $offset_y  offset from the top
 	 * @param   integer  $opacity   opacity of watermark
 	 * @return  void
 	 */
-	abstract protected function _do_watermark(Image $image, $offset_x, $offset_y, $opacity);
+	abstract protected function _do_watermark(drawing $drawing, $offset_x, $offset_y, $opacity);
 
 	/**
 	 * Execute a background.
@@ -745,7 +745,7 @@ abstract class Kohana_Image {
 	/**
 	 * Execute a save.
 	 *
-	 * @param   string   $file     new image filename
+	 * @param   string   $file     new drawing filename
 	 * @param   integer  $quality  quality
 	 * @return  boolean
 	 */
@@ -754,10 +754,10 @@ abstract class Kohana_Image {
 	/**
 	 * Execute a render.
 	 *
-	 * @param   string    $type     image type: png, jpg, gif, etc
+	 * @param   string    $type     drawing type: png, jpg, gif, etc
 	 * @param   integer   $quality  quality
 	 * @return  string
 	 */
 	abstract protected function _do_render($type, $quality);
 
-} // End Image
+} // End drawing

@@ -69,7 +69,7 @@ class Kohana_FeedTest extends Unittest_TestCase
 	 */
 	public function provider_create()
 	{
-		$info = array('pubDate' => 123, 'image' => array('link' => 'http://kohanaframework.org/image.png', 'url' => 'http://kohanaframework.org/', 'title' => 'title'));
+		$info = array('pubDate' => 123, 'drawing' => array('link' => 'http://kohanaframework.org/drawing.png', 'url' => 'http://kohanaframework.org/', 'title' => 'title'));
 
 		return array(
 			// $source, $expected
@@ -85,9 +85,9 @@ class Kohana_FeedTest extends Unittest_TestCase
 					)
 				),
 				array(
-					$this->matcher_composer($info, 'image', 'link'),
-					$this->matcher_composer($info, 'image', 'url'),
-					$this->matcher_composer($info, 'image', 'title')
+					$this->matcher_composer($info, 'drawing', 'link'),
+					$this->matcher_composer($info, 'drawing', 'url'),
+					$this->matcher_composer($info, 'drawing', 'title')
 				)
 			),
 		);
@@ -126,15 +126,15 @@ class Kohana_FeedTest extends Unittest_TestCase
 	 * @param integer $items    items to add
 	 * @param integer $matcher  output
 	 */
-	public function test_create($info, $items, $enviroment, $matcher_item, $matchers_image)
+	public function test_create($info, $items, $enviroment, $matcher_item, $matchers_drawing)
 	{
 		$this->setEnvironment($enviroment);
 
 		$this->assertTag($matcher_item, Feed::create($info, $items), '', FALSE);
 
-		foreach ($matchers_image as $matcher_image)
+		foreach ($matchers_drawing as $matcher_drawing)
 		{
-			$this->assertTag($matcher_image, Feed::create($info, $items), '', FALSE);
+			$this->assertTag($matcher_drawing, Feed::create($info, $items), '', FALSE);
 		}
 	}
 }

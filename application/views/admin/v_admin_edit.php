@@ -3,8 +3,8 @@
     <h2>Форма редактирования чертежа</h2>
     <form id="form-drawing" method="post" action="/admin/adddrawing">
         <div class="input-wrp">
-            <label for="image">Изображение:</label>
-            <input type="text" name="image" value="<?=$draw['image']?>" />
+            <label for="drawing">Изображение:</label>
+            <input type="text" name="drawing" value="<?=$draw['drawing']?>" />
         </div>
         <div class="input-wrp">
         	<label for="code">Код:</label>
@@ -54,14 +54,13 @@
     <h2>Найти чертеж</h2>
     <form id="form-drawing" method="post" action="">
         <div class="input-wrp">
-            <label for="image">Code:</label>
+            <label for="drawing">Code:</label>
             <input type="text" name="code" />
         </div>
         <input type="submit" value="Найти" />
     </form>   
 </div>
 <? endif; ?>
-
 
 
 

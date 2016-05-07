@@ -16,9 +16,9 @@ class Kohana_Kodoc_Markdown extends MarkdownExtra_Parser {
 	public static $base_url = '';
 
 	/**
-	 * @var  string  base url for images
+	 * @var  string  base url for drawings
 	 */
-	public static $image_url = '';
+	public static $drawing_url = '';
 	
 	/**
 	 * Currently defined heading ids.
@@ -61,8 +61,8 @@ class Kohana_Kodoc_Markdown extends MarkdownExtra_Parser {
 
 	public function __construct()
 	{
-		// doImage is 10, add image url just before
-		$this->span_gamut['doImageURL'] = 9;
+		// dodrawing is 10, add drawing url just before
+		$this->span_gamut['dodrawingURL'] = 9;
 
 		// doLink is 20, add base url just before
 		$this->span_gamut['doBaseURL'] = 19;
@@ -216,17 +216,17 @@ class Kohana_Kodoc_Markdown extends MarkdownExtra_Parser {
 	}
 
 	/**
-	 * Add the current base url to all local images.
+	 * Add the current base url to all local drawings.
 	 *
 	 *     ![Install Page](img/install.png "Optional title")
 	 *
 	 * @param   string  Span text
 	 * @return  string
 	 */
-	public function doImageURL($text)
+	public function dodrawingURL($text)
 	{
 		// URLs containing "://" are left untouched
-		return preg_replace('~(!\[.+?\]\()(?!\w++://)(\S*(?:\s*+".+?")?\))~', '$1'.Kodoc_Markdown::$image_url.'$2', $text);
+		return preg_replace('~(!\[.+?\]\()(?!\w++://)(\S*(?:\s*+".+?")?\))~', '$1'.Kodoc_Markdown::$drawing_url.'$2', $text);
 	}
 
 	/**

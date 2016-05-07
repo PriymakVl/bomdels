@@ -141,15 +141,15 @@ _____________________
 * * * *
 _____________________
 
-## Images
+## drawings
 
-Image syntax looks like this:
+drawing syntax looks like this:
 
 	![Alt text](/path/to/img.jpg)
 	
 	![Alt text](/path/to/img.jpg "Optional title")
 
-[!!] Note that the images in userguide are [namespaced](#namespacing).
+[!!] Note that the drawings in userguide are [namespaced](#namespacing).
 
 ## Tables
 ~~~
@@ -190,7 +190,7 @@ To link to a modules index page, have an empty url like: `[Kohana]()`.
 
 To link to page in a different module, prefix your url with `../` and the module name.  For example: `[Kohana Routes](../kohana/routing)`
 
-**Images are also namespaced**, using `![Alt Text](imagename.jpg)` would look for `media/guide/<modulename>/imagename.jpg`.
+**drawings are also namespaced**, using `![Alt Text](drawingname.jpg)` would look for `media/guide/<modulename>/drawingname.jpg`.
 
 [!!] If you want your userguide pages to be browsable on github or similar sites outside Kohana's own userguide module, specify the optional .md file extension in your links
 

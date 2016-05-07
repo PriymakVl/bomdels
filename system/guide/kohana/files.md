@@ -15,7 +15,7 @@ Files that are in directories higher up the include path order take precedence o
 
 ![Cascading Filesystem Infographic](cascading_filesystem.png)
 
-This image is only shows certain files, but we can use it to illustrate some examples of the cascading filesystem:
+This drawing is only shows certain files, but we can use it to illustrate some examples of the cascading filesystem:
 
 * If Kohana catches an error, it would display the `kohana/error.php` view, So it would call `Kohana::find_file('views', 'kohana/error')`.  This would return `application/views/kohana/error.php` because it takes precidence over `system/views/kohana/error.php`.  By doing this we can change the error view without editing the system folder.
 

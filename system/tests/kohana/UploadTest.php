@@ -44,7 +44,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 					'unit_test' => array(
 						'error' => UPLOAD_ERR_OK,
 						'name' => 'Unit_Test File',
-						'type' => 'image/png',
+						'type' => 'drawing/png',
 						'tmp_name' => Kohana::find_file('tests', 'test_data/github', 'png'),
 						'size' => filesize(Kohana::find_file('tests', 'test_data/github', 'png')),
 						)
@@ -59,7 +59,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 						'unit_test' => array(
 							'error' => UPLOAD_ERR_OK,
 							'name' => 'Unit_Test File',
-							'type' => 'image/png',
+							'type' => 'drawing/png',
 							'tmp_name' => Kohana::find_file('tests', 'test_data/github', 'png'),
 							'size' => filesize(Kohana::find_file('tests', 'test_data/github', 'png')),
 						)
@@ -102,7 +102,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 				'unit_test' => array(
 					'error' => UPLOAD_ERR_OK,
 					'name' => 'Unit_Test File',
-					'type' => 'image/png',
+					'type' => 'drawing/png',
 					'tmp_name' => Kohana::find_file('tests', 'test_data/github', 'png'),
 					'size' => filesize(Kohana::find_file('tests', 'test_data/github', 'png')),
 				)
@@ -126,7 +126,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 				array(
 					'error' => UPLOAD_ERR_OK,
 					'name' => 'Unit_Test File',
-					'type' => 'image/png',
+					'type' => 'drawing/png',
 					'tmp_name' => Kohana::find_file('tests', 'test_data/github', 'png'),
 					'size' => filesize(Kohana::find_file('tests', 'test_data/github', 'png')),
 				)
@@ -135,7 +135,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 				FALSE,
 				array(
 					'name' => 'Unit_Test File',
-					'type' => 'image/png',
+					'type' => 'drawing/png',
 					'tmp_name' => Kohana::find_file('tests', 'test_data/github', 'png'),
 					'size' => filesize(Kohana::find_file('tests', 'test_data/github', 'png')),
 				)
@@ -144,7 +144,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 				FALSE,
 				array(
 					'error' => UPLOAD_ERR_OK,
-					'type' => 'image/png',
+					'type' => 'drawing/png',
 					'tmp_name' => Kohana::find_file('tests', 'test_data/github', 'png'),
 					'size' => filesize(Kohana::find_file('tests', 'test_data/github', 'png')),
 				)
@@ -163,7 +163,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 				array(
 					'error' => UPLOAD_ERR_OK,
 					'name' => 'Unit_Test File',
-					'type' => 'image/png',
+					'type' => 'drawing/png',
 					'size' => filesize(Kohana::find_file('tests', 'test_data/github', 'png')),
 				)
 			),
@@ -172,7 +172,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 				array(
 					'error' => UPLOAD_ERR_OK,
 					'name' => 'Unit_Test File',
-					'type' => 'image/png',
+					'type' => 'drawing/png',
 					'tmp_name' => Kohana::find_file('tests', 'test_data/github', 'png'),
 				)
 			),
@@ -211,7 +211,7 @@ class Kohana_UploadTest extends Unittest_TestCase
 				'unit_test' => array(
 					'error' => UPLOAD_ERR_OK,
 					'name' => 'github.png',
-					'type' => 'image/png',
+					'type' => 'drawing/png',
 					'tmp_name' => Kohana::find_file('tests', 'test_data/github', 'png'),
 					'size' => filesize(Kohana::find_file('tests', 'test_data/github', 'png')),
 				)

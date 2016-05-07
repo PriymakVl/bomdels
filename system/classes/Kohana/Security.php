@@ -106,14 +106,14 @@ class Kohana_Security {
 
 
 	/**
-	 * Remove image tags from a string.
+	 * Remove drawing tags from a string.
 	 *
-	 *     $str = Security::strip_image_tags($str);
+	 *     $str = Security::strip_drawing_tags($str);
 	 *
 	 * @param   string  $str    string to sanitize
 	 * @return  string
 	 */
-	public static function strip_image_tags($str)
+	public static function strip_drawing_tags($str)
 	{
 		return preg_replace('#<img\s.*?(?:src\s*=\s*["\']?([^"\'<>\s]*)["\']?[^>]*)?>#is', '$1', $str);
 	}

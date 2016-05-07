@@ -1,12 +1,12 @@
-# Upload Image
+# Upload drawing
 
-The following example shows how to handle uploading of an image, resize it and save it to a file. Be sure you have enabled the [Image] module as discussed in getting started guide.
+The following example shows how to handle uploading of an drawing, resize it and save it to a file. Be sure you have enabled the [drawing] module as discussed in getting started guide.
 
 Assuming you are creating a web application that allows your members to upload their profile picture (avatar), the steps below explains it how.
 
 ## Controller
 
-First we need to create a controller that handles the requests for uploading an image. We will name it `Controller_Avatar` and accessible through `/avatar` URL. Assuming that your project is located at [http://localhost/kohana](http://localhost/kohana), then our avatar controller is at [http://localhost/kohana/avatar](http://localhost/kohana/avatar).
+First we need to create a controller that handles the requests for uploading an drawing. We will name it `Controller_Avatar` and accessible through `/avatar` URL. Assuming that your project is located at [http://localhost/kohana](http://localhost/kohana), then our avatar controller is at [http://localhost/kohana/avatar](http://localhost/kohana/avatar).
 
 For simplicity, the upload form will be on `index` action and `upload` action will process the uploaded file. This is what our controller now looks like. Please note that we are not using [Controller_Template], just [Controller].
 
@@ -31,13 +31,13 @@ class Controller_Avatar extends Controller {
 		{
 			if (isset($_FILES['avatar']))
 			{
-				$filename = $this->_save_image($_FILES['avatar']);
+				$filename = $this->_save_drawing($_FILES['avatar']);
 			}
 		}
 		
 		if ( ! $filename)
 		{
-			$error_message = 'There was a problem while uploading the image.
+			$error_message = 'There was a problem while uploading the drawing.
 				Make sure it is uploaded and must be JPG/PNG/GIF file.';
 		}
 		
@@ -46,24 +46,24 @@ class Controller_Avatar extends Controller {
 		$this->response->body($view);
 	}
 	
-	protected function _save_image($image)
+	protected function _save_drawing($drawing)
 	{
 		if (
-			! Upload::valid($image) OR
-			! Upload::not_empty($image) OR
-			! Upload::type($image, array('jpg', 'jpeg', 'png', 'gif')))
+			! Upload::valid($drawing) OR
+			! Upload::not_empty($drawing) OR
+			! Upload::type($drawing, array('jpg', 'jpeg', 'png', 'gif')))
 		{
 			return FALSE;
 		}
 		
 		$directory = DOCROOT.'uploads/';
 		
-		if ($file = Upload::save($image, NULL, $directory))
+		if ($file = Upload::save($drawing, NULL, $directory))
 		{
 			$filename = strtolower(Text::random('alnum', 20)).'.jpg';
 			
-			Image::factory($file)
-				->resize(200, 200, Image::AUTO)
+			drawing::factory($file)
+				->resize(200, 200, drawing::AUTO)
 				->save($directory.$filename);
 
 			// Delete the temporary file
@@ -78,9 +78,9 @@ class Controller_Avatar extends Controller {
 }
 ~~~
 
-We have `index` and `upload` actions. `index` action will display the upload form and `upload` action will process the uploaded image and provides feedback to the user.
+We have `index` and `upload` actions. `index` action will display the upload form and `upload` action will process the uploaded drawing and provides feedback to the user.
 
-In `upload` action, it checks if the request method was `POST`, then delegates the process to `_save_image()` method which in turn performs various checks and finally resize and save the image to the `uploads` directory.
+In `upload` action, it checks if the request method was `POST`, then delegates the process to `_save_drawing()` method which in turn performs various checks and finally resize and save the drawing to the `uploads` directory.
 
 ## Views
 
@@ -124,15 +124,15 @@ Take note of the action attribute. It points to our `avatar/upload` action whose
 </html>
 ~~~
 
-When the upload is successfull, a success message is displayed with the uploaded image displayed. Otherwise, when it fails, it displays an error message.
+When the upload is successfull, a success message is displayed with the uploaded drawing displayed. Otherwise, when it fails, it displays an error message.
 
 ## Screenshots
 
 Below are screenshots for this example.
 
-![Upload image form](upload_form.jpg)
+![Upload drawing form](upload_form.jpg)
 
-_Upload image form_
+_Upload drawing form_
 
 ![Upload result page](upload_result.jpg)
 

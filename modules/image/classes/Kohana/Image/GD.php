@@ -1,20 +1,20 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Support for image manipulation using [GD](http://php.net/GD).
+ * Support for drawing manipulation using [GD](http://php.net/GD).
  *
- * @package    Kohana/Image
+ * @package    Kohana/drawing
  * @category   Drivers
  * @author     Kohana Team
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license.html
  */
-class Kohana_Image_GD extends Image {
+class Kohana_drawing_GD extends drawing {
 
 	// Which GD functions are available?
-	const IMAGEROTATE = 'imagerotate';
-	const IMAGECONVOLUTION = 'imageconvolution';
-	const IMAGEFILTER = 'imagefilter';
-	const IMAGELAYEREFFECT = 'imagelayereffect';
+	const drawingROTATE = 'drawingrotate';
+	const drawingCONVOLUTION = 'drawingconvolution';
+	const drawingFILTER = 'drawingfilter';
+	const drawingLAYEREFFECT = 'drawinglayereffect';
 	protected static $_available_functions = array();
 
 	/**
@@ -31,14 +31,14 @@ class Kohana_Image_GD extends Image {
 			throw new Kohana_Exception('GD is either not installed or not enabled, check your configuration');
 		}
 		$functions = array(
-			Image_GD::IMAGEROTATE,
-			Image_GD::IMAGECONVOLUTION,
-			Image_GD::IMAGEFILTER,
-			Image_GD::IMAGELAYEREFFECT
+			drawing_GD::drawingROTATE,
+			drawing_GD::drawingCONVOLUTION,
+			drawing_GD::drawingFILTER,
+			drawing_GD::drawingLAYEREFFECT
 		);
 		foreach ($functions as $function)
 		{
-			Image_GD::$_available_functions[$function] = function_exists($function);
+			drawing_GD::$_available_functions[$function] = function_exists($function);
 		}
 
 		if (defined('GD_VERSION'))
@@ -60,94 +60,94 @@ class Kohana_Image_GD extends Image {
 
 		if ( ! version_compare($version, '2.0.1', '>='))
 		{
-			throw new Kohana_Exception('Image_GD requires GD version :required or greater, you have :version',
+			throw new Kohana_Exception('drawing_GD requires GD version :required or greater, you have :version',
 				array('required' => '2.0.1', ':version' => $version));
 		}
 
-		return Image_GD::$_checked = TRUE;
+		return drawing_GD::$_checked = TRUE;
 	}
 
-	// Temporary image resource
-	protected $_image;
+	// Temporary drawing resource
+	protected $_drawing;
 
-	// Function name to open Image
+	// Function name to open drawing
 	protected $_create_function;
 
 	/**
-	 * Runs [Image_GD::check] and loads the image.
+	 * Runs [drawing_GD::check] and loads the drawing.
 	 *
-	 * @param   string  $file  image file path
+	 * @param   string  $file  drawing file path
 	 * @return  void
 	 * @throws  Kohana_Exception
 	 */
 	public function __construct($file)
 	{
-		if ( ! Image_GD::$_checked)
+		if ( ! drawing_GD::$_checked)
 		{
 			// Run the install check
-			Image_GD::check();
+			drawing_GD::check();
 		}
 
 		parent::__construct($file);
 
-		// Set the image creation function name
+		// Set the drawing creation function name
 		switch ($this->type)
 		{
-			case IMAGETYPE_JPEG:
-				$create = 'imagecreatefromjpeg';
+			case drawingTYPE_JPEG:
+				$create = 'drawingcreatefromjpeg';
 			break;
-			case IMAGETYPE_GIF:
-				$create = 'imagecreatefromgif';
+			case drawingTYPE_GIF:
+				$create = 'drawingcreatefromgif';
 			break;
-			case IMAGETYPE_PNG:
-				$create = 'imagecreatefrompng';
+			case drawingTYPE_PNG:
+				$create = 'drawingcreatefrompng';
 			break;
 		}
 
 		if ( ! isset($create) OR ! function_exists($create))
 		{
-			throw new Kohana_Exception('Installed GD does not support :type images',
-				array(':type' => image_type_to_extension($this->type, FALSE)));
+			throw new Kohana_Exception('Installed GD does not support :type drawings',
+				array(':type' => drawing_type_to_extension($this->type, FALSE)));
 		}
 
 		// Save function for future use
 		$this->_create_function = $create;
 
 		// Save filename for lazy loading
-		$this->_image = $this->file;
+		$this->_drawing = $this->file;
 	}
 
 	/**
-	 * Destroys the loaded image to free up resources.
+	 * Destroys the loaded drawing to free up resources.
 	 *
 	 * @return  void
 	 */
 	public function __destruct()
 	{
-		if (is_resource($this->_image))
+		if (is_resource($this->_drawing))
 		{
 			// Free all resources
-			imagedestroy($this->_image);
+			drawingdestroy($this->_drawing);
 		}
 	}
 
 	/**
-	 * Loads an image into GD.
+	 * Loads an drawing into GD.
 	 *
 	 * @return  void
 	 */
-	protected function _load_image()
+	protected function _load_drawing()
 	{
-		if ( ! is_resource($this->_image))
+		if ( ! is_resource($this->_drawing))
 		{
 			// Gets create function
 			$create = $this->_create_function;
 
-			// Open the temporary image
-			$this->_image = $create($this->file);
+			// Open the temporary drawing
+			$this->_drawing = $create($this->file);
 
 			// Preserve transparency when saving
-			imagesavealpha($this->_image, TRUE);
+			drawingsavealpha($this->_drawing, TRUE);
 		}
 	}
 
@@ -164,8 +164,8 @@ class Kohana_Image_GD extends Image {
 		$pre_width = $this->width;
 		$pre_height = $this->height;
 
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
 		// Test if we can do a resize without resampling to speed up the final resize
 		if ($width > ($this->width / 2) AND $height > ($this->height / 2))
@@ -181,30 +181,30 @@ class Kohana_Image_GD extends Image {
 				$pre_height /= 2;
 			}
 
-			// Create the temporary image to copy to
-			$image = $this->_create($pre_width, $pre_height);
+			// Create the temporary drawing to copy to
+			$drawing = $this->_create($pre_width, $pre_height);
 
-			if (imagecopyresized($image, $this->_image, 0, 0, 0, 0, $pre_width, $pre_height, $this->width, $this->height))
+			if (drawingcopyresized($drawing, $this->_drawing, 0, 0, 0, 0, $pre_width, $pre_height, $this->width, $this->height))
 			{
-				// Swap the new image for the old one
-				imagedestroy($this->_image);
-				$this->_image = $image;
+				// Swap the new drawing for the old one
+				drawingdestroy($this->_drawing);
+				$this->_drawing = $drawing;
 			}
 		}
 
-		// Create the temporary image to copy to
-		$image = $this->_create($width, $height);
+		// Create the temporary drawing to copy to
+		$drawing = $this->_create($width, $height);
 
 		// Execute the resize
-		if (imagecopyresampled($image, $this->_image, 0, 0, 0, 0, $width, $height, $pre_width, $pre_height))
+		if (drawingcopyresampled($drawing, $this->_drawing, 0, 0, 0, 0, $width, $height, $pre_width, $pre_height))
 		{
-			// Swap the new image for the old one
-			imagedestroy($this->_image);
-			$this->_image = $image;
+			// Swap the new drawing for the old one
+			drawingdestroy($this->_drawing);
+			$this->_drawing = $drawing;
 
 			// Reset the width and height
-			$this->width  = imagesx($image);
-			$this->height = imagesy($image);
+			$this->width  = drawingsx($drawing);
+			$this->height = drawingsy($drawing);
 		}
 	}
 
@@ -219,22 +219,22 @@ class Kohana_Image_GD extends Image {
 	 */
 	protected function _do_crop($width, $height, $offset_x, $offset_y)
 	{
-		// Create the temporary image to copy to
-		$image = $this->_create($width, $height);
+		// Create the temporary drawing to copy to
+		$drawing = $this->_create($width, $height);
 
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
 		// Execute the crop
-		if (imagecopyresampled($image, $this->_image, 0, 0, $offset_x, $offset_y, $width, $height, $width, $height))
+		if (drawingcopyresampled($drawing, $this->_drawing, 0, 0, $offset_x, $offset_y, $width, $height, $width, $height))
 		{
-			// Swap the new image for the old one
-			imagedestroy($this->_image);
-			$this->_image = $image;
+			// Swap the new drawing for the old one
+			drawingdestroy($this->_drawing);
+			$this->_drawing = $drawing;
 
 			// Reset the width and height
-			$this->width  = imagesx($image);
-			$this->height = imagesy($image);
+			$this->width  = drawingsx($drawing);
+			$this->height = drawingsy($drawing);
 		}
 	}
 
@@ -246,33 +246,33 @@ class Kohana_Image_GD extends Image {
 	 */
 	protected function _do_rotate($degrees)
 	{
-		if (empty(Image_GD::$_available_functions[Image_GD::IMAGEROTATE]))
+		if (empty(drawing_GD::$_available_functions[drawing_GD::drawingROTATE]))
 		{
 			throw new Kohana_Exception('This method requires :function, which is only available in the bundled version of GD',
-				array(':function' => 'imagerotate'));
+				array(':function' => 'drawingrotate'));
 		}
 
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
 		// Transparent black will be used as the background for the uncovered region
-		$transparent = imagecolorallocatealpha($this->_image, 0, 0, 0, 127);
+		$transparent = drawingcolorallocatealpha($this->_drawing, 0, 0, 0, 127);
 
 		// Rotate, setting the transparent color
-		$image = imagerotate($this->_image, 360 - $degrees, $transparent, 1);
+		$drawing = drawingrotate($this->_drawing, 360 - $degrees, $transparent, 1);
 
-		// Save the alpha of the rotated image
-		imagesavealpha($image, TRUE);
+		// Save the alpha of the rotated drawing
+		drawingsavealpha($drawing, TRUE);
 
-		// Get the width and height of the rotated image
-		$width  = imagesx($image);
-		$height = imagesy($image);
+		// Get the width and height of the rotated drawing
+		$width  = drawingsx($drawing);
+		$height = drawingsy($drawing);
 
-		if (imagecopymerge($this->_image, $image, 0, 0, 0, 0, $width, $height, 100))
+		if (drawingcopymerge($this->_drawing, $drawing, 0, 0, 0, 0, $width, $height, 100))
 		{
-			// Swap the new image for the old one
-			imagedestroy($this->_image);
-			$this->_image = $image;
+			// Swap the new drawing for the old one
+			drawingdestroy($this->_drawing);
+			$this->_drawing = $drawing;
 
 			// Reset the width and height
 			$this->width  = $width;
@@ -288,18 +288,18 @@ class Kohana_Image_GD extends Image {
 	 */
 	protected function _do_flip($direction)
 	{
-		// Create the flipped image
+		// Create the flipped drawing
 		$flipped = $this->_create($this->width, $this->height);
 
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
-		if ($direction === Image::HORIZONTAL)
+		if ($direction === drawing::HORIZONTAL)
 		{
 			for ($x = 0; $x < $this->width; $x++)
 			{
 				// Flip each row from top to bottom
-				imagecopy($flipped, $this->_image, $x, 0, $this->width - $x - 1, 0, 1, $this->height);
+				drawingcopy($flipped, $this->_drawing, $x, 0, $this->width - $x - 1, 0, 1, $this->height);
 			}
 		}
 		else
@@ -307,17 +307,17 @@ class Kohana_Image_GD extends Image {
 			for ($y = 0; $y < $this->height; $y++)
 			{
 				// Flip each column from left to right
-				imagecopy($flipped, $this->_image, 0, $y, 0, $this->height - $y - 1, $this->width, 1);
+				drawingcopy($flipped, $this->_drawing, 0, $y, 0, $this->height - $y - 1, $this->width, 1);
 			}
 		}
 
-		// Swap the new image for the old one
-		imagedestroy($this->_image);
-		$this->_image = $flipped;
+		// Swap the new drawing for the old one
+		drawingdestroy($this->_drawing);
+		$this->_drawing = $flipped;
 
 		// Reset the width and height
-		$this->width  = imagesx($flipped);
-		$this->height = imagesy($flipped);
+		$this->width  = drawingsx($flipped);
+		$this->height = drawingsy($flipped);
 	}
 
 	/**
@@ -328,14 +328,14 @@ class Kohana_Image_GD extends Image {
 	 */
 	protected function _do_sharpen($amount)
 	{
-		if (empty(Image_GD::$_available_functions[Image_GD::IMAGECONVOLUTION]))
+		if (empty(drawing_GD::$_available_functions[drawing_GD::drawingCONVOLUTION]))
 		{
 			throw new Kohana_Exception('This method requires :function, which is only available in the bundled version of GD',
-				array(':function' => 'imageconvolution'));
+				array(':function' => 'drawingconvolution'));
 		}
 
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
 		// Amount should be in the range of 18-10
 		$amount = round(abs(-18 + ($amount * 0.08)), 2);
@@ -349,11 +349,11 @@ class Kohana_Image_GD extends Image {
 		);
 
 		// Perform the sharpen
-		if (imageconvolution($this->_image, $matrix, $amount - 8, 0))
+		if (drawingconvolution($this->_drawing, $matrix, $amount - 8, 0))
 		{
 			// Reset the width and height
-			$this->width  = imagesx($this->_image);
-			$this->height = imagesy($this->_image);
+			$this->width  = drawingsx($this->_drawing);
+			$this->height = drawingsy($this->_drawing);
 		}
 	}
 
@@ -367,14 +367,14 @@ class Kohana_Image_GD extends Image {
 	 */
 	protected function _do_reflection($height, $opacity, $fade_in)
 	{
-		if (empty(Image_GD::$_available_functions[Image_GD::IMAGEFILTER]))
+		if (empty(drawing_GD::$_available_functions[drawing_GD::drawingFILTER]))
 		{
 			throw new Kohana_Exception('This method requires :function, which is only available in the bundled version of GD',
-				array(':function' => 'imagefilter'));
+				array(':function' => 'drawingfilter'));
 		}
 
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
 		// Convert an opacity range of 0-100 to 127-0
 		$opacity = round(abs(($opacity * 127 / 100) - 127));
@@ -390,11 +390,11 @@ class Kohana_Image_GD extends Image {
 			$stepping = 127 / $height;
 		}
 
-		// Create the reflection image
+		// Create the reflection drawing
 		$reflection = $this->_create($this->width, $this->height + $height);
 
-		// Copy the image to the reflection
-		imagecopy($reflection, $this->_image, 0, 0, 0, 0, $this->width, $this->height);
+		// Copy the drawing to the reflection
+		drawingcopy($reflection, $this->_drawing, 0, 0, 0, 0, $this->width, $this->height);
 
 		for ($offset = 0; $height >= $offset; $offset++)
 		{
@@ -415,56 +415,56 @@ class Kohana_Image_GD extends Image {
 				$dst_opacity = round($opacity + ($stepping * $offset));
 			}
 
-			// Create a single line of the image
+			// Create a single line of the drawing
 			$line = $this->_create($this->width, 1);
 
-			// Copy a single line from the current image into the line
-			imagecopy($line, $this->_image, 0, 0, 0, $src_y, $this->width, 1);
+			// Copy a single line from the current drawing into the line
+			drawingcopy($line, $this->_drawing, 0, 0, 0, $src_y, $this->width, 1);
 
 			// Colorize the line to add the correct alpha level
-			imagefilter($line, IMG_FILTER_COLORIZE, 0, 0, 0, $dst_opacity);
+			drawingfilter($line, IMG_FILTER_COLORIZE, 0, 0, 0, $dst_opacity);
 
 			// Copy a the line into the reflection
-			imagecopy($reflection, $line, 0, $dst_y, 0, 0, $this->width, 1);
+			drawingcopy($reflection, $line, 0, $dst_y, 0, 0, $this->width, 1);
 		}
 
-		// Swap the new image for the old one
-		imagedestroy($this->_image);
-		$this->_image = $reflection;
+		// Swap the new drawing for the old one
+		drawingdestroy($this->_drawing);
+		$this->_drawing = $reflection;
 
 		// Reset the width and height
-		$this->width  = imagesx($reflection);
-		$this->height = imagesy($reflection);
+		$this->width  = drawingsx($reflection);
+		$this->height = drawingsy($reflection);
 	}
 
 	/**
 	 * Execute a watermarking.
 	 *
-	 * @param   Image    $image     watermarking Image
+	 * @param   drawing    $drawing     watermarking drawing
 	 * @param   integer  $offset_x  offset from the left
 	 * @param   integer  $offset_y  offset from the top
 	 * @param   integer  $opacity   opacity of watermark
 	 * @return  void
 	 */
-	protected function _do_watermark(Image $watermark, $offset_x, $offset_y, $opacity)
+	protected function _do_watermark(drawing $watermark, $offset_x, $offset_y, $opacity)
 	{
-		if (empty(Image_GD::$_available_functions[Image_GD::IMAGELAYEREFFECT]))
+		if (empty(drawing_GD::$_available_functions[drawing_GD::drawingLAYEREFFECT]))
 		{
 			throw new Kohana_Exception('This method requires :function, which is only available in the bundled version of GD',
-				array(':function' => 'imagelayereffect'));
+				array(':function' => 'drawinglayereffect'));
 		}
 
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
-		// Create the watermark image resource
-		$overlay = imagecreatefromstring($watermark->render());
+		// Create the watermark drawing resource
+		$overlay = drawingcreatefromstring($watermark->render());
 
-		imagesavealpha($overlay, TRUE);
+		drawingsavealpha($overlay, TRUE);
 
 		// Get the width and height of the watermark
-		$width  = imagesx($overlay);
-		$height = imagesy($overlay);
+		$width  = drawingsx($overlay);
+		$height = drawingsy($overlay);
 
 		if ($opacity < 100)
 		{
@@ -472,22 +472,22 @@ class Kohana_Image_GD extends Image {
 			$opacity = round(abs(($opacity * 127 / 100) - 127));
 
 			// Allocate transparent gray
-			$color = imagecolorallocatealpha($overlay, 127, 127, 127, $opacity);
+			$color = drawingcolorallocatealpha($overlay, 127, 127, 127, $opacity);
 
-			// The transparent image will overlay the watermark
-			imagelayereffect($overlay, IMG_EFFECT_OVERLAY);
+			// The transparent drawing will overlay the watermark
+			drawinglayereffect($overlay, IMG_EFFECT_OVERLAY);
 
 			// Fill the background with the transparent color
-			imagefilledrectangle($overlay, 0, 0, $width, $height, $color);
+			drawingfilledrectangle($overlay, 0, 0, $width, $height, $color);
 		}
 
 		// Alpha blending must be enabled on the background!
-		imagealphablending($this->_image, TRUE);
+		drawingalphablending($this->_drawing, TRUE);
 
-		if (imagecopy($this->_image, $overlay, $offset_x, $offset_y, 0, 0, $width, $height))
+		if (drawingcopy($this->_drawing, $overlay, $offset_x, $offset_y, 0, 0, $width, $height))
 		{
-			// Destroy the overlay image
-			imagedestroy($overlay);
+			// Destroy the overlay drawing
+			drawingdestroy($overlay);
 		}
 	}
 
@@ -502,8 +502,8 @@ class Kohana_Image_GD extends Image {
 	 */
 	protected function _do_background($r, $g, $b, $opacity)
 	{
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
 		// Convert an opacity range of 0-100 to 127-0
 		$opacity = round(abs(($opacity * 127 / 100) - 127));
@@ -512,49 +512,49 @@ class Kohana_Image_GD extends Image {
 		$background = $this->_create($this->width, $this->height);
 
 		// Allocate the color
-		$color = imagecolorallocatealpha($background, $r, $g, $b, $opacity);
+		$color = drawingcolorallocatealpha($background, $r, $g, $b, $opacity);
 
-		// Fill the image with white
-		imagefilledrectangle($background, 0, 0, $this->width, $this->height, $color);
+		// Fill the drawing with white
+		drawingfilledrectangle($background, 0, 0, $this->width, $this->height, $color);
 
 		// Alpha blending must be enabled on the background!
-		imagealphablending($background, TRUE);
+		drawingalphablending($background, TRUE);
 
-		// Copy the image onto a white background to remove all transparency
-		if (imagecopy($background, $this->_image, 0, 0, 0, 0, $this->width, $this->height))
+		// Copy the drawing onto a white background to remove all transparency
+		if (drawingcopy($background, $this->_drawing, 0, 0, 0, 0, $this->width, $this->height))
 		{
-			// Swap the new image for the old one
-			imagedestroy($this->_image);
-			$this->_image = $background;
+			// Swap the new drawing for the old one
+			drawingdestroy($this->_drawing);
+			$this->_drawing = $background;
 		}
 	}
 
 	/**
 	 * Execute a save.
 	 *
-	 * @param   string   $file     new image filename
+	 * @param   string   $file     new drawing filename
 	 * @param   integer  $quality  quality
 	 * @return  boolean
 	 */
 	protected function _do_save($file, $quality)
 	{
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
 		// Get the extension of the file
 		$extension = pathinfo($file, PATHINFO_EXTENSION);
 
-		// Get the save function and IMAGETYPE
+		// Get the save function and drawingTYPE
 		list($save, $type) = $this->_save_function($extension, $quality);
 
-		// Save the image to a file
-		$status = isset($quality) ? $save($this->_image, $file, $quality) : $save($this->_image, $file);
+		// Save the drawing to a file
+		$status = isset($quality) ? $save($this->_drawing, $file, $quality) : $save($this->_drawing, $file);
 
 		if ($status === TRUE AND $type !== $this->type)
 		{
-			// Reset the image type and mime type
+			// Reset the drawing type and mime type
 			$this->type = $type;
-			$this->mime = image_type_to_mime_type($type);
+			$this->mime = drawing_type_to_mime_type($type);
 		}
 
 		return TRUE;
@@ -563,49 +563,49 @@ class Kohana_Image_GD extends Image {
 	/**
 	 * Execute a render.
 	 *
-	 * @param   string    $type     image type: png, jpg, gif, etc
+	 * @param   string    $type     drawing type: png, jpg, gif, etc
 	 * @param   integer   $quality  quality
 	 * @return  string
 	 */
 	protected function _do_render($type, $quality)
 	{
-		// Loads image if not yet loaded
-		$this->_load_image();
+		// Loads drawing if not yet loaded
+		$this->_load_drawing();
 
-		// Get the save function and IMAGETYPE
+		// Get the save function and drawingTYPE
 		list($save, $type) = $this->_save_function($type, $quality);
 
 		// Capture the output
 		ob_start();
 
-		// Render the image
-		$status = isset($quality) ? $save($this->_image, NULL, $quality) : $save($this->_image, NULL);
+		// Render the drawing
+		$status = isset($quality) ? $save($this->_drawing, NULL, $quality) : $save($this->_drawing, NULL);
 
 		if ($status === TRUE AND $type !== $this->type)
 		{
-			// Reset the image type and mime type
+			// Reset the drawing type and mime type
 			$this->type = $type;
-			$this->mime = image_type_to_mime_type($type);
+			$this->mime = drawing_type_to_mime_type($type);
 		}
 
 		return ob_get_clean();
 	}
 
 	/**
-	 * Get the GD saving function and image type for this extension.
+	 * Get the GD saving function and drawing type for this extension.
 	 * Also normalizes the quality setting
 	 *
-	 * @param   string   $extension  image type: png, jpg, etc
-	 * @param   integer  $quality    image quality
-	 * @return  array    save function, IMAGETYPE_* constant
+	 * @param   string   $extension  drawing type: png, jpg, etc
+	 * @param   integer  $quality    drawing quality
+	 * @return  array    save function, drawingTYPE_* constant
 	 * @throws  Kohana_Exception
 	 */
 	protected function _save_function($extension, & $quality)
 	{
 		if ( ! $extension)
 		{
-			// Use the current image type
-			$extension = image_type_to_extension($this->type, FALSE);
+			// Use the current drawing type
+			$extension = drawing_type_to_extension($this->type, FALSE);
 		}
 
 		switch (strtolower($extension))
@@ -614,27 +614,27 @@ class Kohana_Image_GD extends Image {
 			case 'jpe':
 			case 'jpeg':
 				// Save a JPG file
-				$save = 'imagejpeg';
-				$type = IMAGETYPE_JPEG;
+				$save = 'drawingjpeg';
+				$type = drawingTYPE_JPEG;
 			break;
 			case 'gif':
 				// Save a GIF file
-				$save = 'imagegif';
-				$type = IMAGETYPE_GIF;
+				$save = 'drawinggif';
+				$type = drawingTYPE_GIF;
 
 				// GIFs do not a quality setting
 				$quality = NULL;
 			break;
 			case 'png':
 				// Save a PNG file
-				$save = 'imagepng';
-				$type = IMAGETYPE_PNG;
+				$save = 'drawingpng';
+				$type = drawingTYPE_PNG;
 
 				// Use a compression level of 9 (does not affect quality!)
 				$quality = 9;
 			break;
 			default:
-				throw new Kohana_Exception('Installed GD does not support :type images',
+				throw new Kohana_Exception('Installed GD does not support :type drawings',
 					array(':type' => $extension));
 			break;
 		}
@@ -643,24 +643,24 @@ class Kohana_Image_GD extends Image {
 	}
 
 	/**
-	 * Create an empty image with the given width and height.
+	 * Create an empty drawing with the given width and height.
 	 *
-	 * @param   integer   $width   image width
-	 * @param   integer   $height  image height
+	 * @param   integer   $width   drawing width
+	 * @param   integer   $height  drawing height
 	 * @return  resource
 	 */
 	protected function _create($width, $height)
 	{
-		// Create an empty image
-		$image = imagecreatetruecolor($width, $height);
+		// Create an empty drawing
+		$drawing = drawingcreatetruecolor($width, $height);
 
 		// Do not apply alpha blending
-		imagealphablending($image, FALSE);
+		drawingalphablending($drawing, FALSE);
 
 		// Save alpha levels
-		imagesavealpha($image, TRUE);
+		drawingsavealpha($drawing, TRUE);
 
-		return $image;
+		return $drawing;
 	}
 
-} // End Image_GD
+} // End drawing_GD

@@ -37,11 +37,11 @@ class Kohana_SecurityTest extends Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for test_strip_image_tags()
+	 * Provides test data for test_strip_drawing_tags()
 	 *
 	 * @return array Test data sets
 	 */
-	public function provider_strip_image_tags()
+	public function provider_strip_drawing_tags()
 	{
 		return array(
 			array('foo', '<img src="foo" />'),
@@ -49,15 +49,15 @@ class Kohana_SecurityTest extends Unittest_TestCase
 	}
 
 	/**
-	 * Tests Security::strip_image_tags()
+	 * Tests Security::strip_drawing_tags()
 	 *
 	 * @test
-	 * @dataProvider provider_strip_image_tags
-	 * @covers Security::strip_image_tags
+	 * @dataProvider provider_strip_drawing_tags
+	 * @covers Security::strip_drawing_tags
 	 */
-	public function test_strip_image_tags($expected, $input)
+	public function test_strip_drawing_tags($expected, $input)
 	{
-		$this->assertSame($expected, Security::strip_image_tags($input));
+		$this->assertSame($expected, Security::strip_drawing_tags($input));
 	}
 
 	/**

@@ -29,9 +29,9 @@ Each module has an index page at `guide/<module>/index.md`.
 
 Each module's menu is in `guide/<module>/menu.md`. 
 
-### Images
+### drawings
 
-Any images used in the userguide pages must be in `media/guide/<module>/`.  For example, if a userguide page has `![Image Title](hello-world.jpg)` the image would be located at `media/guide/<module>/hello-world.jpg`.  Images for the ORM module are in `modules/orm/media/guide/orm`, and images for the Kohana docs are in `system/media/guide/kohana`.
+Any drawings used in the userguide pages must be in `media/guide/<module>/`.  For example, if a userguide page has `![drawing Title](hello-world.jpg)` the drawing would be located at `media/guide/<module>/hello-world.jpg`.  drawings for the ORM module are in `modules/orm/media/guide/orm`, and drawings for the Kohana docs are in `system/media/guide/kohana`.
 
 ### API browser
 
@@ -43,7 +43,7 @@ In addition to the features and syntax of [Markdown](http://daringfireball.net/p
 
 ### Namespacing
 
-The first thing to note is that all urls are "namespaced". The name of the module is automatically added to links and image urls, you do not need to include it.  For example, to link to the hello world tutorial page from another page in the Kohana userguide, you should use `[Hello World Tutorial](tutorials/hello-world)` rather than `(kohana/tutorials/hello-world)`.  To link to pages in a different section of the guide, you can use `../`, for example `[Cache](../cache/usage)`.
+The first thing to note is that all urls are "namespaced". The name of the module is automatically added to links and drawing urls, you do not need to include it.  For example, to link to the hello world tutorial page from another page in the Kohana userguide, you should use `[Hello World Tutorial](tutorials/hello-world)` rather than `(kohana/tutorials/hello-world)`.  To link to pages in a different section of the guide, you can use `../`, for example `[Cache](../cache/usage)`.
 
 ### Notes
 

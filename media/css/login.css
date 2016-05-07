@@ -43,13 +43,13 @@ table {
 /* CSS Animations */
 @keyframes "login" {
  0% {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -ms-filter: "progid:DXdrawingTransform.Microsoft.Alpha(Opacity=0)";
    	filter: alpha(opacity=0);
    	opacity: 0;
    	margin-top: -50px;
  }
  100% {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    -ms-filter: "progid:DXdrawingTransform.Microsoft.Alpha(Opacity=100)";
    	filter: alpha(opacity=100);
    	opacity: 1;
    	margin-top: -75px;
@@ -87,13 +87,13 @@ table {
 
 @-ms-keyframes "login" {
  0% {
-   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+   -ms-filter: "progid:DXdrawingTransform.Microsoft.Alpha(Opacity=0)";
    filter: alpha(opacity=0);
    opacity: 0;
    margin-top: -50px;
  }
  100% {
-   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+   -ms-filter: "progid:DXdrawingTransform.Microsoft.Alpha(Opacity=100)";
    filter: alpha(opacity=100);
    opacity: 1;
    margin-top: -75px;
@@ -164,11 +164,11 @@ body {
 	background-clip: padding-box;
 	border-radius: 6px;
 
-	background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
-	background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
-	background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
-	background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
-	background-image: linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
+	background-drawing: -webkit-linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
+	background-drawing: -moz-linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
+	background-drawing: -o-linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
+	background-drawing: -ms-linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
+	background-drawing: linear-gradient(bottom, #FFFFFF 0%, #F2F2F2 100%);
 
 	-webkit-box-shadow: inset 0px 2px 0px #d9d9d9;
 	box-shadow: inset 0px 2px 0px #d9d9d9;
@@ -206,11 +206,11 @@ body {
 	border-radius: 6px;
 
 	background-color: #5466da;
-	background-image: -webkit-linear-gradient(bottom, #5466da 0%, #768ee4 100%);
-	background-image: -moz-linear-gradient(bottom, #5466da 0%, #768ee4 100%);
-	background-image: -o-linear-gradient(bottom, #5466da 0%, #768ee4 100%);
-	background-image: -ms-linear-gradient(bottom, #5466da 0%, #768ee4 100%);
-	background-image: linear-gradient(bottom, #5466da 0%, #768ee4 100%);
+	background-drawing: -webkit-linear-gradient(bottom, #5466da 0%, #768ee4 100%);
+	background-drawing: -moz-linear-gradient(bottom, #5466da 0%, #768ee4 100%);
+	background-drawing: -o-linear-gradient(bottom, #5466da 0%, #768ee4 100%);
+	background-drawing: -ms-linear-gradient(bottom, #5466da 0%, #768ee4 100%);
+	background-drawing: linear-gradient(bottom, #5466da 0%, #768ee4 100%);
 	
 	-webkit-box-shadow: inset 0px 1px 0px #9ab1ec;
 	box-shadow: inset 0px 1px 0px #9ab1ec;
@@ -226,11 +226,11 @@ body {
 
 #slick-login input[type="submit"]:hover {
 	background-color: #5f73e9;
-	background-image: -webkit-linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
-	background-image: -moz-linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
-	background-image: -o-linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
-	background-image: -ms-linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
-	background-image: linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
+	background-drawing: -webkit-linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
+	background-drawing: -moz-linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
+	background-drawing: -o-linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
+	background-drawing: -ms-linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
+	background-drawing: linear-gradient(bottom, #5f73e9 0%, #859bef 100%);
 
 	-webkit-box-shadow: inset 0px 1px 0px #aab9f4;
 	box-shadow: inset 0px 1px 0px #aab9f4;
@@ -239,11 +239,11 @@ body {
 
 #slick-login input[type="submit"]:active {
 	background-color: #7588e1;
-	background-image: -webkit-linear-gradient(bottom, #7588e1 0%, #7184df 100%);
-	background-image: -moz-linear-gradient(bottom, #7588e1 0%, #7184df 100%);
-	background-image: -o-linear-gradient(bottom, #7588e1 0%, #7184df 100%);
-	background-image: -ms-linear-gradient(bottom, #7588e1 0%, #7184df 100%);
-	background-image: linear-gradient(bottom, #7588e1 0%, #7184df 100%);
+	background-drawing: -webkit-linear-gradient(bottom, #7588e1 0%, #7184df 100%);
+	background-drawing: -moz-linear-gradient(bottom, #7588e1 0%, #7184df 100%);
+	background-drawing: -o-linear-gradient(bottom, #7588e1 0%, #7184df 100%);
+	background-drawing: -ms-linear-gradient(bottom, #7588e1 0%, #7184df 100%);
+	background-drawing: linear-gradient(bottom, #7588e1 0%, #7184df 100%);
 
 	-webkit-box-shadow: inset 0px 1px 0px #93a9e9;
 	box-shadow: inset 0px 1px 0px #93a9e9;

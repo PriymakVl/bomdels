@@ -19,7 +19,7 @@ Modules are enabled by calling [Kohana::modules] and passing an array of `'name'
 		'cache'      => MODPATH.'cache',      // Caching with multiple backends
 		'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 		'database'   => MODPATH.'database',   // Database access
-		'image'      => MODPATH.'image',      // Image manipulation
+		'drawing'      => MODPATH.'drawing',      // drawing manipulation
 		'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 		'oauth'      => MODPATH.'oauth',      // OAuth authentication
 		'pagination' => MODPATH.'pagination', // Paging of results

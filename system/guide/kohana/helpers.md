@@ -22,7 +22,7 @@ You can make your own helpers by simply making a class and putting it in the `cl
  
  - **[Fragment]** - Simple file based caching. Covered in more detail on the [Fragments](fragments) page.
 
- - **[HTML]** - Useful HTML functions. Encode, obfuscate, create script, anchor, and image tags, etc.
+ - **[HTML]** - Useful HTML functions. Encode, obfuscate, create script, anchor, and drawing tags, etc.
  
  - **[I18n]** - Internationalization helper for creating multilanguage sites.
  

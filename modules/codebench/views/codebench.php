@@ -57,7 +57,7 @@
 		/* Benchmark details */
 		#bench > li > div { display:none; margin:0 0 12px; padding:0 0 2px; background:#eee; border:1px solid #999; border-top:0; -moz-border-radius-bottomleft:3px; -moz-border-radius-bottomright:3px; -webkit-border-bottom-left-radius:3px; -webkit-border-bottom-right-radius:3px; }
 		#bench > li > div table { width:100%; background:#eee; border-collapse:collapse; }
-		#bench > li > div th { padding:6px; background:#ddd url(data:image/gif;base64,R0lGODlhAQASALMAAMfHx8TExM7Oztvb29jY2NbW1tPT09DQ0MrKygAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAABABIAAAQNMAQAEBLiHGNKIcQwRAA7) repeat-x 0 1px; text-align:left; }
+		#bench > li > div th { padding:6px; background:#ddd url(data:drawing/gif;base64,R0lGODlhAQASALMAAMfHx8TExM7Oztvb29jY2NbW1tPT09DQ0MrKygAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAABABIAAAQNMAQAEBLiHGNKIcQwRAA7) repeat-x 0 1px; text-align:left; }
 		#bench > li > div td { padding:6px; border-top:1px solid #ccc; vertical-align:top; }
 		#bench .numeric { padding-left:18px; text-align:right; }
 		#bench .numeric span { position:relative; display:block; height:16px; }

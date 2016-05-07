@@ -198,7 +198,7 @@ if (strcasecmp(substr(__FILE__, -16), "classTextile.php") == 0) {
 			return $text;
 		}
 		# Fake restricted version: restrictions are not supported for now.
-		function TextileRestricted($text, $lite='', $noimage='') {
+		function TextileRestricted($text, $lite='', $nodrawing='') {
 			return $this->TextileThis($text, $lite);
 		}
 		# Workaround to ensure compatibility with TextPattern 4.0.3.
@@ -234,7 +234,7 @@ class Markdown_Parser {
 	var $no_markup = false;
 	var $no_entities = false;
 	
-	# Predefined urls and titles for reference links and images.
+	# Predefined urls and titles for reference links and drawings.
 	var $predef_urls = array();
 	var $predef_titles = array();
 
@@ -627,9 +627,9 @@ class Markdown_Parser {
 		# in one shot.
 		"parseSpan"           => -30,
 
-		# Process anchor and image tags. Images must come first,
+		# Process anchor and drawing tags. drawings must come first,
 		# because ![foo][f] looks like an anchor.
-		"doImages"            =>  10,
+		"dodrawings"            =>  10,
 		"doAnchors"           =>  20,
 		
 		# Make links out of things like `<http://example.com/>`
@@ -789,12 +789,12 @@ class Markdown_Parser {
 	}
 
 
-	function doImages($text) {
+	function dodrawings($text) {
 	#
-	# Turn Markdown image shortcuts into <img> tags.
+	# Turn Markdown drawing shortcuts into <img> tags.
 	#
 		#
-		# First, handle reference-style labeled images: ![alt text][id]
+		# First, handle reference-style labeled drawings: ![alt text][id]
 		#
 		$text = preg_replace_callback('{
 			(				# wrap whole match in $1
@@ -811,10 +811,10 @@ class Markdown_Parser {
 
 			)
 			}xs', 
-			array(&$this, '_doImages_reference_callback'), $text);
+			array(&$this, '_dodrawings_reference_callback'), $text);
 
 		#
-		# Next, handle inline images:  ![alt text](url "optional title")
+		# Next, handle inline drawings:  ![alt text](url "optional title")
 		# Don't forget: encode * and _
 		#
 		$text = preg_replace_callback('{
@@ -840,11 +840,11 @@ class Markdown_Parser {
 			  \)
 			)
 			}xs',
-			array(&$this, '_doImages_inline_callback'), $text);
+			array(&$this, '_dodrawings_inline_callback'), $text);
 
 		return $text;
 	}
-	function _doImages_reference_callback($matches) {
+	function _dodrawings_reference_callback($matches) {
 		$whole_match = $matches[1];
 		$alt_text    = $matches[2];
 		$link_id     = strtolower($matches[3]);
@@ -872,7 +872,7 @@ class Markdown_Parser {
 
 		return $result;
 	}
-	function _doImages_inline_callback($matches) {
+	function _dodrawings_inline_callback($matches) {
 		$whole_match	= $matches[1];
 		$alt_text		= $matches[2];
 		$url			= $matches[3] == '' ? $matches[4] : $matches[3];

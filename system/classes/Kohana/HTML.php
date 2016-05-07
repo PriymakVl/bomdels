@@ -89,7 +89,7 @@ class Kohana_HTML {
 
 	/**
 	 * Create HTML link anchors. Note that the title is not escaped, to allow
-	 * HTML elements within links (images, etc).
+	 * HTML elements within links (drawings, etc).
 	 *
 	 *     echo HTML::anchor('/user/profile', 'My Profile');
 	 *
@@ -141,7 +141,7 @@ class Kohana_HTML {
 
 	/**
 	 * Creates an HTML anchor to a file. Note that the title is not escaped,
-	 * to allow HTML elements within links (images, etc).
+	 * to allow HTML elements within links (drawings, etc).
 	 *
 	 *     echo HTML::file_anchor('media/doc/user_guide.pdf', 'User Guide');
 	 *
@@ -170,7 +170,7 @@ class Kohana_HTML {
 
 	/**
 	 * Creates an email (mailto:) anchor. Note that the title is not escaped,
-	 * to allow HTML elements within links (images, etc).
+	 * to allow HTML elements within links (drawings, etc).
 	 *
 	 *     echo HTML::mailto($address);
 	 *
@@ -255,9 +255,9 @@ class Kohana_HTML {
 	}
 
 	/**
-	 * Creates a image link.
+	 * Creates a drawing link.
 	 *
-	 *     echo HTML::image('media/img/logo.png', array('alt' => 'My Company'));
+	 *     echo HTML::drawing('media/img/logo.png', array('alt' => 'My Company'));
 	 *
 	 * @param   string  $file       file name
 	 * @param   array   $attributes default attributes
@@ -267,7 +267,7 @@ class Kohana_HTML {
 	 * @uses    URL::base
 	 * @uses    HTML::attributes
 	 */
-	public static function image($file, array $attributes = NULL, $protocol = NULL, $index = FALSE)
+	public static function drawing($file, array $attributes = NULL, $protocol = NULL, $index = FALSE)
 	{
 		if (strpos($file, '://') === FALSE)
 		{
@@ -275,7 +275,7 @@ class Kohana_HTML {
 			$file = URL::site($file, $protocol, $index);
 		}
 
-		// Add the image link
+		// Add the drawing link
 		$attributes['src'] = $file;
 
 		return '<img'.HTML::attributes($attributes).' />';

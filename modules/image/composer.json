@@ -1,10 +1,10 @@
 {
-	"name":        "kohana/image",
+	"name":        "kohana/drawing",
 	"type":        "kohana-module",
-	"description": "The official Kohana module for manipulating images",
+	"description": "The official Kohana module for manipulating drawings",
 	"homepage":    "http://kohanaframework.org",
 	"license":     "BSD-3-Clause",
-	"keywords":    ["kohana", "framework", "image"],
+	"keywords":    ["kohana", "framework", "drawing"],
 	"authors": [
 		{
 			"name":     "Kohana Team",

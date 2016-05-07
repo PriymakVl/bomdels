@@ -94,14 +94,14 @@ class Kohana_Feed {
 
 		foreach ($info as $name => $value)
 		{
-			if ($name === 'image')
+			if ($name === 'drawing')
 			{
-				// Create an image element
-				$image = $feed->channel->addChild('image');
+				// Create an drawing element
+				$drawing = $feed->channel->addChild('drawing');
 
 				if ( ! isset($value['link'], $value['url'], $value['title']))
 				{
-					throw new Kohana_Exception('Feed images require a link, url, and title');
+					throw new Kohana_Exception('Feed drawings require a link, url, and title');
 				}
 
 				if (strpos($value['link'], '://') === FALSE)
@@ -116,10 +116,10 @@ class Kohana_Feed {
 					$value['url'] = URL::site($value['url'], 'http');
 				}
 
-				// Create the image elements
-				$image->addChild('link', $value['link']);
-				$image->addChild('url', $value['url']);
-				$image->addChild('title', $value['title']);
+				// Create the drawing elements
+				$drawing->addChild('link', $value['link']);
+				$drawing->addChild('url', $value['url']);
+				$drawing->addChild('title', $value['title']);
 			}
 			else
 			{

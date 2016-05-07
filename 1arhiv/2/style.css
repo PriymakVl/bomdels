@@ -8,7 +8,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0px;
 	padding: 0;
-	background: #3C424C url(images/img01.jpg) repeat-x left top;
+	background: #3C424C url(drawings/img01.jpg) repeat-x left top;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #464646;
@@ -95,7 +95,7 @@ hr { display: none; }
 	height: 140px;
 	margin: 0 auto;
 	padding: 0px;
-	background: url(images/img02.jpg) no-repeat left top;
+	background: url(drawings/img02.jpg) no-repeat left top;
 }
 
 #logo h1, #logo p {
@@ -145,7 +145,7 @@ hr { display: none; }
 #menu li {
 	display: block;
 	float: left;
-	background: url(images/img04.jpg) no-repeat left top;
+	background: url(drawings/img04.jpg) no-repeat left top;
 }
 
 #menu a {
@@ -221,7 +221,7 @@ hr { display: none; }
 	width: 940px;
 	margin: 0 auto;
 	padding: 20px 20px 0px 20px;
-	background: #C1D6E2 url(images/img03.jpg) repeat-x left bottom;
+	background: #C1D6E2 url(drawings/img03.jpg) repeat-x left bottom;
 }
 
 #banner {
@@ -350,14 +350,14 @@ hr { display: none; }
 	margin: 0;
 	padding: 10px 0px;
 	border: none;
-	background: url(images/img06.jpg) repeat-x left bottom;
+	background: url(drawings/img06.jpg) repeat-x left bottom;
 }
 
 #sidebar li li a {
 	padding: 0px 0px 0px 30px;
 	font-weight: normal;
 	border: none;
-	background: url(images/img07.jpg) no-repeat 15px 4px;
+	background: url(drawings/img07.jpg) no-repeat 15px 4px;
 }
 
 #sidebar li li a:hover {
@@ -373,7 +373,7 @@ hr { display: none; }
 	height: 32px;
 	margin: 0 0 10px 0px;
 	padding: 8px 0 2px 15px;
-	background: url(images/img05.jpg) repeat-x left top;
+	background: url(drawings/img05.jpg) repeat-x left top;
 	text-transform: capitalize;
 	font-size: 18px;
 	font-weight: normal;

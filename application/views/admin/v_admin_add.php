@@ -7,8 +7,8 @@
     <? endif; ?>
     <form id="form-drawing" method="post" action="/admin/adddrawing">
         <div class="input-wrp">
-            <label for="image">Изображение:</label>
-            <input type="text" name="image" value="<? if(isset($draw['image'])) echo $draw['image']?>" />
+            <label for="drawing">Изображение:</label>
+            <input type="text" name="drawing" value="<? if(isset($draw['drawing'])) echo $draw['drawing']?>" />
         </div>
         <div class="input-wrp">
         	<label for="code">Код:</label>

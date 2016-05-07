@@ -7,7 +7,7 @@
 
 	<property name="branch" value="3.3/develop"/>
 
-	<property name="submodules" value="system,modules/auth,modules/cache,modules/codebench,modules/database,modules/image,modules/orm,modules/unittest,modules/userguide"/>
+	<property name="submodules" value="system,modules/auth,modules/cache,modules/codebench,modules/database,modules/drawing,modules/orm,modules/unittest,modules/userguide"/>
 
 	<!-- Shows the help message -->
 	<target name="help">
@@ -143,8 +143,8 @@
 			<property name="dir"        value="${basedir}/modules/database" />
 		</phingcall>
 		<phingcall target="_dev-setup-remote">
-			<property name="repository" value="git@github.com:kohana/image.git" />
-			<property name="dir"        value="${basedir}/modules/image" />
+			<property name="repository" value="git@github.com:kohana/drawing.git" />
+			<property name="dir"        value="${basedir}/modules/drawing" />
 		</phingcall>
 		<phingcall target="_dev-setup-remote">
 			<property name="repository" value="git@github.com:kohana/orm.git" />

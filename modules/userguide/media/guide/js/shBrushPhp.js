@@ -42,7 +42,7 @@
 						'fileatime filectime filegroup fileinode filemtime fileowner fileperms filesize filetype '+
 						'floatval flock floor flush fmod fnmatch fopen fpassthru fprintf fputcsv fputs fread fscanf '+
 						'fseek fsockopen fstat ftell ftok getallheaders getcwd getdate getenv gethostbyaddr gethostbyname '+
-						'gethostbynamel getimagesize getlastmod getmxrr getmygid getmyinode getmypid getmyuid getopt '+
+						'gethostbynamel getdrawingsize getlastmod getmxrr getmygid getmyinode getmypid getmyuid getopt '+
 						'getprotobyname getprotobynumber getrandmax getrusage getservbyname getservbyport gettext '+
 						'gettimeofday gettype glob gmdate gmmktime ini_alter ini_get ini_get_all ini_restore ini_set '+
 						'interface_exists intval ip2long is_a is_array is_bool is_callable is_dir is_double '+

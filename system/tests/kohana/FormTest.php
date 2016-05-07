@@ -343,31 +343,31 @@ class Kohana_FormTest extends Unittest_TestCase
 
 
 	/**
-	 * Provides test data for test_image()
+	 * Provides test data for test_drawing()
 	 *
 	 * @return array
 	 */
-	public function provider_image()
+	public function provider_drawing()
 	{
 		return array(
 			// $value, $result
-			array('foo', 'bar', array('src' => 'media/img/login.png'), '<input type="image" name="foo" value="bar" src="/media/img/login.png" />'),
+			array('foo', 'bar', array('src' => 'media/img/login.png'), '<input type="drawing" name="foo" value="bar" src="/media/img/login.png" />'),
 		);
 	}
 
 	/**
-	 * Tests Form::image()
+	 * Tests Form::drawing()
 	 *
 	 * @test
-	 * @dataProvider provider_image
-	 * @param boolean $name         Input for Form::image
-	 * @param boolean $value        Input for Form::image
-	 * @param boolean $attributes  Input for Form::image
-	 * @param boolean $expected    Output for Form::image
+	 * @dataProvider provider_drawing
+	 * @param boolean $name         Input for Form::drawing
+	 * @param boolean $value        Input for Form::drawing
+	 * @param boolean $attributes  Input for Form::drawing
+	 * @param boolean $expected    Output for Form::drawing
 	 */
-	public function test_image($name, $value, $attributes, $expected)
+	public function test_drawing($name, $value, $attributes, $expected)
 	{
-		$this->assertSame($expected, Form::image($name, $value, $attributes));
+		$this->assertSame($expected, Form::drawing($name, $value, $attributes));
 	}
 
 	/**

@@ -936,7 +936,7 @@ class Kohana_HTTP_HeaderTest extends Unittest_TestCase {
 				array(
 					'text/plain',
 					'application/xml',
-					'image/jpeg'
+					'drawing/jpeg'
 				),
 				FALSE,
 				'application/xml'
@@ -948,7 +948,7 @@ class Kohana_HTTP_HeaderTest extends Unittest_TestCase {
 				array(
 					'text/plain',
 					'application/xml',
-					'image/jpeg'
+					'drawing/jpeg'
 				),
 				FALSE,
 				'text/plain'
@@ -960,7 +960,7 @@ class Kohana_HTTP_HeaderTest extends Unittest_TestCase {
 				array(
 					'text/plain',
 					'application/xml',
-					'image/jpeg'
+					'drawing/jpeg'
 				),
 				TRUE,
 				FALSE

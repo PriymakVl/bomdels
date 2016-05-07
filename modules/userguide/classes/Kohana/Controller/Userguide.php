@@ -32,9 +32,9 @@ abstract class Kohana_Controller_Userguide extends Controller_Template {
 			$this->media = Route::get('docs/media');
 			$this->guide = Route::get('docs/guide');
 
-			// Set the base URL for links and images
+			// Set the base URL for links and drawings
 			Kodoc_Markdown::$base_url  = URL::site($this->guide->uri()).'/';
-			Kodoc_Markdown::$image_url = URL::site($this->media->uri()).'/';
+			Kodoc_Markdown::$drawing_url = URL::site($this->media->uri()).'/';
 		}
 
 		// Default show_comments to config value
@@ -68,7 +68,7 @@ abstract class Kohana_Controller_Userguide extends Controller_Template {
 		{
 			// Namespace the markdown parser
 			Kodoc_Markdown::$base_url  = URL::site($this->guide->uri()).'/'.$module.'/';
-			Kodoc_Markdown::$image_url = URL::site($this->media->uri()).'/'.$module.'/';
+			Kodoc_Markdown::$drawing_url = URL::site($this->media->uri()).'/'.$module.'/';
 
 			$this->template->menu = Kodoc_Markdown::markdown($this->_get_all_menu_markdown());
 			$this->template->breadcrumb = array(
@@ -140,7 +140,7 @@ abstract class Kohana_Controller_Userguide extends Controller_Template {
 		
 		// Namespace the markdown parser
 		Kodoc_Markdown::$base_url  = URL::site($this->guide->uri()).'/'.$module.'/';
-		Kodoc_Markdown::$image_url = URL::site($this->media->uri()).'/'.$module.'/';
+		Kodoc_Markdown::$drawing_url = URL::site($this->media->uri()).'/'.$module.'/';
 
 		// Set the page title
 		$this->template->title = ($page == 'index')

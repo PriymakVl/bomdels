@@ -1,22 +1,22 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Support for image manipulation using [Imagick](http://php.net/Imagick).
+ * Support for drawing manipulation using [Imagick](http://php.net/Imagick).
  *
- * @package    Kohana/Image
+ * @package    Kohana/drawing
  * @category   Drivers
  * @author     Tamas Mihalik tamas.mihalik@gmail.com
  * @copyright  (c) 2009-2012 Kohana Team
  * @license    http://kohanaphp.com/license.html
  */
-class Kohana_Image_Imagick extends Image {
+class Kohana_drawing_Imagick extends drawing {
 
 	/**
-	 * @var  Imagick  image magick object
+	 * @var  Imagick  drawing magick object
 	 */
 	protected $im;
 
 	/**
-	 * Checks if ImageMagick is enabled.
+	 * Checks if drawingMagick is enabled.
 	 *
 	 * @throws  Kohana_Exception
 	 * @return  boolean
@@ -28,37 +28,37 @@ class Kohana_Image_Imagick extends Image {
 			throw new Kohana_Exception('Imagick is not installed, or the extension is not loaded');
 		}
 
-		return Image_Imagick::$_checked = TRUE;
+		return drawing_Imagick::$_checked = TRUE;
 	}
 
 	/**
-	 * Runs [Image_Imagick::check] and loads the image.
+	 * Runs [drawing_Imagick::check] and loads the drawing.
 	 *
 	 * @return  void
 	 * @throws  Kohana_Exception
 	 */
 	public function __construct($file)
 	{
-		if ( ! Image_Imagick::$_checked)
+		if ( ! drawing_Imagick::$_checked)
 		{
 			// Run the install check
-			Image_Imagick::check();
+			drawing_Imagick::check();
 		}
 
 		parent::__construct($file);
 
 		$this->im = new Imagick;
-		$this->im->readImage($file);
+		$this->im->readdrawing($file);
 
-		if ( ! $this->im->getImageAlphaChannel())
+		if ( ! $this->im->getdrawingAlphaChannel())
 		{
-			// Force the image to have an alpha channel
-			$this->im->setImageAlphaChannel(Imagick::ALPHACHANNEL_SET);
+			// Force the drawing to have an alpha channel
+			$this->im->setdrawingAlphaChannel(Imagick::ALPHACHANNEL_SET);
 		}
 	}
 
 	/**
-	 * Destroys the loaded image to free up resources.
+	 * Destroys the loaded drawing to free up resources.
 	 *
 	 * @return  void
 	 */
@@ -70,11 +70,11 @@ class Kohana_Image_Imagick extends Image {
 
 	protected function _do_resize($width, $height)
 	{
-		if ($this->im->scaleImage($width, $height))
+		if ($this->im->scaledrawing($width, $height))
 		{
 			// Reset the width and height
-			$this->width = $this->im->getImageWidth();
-			$this->height = $this->im->getImageHeight();
+			$this->width = $this->im->getdrawingWidth();
+			$this->height = $this->im->getdrawingHeight();
 
 			return TRUE;
 		}
@@ -84,14 +84,14 @@ class Kohana_Image_Imagick extends Image {
 
 	protected function _do_crop($width, $height, $offset_x, $offset_y)
 	{
-		if ($this->im->cropImage($width, $height, $offset_x, $offset_y))
+		if ($this->im->cropdrawing($width, $height, $offset_x, $offset_y))
 		{
 			// Reset the width and height
-			$this->width = $this->im->getImageWidth();
-			$this->height = $this->im->getImageHeight();
+			$this->width = $this->im->getdrawingWidth();
+			$this->height = $this->im->getdrawingHeight();
 
 			// Trim off hidden areas
-			$this->im->setImagePage($this->width, $this->height, 0, 0);
+			$this->im->setdrawingPage($this->width, $this->height, 0, 0);
 
 			return TRUE;
 		}
@@ -101,14 +101,14 @@ class Kohana_Image_Imagick extends Image {
 
 	protected function _do_rotate($degrees)
 	{
-		if ($this->im->rotateImage(new ImagickPixel('transparent'), $degrees))
+		if ($this->im->rotatedrawing(new ImagickPixel('transparent'), $degrees))
 		{
 			// Reset the width and height
-			$this->width = $this->im->getImageWidth();
-			$this->height = $this->im->getImageHeight();
+			$this->width = $this->im->getdrawingWidth();
+			$this->height = $this->im->getdrawingHeight();
 
 			// Trim off hidden areas
-			$this->im->setImagePage($this->width, $this->height, 0, 0);
+			$this->im->setdrawingPage($this->width, $this->height, 0, 0);
 
 			return TRUE;
 		}
@@ -118,13 +118,13 @@ class Kohana_Image_Imagick extends Image {
 
 	protected function _do_flip($direction)
 	{
-		if ($direction === Image::HORIZONTAL)
+		if ($direction === drawing::HORIZONTAL)
 		{
-			return $this->im->flopImage();
+			return $this->im->flopdrawing();
 		}
 		else
 		{
-			return $this->im->flipImage();
+			return $this->im->flipdrawing();
 		}
 	}
 
@@ -136,18 +136,18 @@ class Kohana_Image_Imagick extends Image {
 		// Amount should be in the range of 0.0 to 3.0
 		$amount = ($amount * 3.0) / 100;
 
-		return $this->im->sharpenImage(0, $amount);
+		return $this->im->sharpendrawing(0, $amount);
 	}
 
 	protected function _do_reflection($height, $opacity, $fade_in)
 	{
-		// Clone the current image and flip it for reflection
+		// Clone the current drawing and flip it for reflection
 		$reflection = $this->im->clone();
-		$reflection->flipImage();
+		$reflection->flipdrawing();
 
 		// Crop the reflection to the selected height
-		$reflection->cropImage($this->width, $height, 0, 0);
-		$reflection->setImagePage($this->width, $height, 0, 0);
+		$reflection->cropdrawing($this->width, $height, 0, 0);
+		$reflection->setdrawingPage($this->width, $height, 0, 0);
 
 		// Select the fade direction
 		$direction = array('transparent', 'black');
@@ -160,37 +160,37 @@ class Kohana_Image_Imagick extends Image {
 
 		// Create a gradient for fading
 		$fade = new Imagick;
-		$fade->newPseudoImage($reflection->getImageWidth(), $reflection->getImageHeight(), vsprintf('gradient:%s-%s', $direction));
+		$fade->newPseudodrawing($reflection->getdrawingWidth(), $reflection->getdrawingHeight(), vsprintf('gradient:%s-%s', $direction));
 
 		// Apply the fade alpha channel to the reflection
-		$reflection->compositeImage($fade, Imagick::COMPOSITE_DSTOUT, 0, 0);
+		$reflection->compositedrawing($fade, Imagick::COMPOSITE_DSTOUT, 0, 0);
 
-		// NOTE: Using setImageOpacity will destroy alpha channels!
-		$reflection->evaluateImage(Imagick::EVALUATE_MULTIPLY, $opacity / 100, Imagick::CHANNEL_ALPHA);
+		// NOTE: Using setdrawingOpacity will destroy alpha channels!
+		$reflection->evaluatedrawing(Imagick::EVALUATE_MULTIPLY, $opacity / 100, Imagick::CHANNEL_ALPHA);
 
-		// Create a new container to hold the image and reflection
-		$image = new Imagick;
-		$image->newImage($this->width, $this->height + $height, new ImagickPixel);
+		// Create a new container to hold the drawing and reflection
+		$drawing = new Imagick;
+		$drawing->newdrawing($this->width, $this->height + $height, new ImagickPixel);
 
-		// Force the image to have an alpha channel
-		$image->setImageAlphaChannel(Imagick::ALPHACHANNEL_SET);
+		// Force the drawing to have an alpha channel
+		$drawing->setdrawingAlphaChannel(Imagick::ALPHACHANNEL_SET);
 
 		// Force the background color to be transparent
-		// $image->setImageBackgroundColor(new ImagickPixel('transparent'));
+		// $drawing->setdrawingBackgroundColor(new ImagickPixel('transparent'));
 
-		// Match the colorspace between the two images before compositing
-		$image->setColorspace($this->im->getColorspace());
+		// Match the colorspace between the two drawings before compositing
+		$drawing->setColorspace($this->im->getColorspace());
 
-		// Place the image and reflection into the container
-		if ($image->compositeImage($this->im, Imagick::COMPOSITE_SRC, 0, 0)
-		AND $image->compositeImage($reflection, Imagick::COMPOSITE_OVER, 0, $this->height))
+		// Place the drawing and reflection into the container
+		if ($drawing->compositedrawing($this->im, Imagick::COMPOSITE_SRC, 0, 0)
+		AND $drawing->compositedrawing($reflection, Imagick::COMPOSITE_OVER, 0, $this->height))
 		{
-			// Replace the current image with the reflected image
-			$this->im = $image;
+			// Replace the current drawing with the reflected drawing
+			$this->im = $drawing;
 
 			// Reset the width and height
-			$this->width = $this->im->getImageWidth();
-			$this->height = $this->im->getImageHeight();
+			$this->width = $this->im->getdrawingWidth();
+			$this->height = $this->im->getdrawingHeight();
 
 			return TRUE;
 		}
@@ -198,29 +198,29 @@ class Kohana_Image_Imagick extends Image {
 		return FALSE;
 	}
 
-	protected function _do_watermark(Image $image, $offset_x, $offset_y, $opacity)
+	protected function _do_watermark(drawing $drawing, $offset_x, $offset_y, $opacity)
 	{
-		// Convert the Image intance into an Imagick instance
+		// Convert the drawing intance into an Imagick instance
 		$watermark = new Imagick;
-		$watermark->readImageBlob($image->render(), $image->file);
+		$watermark->readdrawingBlob($drawing->render(), $drawing->file);
 
-		if ($watermark->getImageAlphaChannel() !== Imagick::ALPHACHANNEL_ACTIVATE)
+		if ($watermark->getdrawingAlphaChannel() !== Imagick::ALPHACHANNEL_ACTIVATE)
 		{
-			// Force the image to have an alpha channel
-			$watermark->setImageAlphaChannel(Imagick::ALPHACHANNEL_OPAQUE);
+			// Force the drawing to have an alpha channel
+			$watermark->setdrawingAlphaChannel(Imagick::ALPHACHANNEL_OPAQUE);
 		}
 
 		if ($opacity < 100)
 		{
-			// NOTE: Using setImageOpacity will destroy current alpha channels!
-			$watermark->evaluateImage(Imagick::EVALUATE_MULTIPLY, $opacity / 100, Imagick::CHANNEL_ALPHA);
+			// NOTE: Using setdrawingOpacity will destroy current alpha channels!
+			$watermark->evaluatedrawing(Imagick::EVALUATE_MULTIPLY, $opacity / 100, Imagick::CHANNEL_ALPHA);
 		}
 
-		// Match the colorspace between the two images before compositing
+		// Match the colorspace between the two drawings before compositing
 		// $watermark->setColorspace($this->im->getColorspace());
 
-		// Apply the watermark to the image
-		return $this->im->compositeImage($watermark, Imagick::COMPOSITE_DISSOLVE, $offset_x, $offset_y);
+		// Apply the watermark to the drawing
+		return $this->im->compositedrawing($watermark, Imagick::COMPOSITE_DISSOLVE, $offset_x, $offset_y);
 	}
 
 	protected function _do_background($r, $g, $b, $opacity)
@@ -228,28 +228,28 @@ class Kohana_Image_Imagick extends Image {
 		// Create a RGB color for the background
 		$color = sprintf('rgb(%d, %d, %d)', $r, $g, $b);
 
-		// Create a new image for the background
+		// Create a new drawing for the background
 		$background = new Imagick;
-		$background->newImage($this->width, $this->height, new ImagickPixel($color));
+		$background->newdrawing($this->width, $this->height, new ImagickPixel($color));
 
-		if ( ! $background->getImageAlphaChannel())
+		if ( ! $background->getdrawingAlphaChannel())
 		{
-			// Force the image to have an alpha channel
-			$background->setImageAlphaChannel(Imagick::ALPHACHANNEL_SET);
+			// Force the drawing to have an alpha channel
+			$background->setdrawingAlphaChannel(Imagick::ALPHACHANNEL_SET);
 		}
 
-		// Clear the background image
-		$background->setImageBackgroundColor(new ImagickPixel('transparent'));
+		// Clear the background drawing
+		$background->setdrawingBackgroundColor(new ImagickPixel('transparent'));
 
-		// NOTE: Using setImageOpacity will destroy current alpha channels!
-		$background->evaluateImage(Imagick::EVALUATE_MULTIPLY, $opacity / 100, Imagick::CHANNEL_ALPHA);
+		// NOTE: Using setdrawingOpacity will destroy current alpha channels!
+		$background->evaluatedrawing(Imagick::EVALUATE_MULTIPLY, $opacity / 100, Imagick::CHANNEL_ALPHA);
 
-		// Match the colorspace between the two images before compositing
+		// Match the colorspace between the two drawings before compositing
 		$background->setColorspace($this->im->getColorspace());
 
-		if ($background->compositeImage($this->im, Imagick::COMPOSITE_DISSOLVE, 0, 0))
+		if ($background->compositedrawing($this->im, Imagick::COMPOSITE_DISSOLVE, 0, 0))
 		{
-			// Replace the current image with the new image
+			// Replace the current drawing with the new drawing
 			$this->im = $background;
 
 			return TRUE;
@@ -260,20 +260,20 @@ class Kohana_Image_Imagick extends Image {
 
 	protected function _do_save($file, $quality)
 	{
-		// Get the image format and type
-		list($format, $type) = $this->_get_imagetype(pathinfo($file, PATHINFO_EXTENSION));
+		// Get the drawing format and type
+		list($format, $type) = $this->_get_drawingtype(pathinfo($file, PATHINFO_EXTENSION));
 
-		// Set the output image type
+		// Set the output drawing type
 		$this->im->setFormat($format);
 
 		// Set the output quality
-		$this->im->setImageCompressionQuality($quality);
+		$this->im->setdrawingCompressionQuality($quality);
 
-		if ($this->im->writeImage($file))
+		if ($this->im->writedrawing($file))
 		{
-			// Reset the image type and mime type
+			// Reset the drawing type and mime type
 			$this->type = $type;
-			$this->mime = image_type_to_mime_type($type);
+			$this->mime = drawing_type_to_mime_type($type);
 
 			return TRUE;
 		}
@@ -283,30 +283,30 @@ class Kohana_Image_Imagick extends Image {
 
 	protected function _do_render($type, $quality)
 	{
-		// Get the image format and type
-		list($format, $type) = $this->_get_imagetype($type);
+		// Get the drawing format and type
+		list($format, $type) = $this->_get_drawingtype($type);
 
-		// Set the output image type
+		// Set the output drawing type
 		$this->im->setFormat($format);
 
 		// Set the output quality
-		$this->im->setImageCompressionQuality($quality);
+		$this->im->setdrawingCompressionQuality($quality);
 
-		// Reset the image type and mime type
+		// Reset the drawing type and mime type
 		$this->type = $type;
-		$this->mime = image_type_to_mime_type($type);
+		$this->mime = drawing_type_to_mime_type($type);
 
 		return (string) $this->im;
 	}
 
 	/**
-	 * Get the image type and format for an extension.
+	 * Get the drawing type and format for an extension.
 	 *
-	 * @param   string  $extension  image extension: png, jpg, etc
-	 * @return  string  IMAGETYPE_* constant
+	 * @param   string  $extension  drawing extension: png, jpg, etc
+	 * @return  string  drawingTYPE_* constant
 	 * @throws  Kohana_Exception
 	 */
-	protected function _get_imagetype($extension)
+	protected function _get_drawingtype($extension)
 	{
 		// Normalize the extension to a format
 		$format = strtolower($extension);
@@ -316,20 +316,20 @@ class Kohana_Image_Imagick extends Image {
 			case 'jpg':
 			case 'jpe':
 			case 'jpeg':
-				$type = IMAGETYPE_JPEG;
+				$type = drawingTYPE_JPEG;
 			break;
 			case 'gif':
-				$type = IMAGETYPE_GIF;
+				$type = drawingTYPE_GIF;
 			break;
 			case 'png':
-				$type = IMAGETYPE_PNG;
+				$type = drawingTYPE_PNG;
 			break;
 			default:
-				throw new Kohana_Exception('Installed ImageMagick does not support :type images',
+				throw new Kohana_Exception('Installed drawingMagick does not support :type drawings',
 					array(':type' => $extension));
 			break;
 		}
 
 		return array($format, $type);
 	}
-} // End Kohana_Image_Imagick
+} // End Kohana_drawing_Imagick

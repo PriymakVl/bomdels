@@ -109,14 +109,14 @@ class Kohana_HTTPTest extends Unittest_TestCase {
 				array(
 					'CONTENT_TYPE' => 'text/html; charset=utf-8',
 					'CONTENT_LENGTH' => '3547',
-					'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+					'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,drawing/webp,*/*;q=0.8',
 					'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch',
 					'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,fr;q=0.6,hy;q=0.4',
 				),
 				array(
 					'content-type' => 'text/html; charset=utf-8',
 					'content-length' => '3547',
-					'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+					'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,drawing/webp,*/*;q=0.8',
 					'accept-encoding'=>'gzip, deflate, sdch',
 					'accept-language'=>'en-US,en;q=0.8,fr;q=0.6,hy;q=0.4',
 				)

@@ -5,31 +5,24 @@ class Controller_Specification extends Controller_Base {
     
     public function action_index()
     {   
-        $this->template->block_right = View::factory('widgets/w_vernav');
+        $this->template->styles = array('style.css', 'specification_sidebar.css');
+        $scripts = array('jquery.js', 'sort_details_sundbirsta.js', 'sort_sundbirsta_checked_all.js', 'specification_show_box_sidebar.js');
+        $this->template->scripts = $scripts;
         
-        $id = Arr::get($_GET, 'id');
-        if(!(int) $id) $this->redirect('404');
+        $detail_id = $this->request->query('id');
+
+        if((int) $detail_id) $detail = new Object_Sundbirsta($detail_id);
+        else $this->redirect('404');
         
-        $draw = new Object_Drawing($id);
+        $breadcrumbs = $this->getBreadcrumbs($detail->code);
+        View::bind_global('detail', $detail);
         
-        if(!$draw) {
-            $this->template->block_center = View::factory('widgets/w_draw_not_found')->set('submenu', false)->set('message', 'Такой детали не найдено');    
-        }
-        else {
-            $submenu = $this->getSubmenu('Спецификация', $draw);
-            $draws = $this->getArrayOfObjects($draw->sub_id, 'Object_Drawing');
-            //Arr::_print($draws);
-            $this->template->block_topnav = View::factory('widgets/w_top_breadcrumbs')->bind('draw', $draw);
-            $this->template->block_center = View::factory('widgets/w_specification_draw')->bind('draws', $draws)->bind('submenu', $submenu);  
-        }   
+        $details = $this->getArrayOfObjects($detail->sub_id, 'Object_Sundbirsta');
+        $this->template->block_topnav = View::factory('total/v_top_breadcrumbs')->bind('breadcrumbs', $breadcrumbs);
+        $this->template->block_right = View::factory('specification/v_specification_menu');
+        $this->template->block_center = View::factory('specification/v_specification_detail')->bind('details', $details);
+                       
     }
     
-    private function getSubmenu($item, Object_Drawing $draw) {
-        $str = "<span style='color: green;'>$item</span>";
-        $str .= "<a href='/data?id=$draw->id'>Данные</a>";
-        $str .= "<a href='#'>Обеспечение</a>";
-        $str .= "<a href='/data?id=$draw->id'>Чертеж</a>";
-        return $str;    
-    }
-
 }
+    

@@ -1,16 +1,16 @@
 <?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
 
 /**
- * @package    Kohana/Image
+ * @package    Kohana/drawing
  * @group      kohana
- * @group      kohana.image
+ * @group      kohana.drawing
  * @category   Test
  * @author     Kohana Team
  * @copyright  (c) 2009-2012 Kohana Team
  * @license    http://http://kohanaframework.org/license
  */
 
-class Kohana_ImageTest extends PHPUnit_Framework_TestCase {
+class Kohana_drawingTest extends PHPUnit_Framework_TestCase {
 
 	protected function setUp()
 	{
@@ -21,16 +21,16 @@ class Kohana_ImageTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Tests the Image::save() method for files that don't have extensions
+	 * Tests the drawing::save() method for files that don't have extensions
 	 *
 	 * @return  void
 	 */
 	public function test_save_without_extension()
 	{
-		$image = Image::factory(MODPATH.'image/tests/test_data/test_image');
-		$this->assertTrue($image->save(Kohana::$cache_dir.'/test_image'));
+		$drawing = drawing::factory(MODPATH.'drawing/tests/test_data/test_drawing');
+		$this->assertTrue($drawing->save(Kohana::$cache_dir.'/test_drawing'));
 
-		unlink(Kohana::$cache_dir.'/test_image');
+		unlink(Kohana::$cache_dir.'/test_drawing');
 	}
 
-} // End Kohana_ImageTest
+} // End Kohana_drawingTest

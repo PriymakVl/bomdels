@@ -4,10 +4,10 @@
  * @category   Tests
  * @author     Geert De Deckere <geert@idoe.be>
  */
-class Bench_MDDoImageURL extends Codebench {
+class Bench_MDDodrawingURL extends Codebench {
 
 	public $description =
-		'Optimization for the <code>doImageURL()</code> method of <code>Kohana_Kodoc_Markdown</code>
+		'Optimization for the <code>dodrawingURL()</code> method of <code>Kohana_Kodoc_Markdown</code>
 		 for the Kohana Userguide.';
 
 	public $loops = 10000;
@@ -17,7 +17,7 @@ class Bench_MDDoImageURL extends Codebench {
 		// Valid matches
 		'![Alt text](http://img.skitch.com/20091019-rud5mmqbf776jwua6hx9nm1n.png)',
 		'![Alt text](https://img.skitch.com/20091019-rud5mmqbf776jwua6hx9nm1n.png)',
-		'![Alt text](otherprotocol://image.png "Optional title")',
+		'![Alt text](otherprotocol://drawing.png "Optional title")',
 		'![Alt text](img/install.png "Optional title")',
 		'![Alt text containing [square] brackets](img/install.png)',
 		'![Empty src]()',
@@ -28,9 +28,9 @@ class Bench_MDDoImageURL extends Codebench {
 
 	public function bench_original($subject)
 	{
-		return preg_replace_callback('~!\[(.+?)\]\((\S*(?:\s*".+?")?)\)~', array($this, '_add_image_url_original'), $subject);
+		return preg_replace_callback('~!\[(.+?)\]\((\S*(?:\s*".+?")?)\)~', array($this, '_add_drawing_url_original'), $subject);
 	}
-	protected function _add_image_url_original($matches)
+	protected function _add_drawing_url_original($matches)
 	{
 		if ($matches[2] AND strpos($matches[2], '://') === FALSE)
 		{
@@ -45,9 +45,9 @@ class Bench_MDDoImageURL extends Codebench {
 	public function bench_optimized_callback($subject)
 	{
 		// Moved the check for "://" to the regex, simplifying the callback function
-		return preg_replace_callback('~!\[(.+?)\]\((?!\w++://)(\S*(?:\s*+".+?")?)\)~', array($this, '_add_image_url_optimized'), $subject);
+		return preg_replace_callback('~!\[(.+?)\]\((?!\w++://)(\S*(?:\s*+".+?")?)\)~', array($this, '_add_drawing_url_optimized'), $subject);
 	}
-	protected function _add_image_url_optimized($matches)
+	protected function _add_drawing_url_optimized($matches)
 	{
 		// Add the base url to the link URL
 		$matches[2] = 'http://BASE/'.$matches[2];

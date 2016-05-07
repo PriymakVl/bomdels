@@ -5,19 +5,30 @@ class Controller_Data extends Controller_Base {
     
     public function action_index()
     {   
-        $this->template->block_right = View::factory('widgets/w_vernav');
+        $scripts = array('jquery.js', 'add_active_item_topnav.js', 'auto_add_sundbirsta.js', 'data_show_box_sidebar.js', 'data_edit.js');
+        $this->template->scripts = $scripts;
         
-        $id = $this->code ? Model::factory('drawing')->getIdDrawByCode($this->code) : Arr::get($_REQUEST, 'id');
-        //Arr::_print($id);
-        if (!$id) {
-            $this->template->block_center = View::factory('widgets/w_draw_not_found')->set('info', 'Результат поиска');   
-        }
-        else {
-            $draw = new Object_Drawing($id);
-            $draw->getParent();
-            $this->template->block_topnav = View::factory('widgets/w_top_breadcrumbs')->bind('draw', $draw);
-            $this->template->block_center = View::factory('widgets/w_data_draw')->bind('draw', $draw);  
-        }   
+        $detail_id = $this->request->query('id');
+
+        if(!(int) $detail_id) exit('error<br><a href="/">главная</a>');
+        
+        $detail = new Object_Sundbirsta($detail_id);
+        //Arr::_print($detail);
+        $detail->getParent();
+        $breadcrumbs = $this->getBreadcrumbs($detail->code);
+        
+        View::bind_global('detail', $detail);
+        $this->template->block_topnav = View::factory('total/v_top_breadcrumbs')->bind('breadcrumbs', $breadcrumbs);
+        $this->template->block_center = View::factory('data/v_data_detail');
+        $this->template->block_right = View::factory('data/v_data_menu');  
+       
     }
+    
+    public function action_edit() {
+        echo Model::factory('sundbirsta')->update($_POST);
+        exit();
+    }
+   
+    
 
 }

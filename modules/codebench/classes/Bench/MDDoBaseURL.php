@@ -21,7 +21,7 @@ class Bench_MDDoBaseURL extends Codebench {
 		'[object oriented](http://wikipedia.org/wiki/Object-Oriented_Programming)',
 
 		// Invalid matches
-		'![this is image syntax](about.filesystem)',
+		'![this is drawing syntax](about.filesystem)',
 		'[filesystem](about.filesystem',
 	);
 

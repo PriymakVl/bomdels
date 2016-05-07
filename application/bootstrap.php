@@ -124,7 +124,7 @@ Kohana::modules(array(
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	 'database'   => MODPATH.'database',   // Database access
-	// 'image'      => MODPATH.'image',      // Image manipulation
+	// 'drawing'      => MODPATH.'drawing',      // drawing manipulation
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
 	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
@@ -145,7 +145,12 @@ Kohana::modules(array(
  * defaults for the URI.
  */
  
- Route::set('admin', 'admin/<controller>(/<action>)', array('controller' => 'main'))
+  Route::set('auto', 'auto/<controller>(/<action>)', array('controller' => 'data'))
+	->defaults(array(
+		'directory' => 'auto',
+	));
+ 
+ Route::set('admin', 'admin/<controller>(/<action>)', array('controller' => 'main|hendler'))
 	->defaults(array(
 		'directory' => 'admin',
         'action' => 'index'
@@ -160,6 +165,6 @@ Kohana::modules(array(
     
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'main',
+		'controller' => 'elect',
 		'action'     => 'index',
 	));
