@@ -12,7 +12,7 @@ class Controller_Login extends Controller_Base {
         $this->template->scripts = array('jquery.js', 'login_admin.js');
         
         $this->template->block_header = null;
-        $this->template->block_topnav = null;
+        $this->template->block_header = null;
         $this->template->block_right = null;
         $this->template->block_center = View::factory('admin/v_login');
         $this->template->block_footer = null;

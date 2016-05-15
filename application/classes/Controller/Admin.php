@@ -18,7 +18,7 @@ class Controller_Admin extends Controller_Base {
         }
         
         $this->template->block_header = null;
-        $this->template->block_topnav = null;
+        $this->template->block_header = null;
         $this->template->block_right = null;
         $this->template->block_center = View::factory('admin/v_admin_add')->bind('message', $message)->bind('draw', $post);
         $this->template->block_right = View::factory('admin/v_admin_nav');
@@ -59,7 +59,7 @@ class Controller_Admin extends Controller_Base {
         Arr::_print($draw);
         
         $this->template->block_header = null;
-        $this->template->block_topnav = null;
+        $this->template->block_header = null;
         $this->template->block_right = null;
         $this->template->block_center = View::factory('admin/v_admin_edit')->bind('draw', $draw);
         $this->template->block_right = View::factory('admin/v_admin_nav');

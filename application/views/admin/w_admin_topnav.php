@@ -1,4 +1,4 @@
-<div class="topnav">
+<div class="header">
     <ul>
         <li><a href="/">Главная</a></li>
     </ul>

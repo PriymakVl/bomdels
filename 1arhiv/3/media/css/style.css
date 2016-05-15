@@ -36,27 +36,27 @@ body
 }
 
 
-.topnav 
+.header 
 {
 	border-bottom: 1px solid #000;
 	margin-bottom: 15px;
 }
 
-.topnav ul li
+.header ul li
 {
 	display: inline;
 	list-style-type: none;
 	padding-left: 20px;
 }
 
-.topnav li a {
+.header li a {
 	font-weight: bold;
 	font-size: 15px;
 	color: #666;
 	text-decoration: none;
 }
 
-.topnav a:hover {
+.header a:hover {
 	border-bottom: 4px solid #000;
 	color: #000;
 }
@@ -184,6 +184,5 @@ body
 	color: #000;
 	font-size: 1.0em;
 }
-
 
 

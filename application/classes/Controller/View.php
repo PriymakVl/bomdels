@@ -31,7 +31,7 @@ class Controller_View extends Controller_Base {
         $count_img = count($detail->drawings);
         //Arr::_print($detail);
 
-        $this->template->block_topnav = View::factory('view/v_view_topnav')->bind('count_img', $count_img);
+        $this->template->block_header = View::factory('view/v_view_header')->bind('count_img', $count_img);
         $this->template->block_specification = View::factory('view/v_view_specification')->bind('details', $details);
         $this->template->block_full_drawing = View::factory('view/v_view_drawing')->bind('drawing', $drawing);
         $this->template->block_list = View::factory('view/v_view_list')->bind('draws', $draws);

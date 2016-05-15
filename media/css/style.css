@@ -20,94 +20,7 @@ body
 	border:solid 1px #666;
 }
 
-.topnav 
-{
-    min-height:40px;
-	width:100%;
-	background-color: #D9CCB4;
-    border:1px solid #B49A6A;
-	position: relative;
-	margin-bottom: 15px;
-}
 
-.topnav a {
-    line-height: 40px;
-    font-size: 15px;
-}
-
-.link-home {
-    margin: 0 25px 0 15px;
-    text-align: left !important;
-}
-
-.top-breadcrumbs a {
-    margin-right: 18px; 
-    background: url('../images/style/breadcrumbs_arrow3.png') no-repeat right 5px;
-    padding-right: 33px;  
-}
-
-.top-breadcrumbs span {
-    font-size: 15px;
-    color: #000;
-}
-
-.topnav-info {
-    margin-left: 200px;
-}
-
-.topnav-info span{
-    font-size: 15px;
-    color: #000;
-    margin-right: 15px;   
-}
-
-.top-breadcrumbs a:last-child {
-    margin-right: 0; 
-    background: none;
-    padding-right: 0;   
-}
-
-.topnav ul li
-{
-	display: inline;
-	list-style-type: none;
-	margin-left: 20px;
-}
-
-.topnav li a {
-	font-weight: bold;
-	font-size: 15px;
-	text-decoration: none;
-    line-height: 40px;
-    color: #000;
-}
-
-.topnav a:hover {
-	color: #000;
-}
-
-.current-item-topnav {
-	color: #000 !important;	
-}
-
-.search-code {
-    position: absolute;
-    right: 15px;
-    top: 7px;    
-}
-
-.search-code input[type="text"] {
-    width:  250px;
-    height: 24px;
-    font-size: 16px;
-    padding-left: 5px;
-    margin-right: 15px;
-    border:1px solid #B49A6A;
-}
-
-.search-code input[type="submit"] {
-    padding: 2px 15px;    
-}
 
 .draw-not-found {
     padding: 15px 0 20px 10px;
@@ -134,31 +47,21 @@ body
 	margin: 0 30% 0 0;
 }
 
-.content h2
-{
+.content .info-menu-box    {
 	padding:5px 0 5px 10px;
-	background-color:#D9CCB4;
+	/*background-color:#D9CCB4;*/
 	font-family: "Century Gothic", Arial, Helvetica, Tahoma, sans-serif;
 	border:1px solid #B49A6A;
 	text-align: left;
-	color:#000000;
-	font-size: 1.4em;
+	font-size: 1.3em;
 }
 
-.content h2 a {
-    margin-right: 15px;
-    color: #000;
-    text-decoration: none;      
+.info-menu-box:first-letter {
+    text-transform: uppercase;
 }
 
-.content h2 a:hover {
-    text-decoration: underline;
-    color: blue;
-}
-
-.content h2 span {
-    margin-right: 15px;
-    color: green;    
+.content .info-menu-box span {
+    color: green;
 }
 
 .content table {
@@ -167,25 +70,23 @@ body
 	margin: 15px 0 15px; 
 }
 
-.content thead {
+.content table tr:first-child {
     background:#D9CCB4;
 	/*font-family: "Century Gothic", Arial, Helvetica, Tahoma, sans-serif;*/
 }
 
 .content table td,  .content table th {
 	border: 1px solid #B49A6A;
-	height: 30px;
-	padding-left: 5px; 
-	font-size: 1.2em;
+	height: 30px; 
 }
 
-.content table td:nth-child(3) {
+/*.content table td:nth-child(3) {
     text-align: center;
     padding: 0;
-}
+}*/
 
-.content table input[type="checkbox"] {
-    margin: 6px;   
+.content table input[type="radio"] {
+    margin: 8px;   
 }
 
 .content table input[type="text"] {
@@ -223,6 +124,8 @@ body
     color: red;
 }
 
+/* right sidebar menu */
+
 .right-sidebar
 {
 	width:28%;
@@ -256,44 +159,43 @@ body
 }
 
 
-.right-sidebar .sidebar-menu-content-wrp {
+.right-sidebar .sidebar-content-wrp {
     border:1px solid #B49A6A; 
     min-height: 150px;   
 }
 
-.sidebar-menu-content-wrp select {
+.sidebar-content-wrp select {
     width: 200px;
     height: 24px;       
 }
 
-.sidebar-menu-content-wrp ul  {
+.sidebar-content-wrp ul  {
 	margin: 15px 0 10px 25px;
 }
 
-.sidebar-menu-content-wrp ul li {
+.sidebar-content-wrp ul li {
 	list-style-type: square;
 	padding-bottom: 5px;
 }
 
-.sidebar-menu-content-wrp ul li a {
-	background-color:inherit;
-	text-decoration: underline;
-	color: #000066;
-	font-size: 1.0em;
+.sidebar-content-wrp ul li a {
+	font-size: 1.2em;
 }
 
-.sidebar-menu-content-wrp ul li a:hover {
-	background-color:inherit;
-	color: #666;
+.sidebar-content-wrp ul li a:hover {
+	color: red;
 }
 
-#data-action-box {
-    font-size: 1.2em;    
-}
-
-#data-action-box li:hover {
+/* sidebar menu action box */
+#menu_action_box li{
+    font-size: 1.2em; 
     text-decoration: underline;
-    cursor: pointer;
+    cursor: pointer; 
+    color: #3400F0;  
+}
+
+#menu_action_box li:hover {
+    color: red;
 }
 
 .footer

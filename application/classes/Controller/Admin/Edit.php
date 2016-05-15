@@ -15,7 +15,7 @@ class Controller_Admin_Edit extends Controller_Base {
         
         Arr::_print($draw);
         
-        $this->template->block_topnav = View::factory('admin/w_admin_topnav');
+        $this->template->block_header = View::factory('admin/w_admin_header');
         $this->template->block_center = View::factory('admin/w_admin_edit_content')->bind('draw', $draw)->bind('options', $draw_options);
         $this->template->block_right = View::factory('admin/w_admin_menu');   
         

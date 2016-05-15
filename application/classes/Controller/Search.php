@@ -5,7 +5,7 @@ class Controller_Search extends Controller_Base {
     
     public function action_index()
     {   
-        $this->template->block_topnav = View::factory('widgets/w_topnav')->bind('code', $this->code);
+        $this->template->block_header = View::factory('widgets/w_header')->bind('code', $this->code);
         $this->template->block_right = View::factory('widgets/w_vernav');
         
         $res = Model::factory('drawing')->getIdDrawByCode($code);

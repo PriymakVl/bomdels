@@ -5,21 +5,24 @@ class Controller_Data extends Controller_Base {
     
     public function action_index()
     {   
-        $scripts = array('jquery.js', 'add_active_item_topnav.js', 'auto_add_sundbirsta.js', 'data_show_box_sidebar.js', 'data_edit.js');
+        $scripts = array('jquery.js', 'add_active_item_header.js', 'auto_add_sundbirsta.js', 'data_show_box_sidebar.js', 'data_edit.js');
         $this->template->scripts = $scripts;
         
         $detail_id = $this->request->query('id');
+        $equipment = $this->request->query('equipment');
 
-        if(!(int) $detail_id) exit('error<br><a href="/">главная</a>');
+        if(!(int) $detail_id) exit('id detail does not validation');
         
-        $detail = new Object_Sundbirsta($detail_id);
+        if($equipment == 'sundbirsta') $detail = new Object_Sundbirsta($detail_id);
+        if($equipment == 'danieli') $detail = new Object_danieli($detail_id);
+        if(empty($detail)) exit('detail not been exist');
         //Arr::_print($detail);
         $detail->getParent();
-        $breadcrumbs = $this->getBreadcrumbs($detail->code);
+        $breadcrumbs = $this->getBreadcrumbs($detail->code, $equipment);
         
         View::bind_global('detail', $detail);
-        $this->template->block_topnav = View::factory('total/v_top_breadcrumbs')->bind('breadcrumbs', $breadcrumbs);
-        $this->template->block_center = View::factory('data/v_data_detail');
+        $this->template->block_header = View::factory('total/v_top_breadcrumbs')->bind('breadcrumbs', $breadcrumbs);
+        $this->template->block_center = View::factory('data/v_data_content');
         $this->template->block_right = View::factory('data/v_data_menu');  
        
     }

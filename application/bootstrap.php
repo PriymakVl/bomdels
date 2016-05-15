@@ -104,6 +104,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/',
+    'index_file' => false,
 ));
 
 /**
@@ -145,9 +146,16 @@ Kohana::modules(array(
  * defaults for the URI.
  */
  
-  Route::set('auto', 'auto/<controller>(/<action>)', array('controller' => 'data'))
+//   Route::set('danieli', 'auto/danieli(/<action>)', array('controller' => 'danieli'))
+//	->defaults(array(
+//		'directory' => 'auto',
+//        'action' => 'index'
+//	));
+ 
+  Route::set('auto', 'auto/<controller>(/<action>)', array('controller' => 'data|danieli'))
 	->defaults(array(
 		'directory' => 'auto',
+        'action' => 'index'
 	));
  
  Route::set('admin', 'admin/<controller>(/<action>)', array('controller' => 'main|hendler'))
