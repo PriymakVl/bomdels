@@ -2,10 +2,12 @@
 
 class Controller_Data extends Controller_Base {
 
+    public $equipment;
     
     public function action_index()
     {   
-        $scripts = array('jquery.js', 'add_active_item_header.js', 'auto_add_sundbirsta.js', 'data_show_box_sidebar.js', 'data_edit.js');
+        $this->template->styles = array('style.css', 'header.css', 'data.css');
+        $scripts = array('jquery.js', 'data_show_box.js', 'data_edit.js');//'auto_add_sundbirsta.js'
         $this->template->scripts = $scripts;
         
         $detail_id = $this->request->query('id');
@@ -18,17 +20,21 @@ class Controller_Data extends Controller_Base {
         if(empty($detail)) exit('detail not been exist');
         //Arr::_print($detail);
         $detail->getParent();
+        //Arr::_print($detail);
         $breadcrumbs = $this->getBreadcrumbs($detail->code, $equipment);
         
         View::bind_global('detail', $detail);
-        $this->template->block_header = View::factory('total/v_top_breadcrumbs')->bind('breadcrumbs', $breadcrumbs);
+        $this->template->block_header = View::factory('header/v_header_breadcrumbs')->bind('breadcrumbs', $breadcrumbs);
         $this->template->block_center = View::factory('data/v_data_content');
         $this->template->block_right = View::factory('data/v_data_menu');  
        
     }
     
     public function action_edit() {
-        echo Model::factory('sundbirsta')->update($_POST);
+        $equipment = $this->request->post('equipment');
+        if($equipment == 'sundbirsta') $res = Model::factory('Sundbirsta')->update($_POST);
+        else if($equipment == 'danieli') $res = Model::factory('Danieli')->update($_POST);
+        var_dump($res);
         exit();
     }
    

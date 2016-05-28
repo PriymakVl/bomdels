@@ -16,7 +16,7 @@ abstract class Controller_Base extends Controller_Template {
         if(!$this->cat_id) $this->cat_id = 1;
         
         $this->template->styles = array('style.css', 'header.css');
-        $this->template->scripts = array('jquery.js', 'add_active_item_header.js');
+        $this->template->scripts = array('jquery.js');
         
         $this->template->block_header = null;
         $this->template->block_right = null;
@@ -53,7 +53,7 @@ abstract class Controller_Base extends Controller_Template {
     protected function getBreadcrumbs($code, $equipment) {
         $details = $this->getArrayParents($code, $equipment);
         $details = array_reverse($details);
-        if($equipment == 'danieli') $str = "<a href='/equipment/danieli'>Danieli</a>";
+        if($equipment == 'danieli') $str = "<a href='/category/danieli'>Danieli</a>";
         else if($equipment == 'sundbirsta') $str = "<a href='/equipment/sundbirsta'>Sandbirsta</a>";
         $count = count($details);
         foreach ($details as $key => $detail) {
@@ -88,6 +88,23 @@ abstract class Controller_Base extends Controller_Template {
         $parents[] = $detail[0];
         $detail = Model::factory($equipment)->getDetailByCode($detail[0]['parent_code']);
         if(!$detail) return $parents;
+    }
+    
+    //get array obj details which input in category
+    protected function getArrayNodes($cat) {
+        $details = array();
+        foreach($cat->details as $code) {
+            if($cat->equipment == 'danieli') {
+                $detail = Model::factory('Danieli')->getDetailByCode($code);
+                if($detail) $details[] = $detail[0]; 
+            }  
+            else  {
+                $details[] = Model::factory('Sundbirsta')->getDetailByCode($code);
+                $details[] = $detail[0];    
+            } 
+        }
+        if($cat->equipment == 'danieli') return $this->getArrayOfObjects($details, 'Object_Danieli');
+        else  return $this->getArrayOfObjects($details, 'Object_Sundbirsta'); 
     }
 
 

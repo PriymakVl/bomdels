@@ -35,7 +35,7 @@ class Controller_Specification extends Controller_Base {
         
         $details = $this->getArrayOfObjects($detail->sub_id, $class_name);
 
-        $this->template->block_header = View::factory('total/v_top_breadcrumbs')->bind('breadcrumbs', $breadcrumbs);
+        $this->template->block_header = View::factory('header/v_header_breadcrumbs')->bind('breadcrumbs', $breadcrumbs);
         $this->template->block_right = View::factory($template_menu);
         $this->template->block_center = View::factory($template_content)->bind('details', $details);
                        

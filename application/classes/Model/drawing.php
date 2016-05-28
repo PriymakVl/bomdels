@@ -39,12 +39,13 @@ class Model_Drawing extends Model {
         return $query->execute();
     }
     
-     public function addAutodanieli($data, $detail_id) 
+     public function addDanieli($data, $detail_id) 
     {
-        $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`, `sheet`, `sheets`, `size`) VALUES (:type, :file, :code, :equipment, :sheet, :sheets, :size)";
-        $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['Member'])->param(':type', 'производитель')->bind(':file', $data['file'])
-                            ->bind(':detail_id', $detail_id)->bind(':equipment', 'danieli')->bind(':sheet', $data['Sheet'])->bind(':sheets', $data['Sheets'])
-                            ->bind(':size', $data['Size']);
+        $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`, `sheet`, `sheets`, `size`, `folder`)
+                         VALUES (:type, :file, :code, :detail_id, :equipment, :sheet, :sheets, :size, :folder)";
+        $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['Member'])->param(':type', 'производитель')
+                            ->bind(':file', $data['file'])->param(':folder', 'tif')->bind(':size', $data['size'])
+                            ->bind(':detail_id', $detail_id)->param(':equipment', 'danieli')->bind(':sheet', $data['sheet'])->bind(':sheets', $data['sheets']);
         return $query->execute();
     }
     

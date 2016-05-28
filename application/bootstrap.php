@@ -158,7 +158,7 @@ Kohana::modules(array(
         'action' => 'index'
 	));
  
- Route::set('admin', 'admin/<controller>(/<action>)', array('controller' => 'main|hendler'))
+ Route::set('admin', 'admin/<controller>(/<action>)', array('controller' => 'category|categorycontent'))
 	->defaults(array(
 		'directory' => 'admin',
         'action' => 'index'

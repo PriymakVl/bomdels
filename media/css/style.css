@@ -13,11 +13,11 @@ body
 .conteiner
 {
 	margin: 10px auto;
-	padding:5px 5px 5px 5px;
-	width:950px;
+	padding: 5px 5px 5px 5px;
+	width: 950px;
 	height: 100%;
-	background-color:#fff;
-	border:solid 1px #666;
+	background-color: #fff;
+	border: solid 1px #666;
 }
 
 
@@ -49,11 +49,11 @@ body
 
 .content .info-menu-box    {
 	padding:5px 0 5px 10px;
-	/*background-color:#D9CCB4;*/
 	font-family: "Century Gothic", Arial, Helvetica, Tahoma, sans-serif;
 	border:1px solid #B49A6A;
 	text-align: left;
 	font-size: 1.3em;
+    position: relative;
 }
 
 .info-menu-box:first-letter {
@@ -62,6 +62,12 @@ body
 
 .content .info-menu-box span {
     color: green;
+}
+
+#history-back-link {
+    position: absolute;
+    right: 10px;
+    font-size: 0.9em;
 }
 
 .content table {
@@ -77,7 +83,7 @@ body
 
 .content table td,  .content table th {
 	border: 1px solid #B49A6A;
-	height: 30px; 
+	/*height: 30px;*/ 
 }
 
 /*.content table td:nth-child(3) {
@@ -180,6 +186,10 @@ body
 
 .sidebar-content-wrp ul li a {
 	font-size: 1.2em;
+}
+
+#sidebar-glossary a {
+    font-size: 1em;
 }
 
 .sidebar-content-wrp ul li a:hover {
