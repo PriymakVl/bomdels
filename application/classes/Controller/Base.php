@@ -3,17 +3,28 @@
 abstract class Controller_Base extends Controller_Template {
 
     public $template = 'total/v_base';
-    protected $code;
-    protected $cat_id;
+    protected $employee;
     
     public function before()
     {
         parent::before();
         
-        $this->template->title = 'стан 400/200';
-        $this->code = Arr::get($_POST, 'code');
-        $this->cat_id = Arr::get($_GET, 'cat_id');
-        if(!$this->cat_id) $this->cat_id = 1;
+        $this->template->title = 'ЦРМO СПС';
+        
+        $employee_id = Cookie::get('employee_id');
+        
+        $this->employee = new Object_Employee($employee_id);
+        $employee = $this->employee;
+        View::bind_global('employee', $employee);
+        
+        $role = $this->employee->role;
+        //Arr::_print($role);
+        View::bind_global('role', $role);
+        //Arr::_print($this->employee);
+        //$this->user =
+        //$this->code = Arr::get($_POST, 'code');
+//        $this->cat_id = Arr::get($_GET, 'cat_id');
+//        if(!$this->cat_id) $this->cat_id = 1;
         
         $this->template->styles = array('style.css', 'header.css');
         $this->template->scripts = array('jquery.js');

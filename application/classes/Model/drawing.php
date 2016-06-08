@@ -31,11 +31,11 @@ class Model_Drawing extends Model {
         return $res[0];  
     } 
     
-    public function add($type, $file, $code, $detail_id, $equipment) 
+    public function add($type, $file, $code, $detail_id, $equipment, $folder) 
     {
-        $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`) VALUES (:type, :file, :code)";
+        $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`, `folder`) VALUES (:type, :file, :code, detail_id, :equipment, :folder)";
         $query = DB::query(Database::INSERT, $sql)->bind(':code', $code)->bind(':type', $type)->bind(':file', $file)
-                            ->bind(':detail_id', $detail_id)->bind(':equipment', $equipment);
+                            ->bind(':detail_id', $detail_id)->bind(':equipment', $equipment)->bind(':folder', $folder);
         return $query->execute();
     }
     

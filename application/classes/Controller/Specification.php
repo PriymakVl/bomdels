@@ -7,7 +7,7 @@ class Controller_Specification extends Controller_Base {
     {   
         $this->template->styles = array('style.css', 'specification_sidebar.css', 'header.css');
         $scripts_1 = array('jquery.js', 'sort_details_sundbirsta.js', 'sort_sundbirsta_checked_all.js');//, 'specification_show_box_sidebar.js'
-        $scripts_2 = array('elect_add.js', 'sort_danieli.js', 'specification_show_danieli_box.js');
+        $scripts_2 = array('elect/specification_elect_add.js', 'sort_danieli.js', 'specification_show_danieli_box.js');
         $scripts = Arr::merge($scripts_1, $scripts_2);
         $this->template->scripts = $scripts;
         

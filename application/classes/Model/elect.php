@@ -4,24 +4,33 @@ class Model_Elect extends Model {
     
     private $tableName = 'elect';
     
-    public function get($user_id)
+    public function getDefaultElect($list_id)
     {
-       $sql = "SELECT * FROM $this->tableName WHERE `user_id` = :user_id AND `status` = :status ORDER BY `rating` DESC";
-       $query = DB::query(Database::SELECT, $sql)->bind(':user_id', $user_id)->param(':status', 1);
-       return $query->execute()->as_array();
+        if(!$list_id) $list_id = 1;
+        $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status AND `list_id` = :list_id ORDER BY `rating` DESC";
+        $query = DB::query(Database::SELECT, $sql)->param(':employee_id', '1')->bind(':list_id', $list_id)->param(':status', 1);
+        return $query->execute()->as_array();
     }
     
-    public function add($user_id, $detail_id, $equipment)
+    public function getEmployeeElect($employee_id, $list_id)
     {
-       $sql = "INSERT INTO $this->tableName (`user_id`, `detail_id`, `equipment`) VALUES (:user_id, :detail_id, :equipment)";
-       $query = DB::query(Database::INSERT, $sql)->bind(':user_id', $user_id)->bind(':detail_id', $detail_id)->bind(':equipment', $equipment);
+       $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status AND `list_id` = :list_id ORDER BY `rating` DESC";
+       $query = DB::query(Database::SELECT, $sql)->param(':employee_id', $employee_id)->bind(':list_id', $list_id)->param(':status', 1);
+       return $query->execute()->as_array();
+    }
+
+    
+    public function add($employee_id, $elem_id, $kind, $list_id)
+    {
+       $sql = "INSERT INTO $this->tableName (`employee_id`, `elem_id`, `kind`, `list_id`) VALUES (:employee_id, :elem_id, :kind, :list_id)";
+       $query = DB::query(Database::INSERT, $sql)->bind(':employee_id', $employee_id)->bind(':elem_id', $elem_id)->bind(':kind', $kind)->bind(':list_id', $list_id);
        return $query->execute();
     }
     
-    public function delete($user_id, $id)
+    public function delete($id)
     {
-       $sql = "UPDATE $this->tableName SET `status` = :status WHERE `user_id` = :user_id AND `id` = :id";
-       $query = DB::query(Database::UPDATE, $sql)->bind(':user_id', $user_id)->bind(':id', $id)->param(':status', 0);
+       $sql = "UPDATE $this->tableName SET `status` = :status WHERE `id` = :id";
+       $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->param(':status', 0);
        return $query->execute();
     }
     

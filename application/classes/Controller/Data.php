@@ -34,7 +34,7 @@ class Controller_Data extends Controller_Base {
         $equipment = $this->request->post('equipment');
         if($equipment == 'sundbirsta') $res = Model::factory('Sundbirsta')->update($_POST);
         else if($equipment == 'danieli') $res = Model::factory('Danieli')->update($_POST);
-        var_dump($res);
+        echo $res;
         exit();
     }
    

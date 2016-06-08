@@ -62,12 +62,19 @@ body
 
 .content .info-menu-box span {
     color: green;
+    font-style: italic;
 }
 
 #history-back-link {
     position: absolute;
     right: 10px;
     font-size: 0.9em;
+}
+
+#employee_data_box td, #employee_data_box th {
+    height: 16px;
+    width: 50%;
+    padding: 5px;
 }
 
 .content table {
@@ -197,14 +204,14 @@ body
 }
 
 /* sidebar menu action box */
-#menu_action_box li{
+#menu_action_box li, #menu_elect_box li{
     font-size: 1.2em; 
     text-decoration: underline;
     cursor: pointer; 
     color: #3400F0;  
 }
 
-#menu_action_box li:hover {
+#menu_action_box li:hover, #menu_elect_box li:hover {
     color: red;
 }
 
