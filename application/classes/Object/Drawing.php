@@ -31,12 +31,6 @@ class Object_Drawing extends Object_Object {
         else return false;        
     }
     
-    public function cutNote($max = 30) {
-        $lenth = UTF8::strlen($this->data['note']);
-        if($lenth > $max) $this->data['note_cut'] = UTF8::substr($this->data['note'], 0, $max);
-        return $this;     
-    }
-    
 }
 
 

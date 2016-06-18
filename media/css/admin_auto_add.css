@@ -1,0 +1,31 @@
+.auto_add_table_box {
+    border:1px solid #B49A6A;
+    text-align: left;
+}
+
+.auto_add_table_box p{
+    margin: 15px 0 15px 25px;
+    font-size: 1.3em;  
+}
+
+.auto_add_table_box input{
+    margin-left: 25px;
+    margin-bottom: 15px;   
+}
+
+#change_equipment_box {
+    font-size: 1.3em;
+    padding: 10px 0 10px 15px;
+    color: #000;
+    border:1px solid #B49A6A;
+}
+
+
+
+
+
+
+
+
+
+  

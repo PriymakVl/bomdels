@@ -1,0 +1,170 @@
+.header 
+{
+	width:100%;
+	background-color: #D9CCB4;
+    border:1px solid #B49A6A;
+	position: relative;
+	margin-bottom: 15px;
+}
+
+.current-item-header {
+	color: #000 !important;	
+}
+
+.logo {
+    font-size: 1.5em;
+    left: 15px;
+    position: absolute;
+    top: 10px;
+}
+
+/* breadcrumbs */
+
+.top-breadcrumbs {
+    min-height:30px;
+/*	background-color: #D9CCB4;
+    border:1px solid #B49A6A;
+	position: relative;*/   
+}
+
+.top-breadcrumbs .link-home {
+    margin: 0 25px 0 15px;
+    line-height: 30px;
+    background: none;
+}
+
+.link-home-profile {
+    position: absolute;
+    top: 13px;
+    left:10px;
+    color: #000;
+}
+    
+
+.top-breadcrumbs a {
+    margin-right: 2px; 
+    background: url('../images/style/breadcrumbs_arrow4.png') no-repeat right 1px;
+    padding-right: 20px;  
+}
+
+.top-breadcrumbs div {
+    float: right;
+}
+
+/* auth and register */
+
+#auth-form {
+    height: 40px;
+    margin-left: 180px;
+}
+
+#auth-form input[type="text"] {
+    border: 1px solid #b49a6a;
+    font-size: 16px;
+    height: 24px;
+    margin: 7px 0 0 15px;
+    padding-left: 5px;
+    width: 160px;
+}
+
+/*#auth-form input:first-child {
+    margin-left: 20px;
+}*/
+
+#auth-form a {
+    margin-left: 15px;
+    color: #000;
+    line-height: 40px;
+    font-size: 1.1em;
+}
+
+/* search */
+
+.search-box {
+    height: 40px;
+}
+
+.search-box .link-home {
+    margin: 0 25px 0 15px;
+    line-height: 40px;
+    color: #000;    
+}
+
+.search-code {
+    position: absolute;
+    right: 15px;
+    top: 7px;    
+}
+
+.search-code input[type="text"] {
+    width:  350px;
+    height: 24px;
+    font-size: 16px;
+    padding-left: 5px;
+    margin-right: 15px;
+    border:1px solid #B49A6A;
+}
+
+::-webkit-input-placeholder {color:#494949; font-size: 14px;}
+::-moz-placeholder          {color:#494949; font-size: 14px;}/* Firefox 19+ */
+:-moz-placeholder           {color:#494949; font-size: 14px;}/* Firefox 18- */
+ :-ms-input-placeholder      {color:#494949; font-size: 14px;}
+
+.search-code input[type="submit"] {
+    padding: 2px 15px;    
+}
+
+.search-code label {
+    margin-right: 20px;
+}
+
+.header-title {
+    height: 30px;
+    text-align: center;
+}
+
+.header-title span {
+    line-height: 30px;
+    font-size: 1.2em;
+}
+
+.header-title .link-home {
+    color: #000;
+    left: 10px;
+    position: absolute;
+    top: 6px;
+    font-size: 1.1em;
+}
+
+.wellcome {
+    text-align: right;
+    height: 40px;
+}
+
+.wellcome a {
+    margin-right: 15px;
+    line-height: 40px;
+}
+
+.wellcome span {
+    margin-right: 5px;
+    line-height: 40px; 
+    font-size: 1.2em;   
+}
+
+.wellcome  #employee_name {
+    margin-right: 15px;    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

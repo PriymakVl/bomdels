@@ -1,0 +1,17 @@
+#data_edit_box li{
+    text-decoration: underline; 
+    font-size: 1.2em;  
+}
+
+#data_edit_box li:hover  {
+    color: red;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+  

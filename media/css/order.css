@@ -1,0 +1,195 @@
+.menu-create-order-wrp {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 15px;
+    border:1px solid #B49A6A;
+}
+
+.menu-create-order-wrp ul {
+    list-style: none;
+    margin-left: 200px;
+}
+
+.menu-create-order-wrp ul li {
+    display: inline;
+    margin-left: 15px;
+    line-height: 30px;
+    font-size: 1.2em;
+    border-right: 1px solid #B49A6A;
+    padding-right: 15px;
+}
+
+.menu-create-order-wrp ul li:first-child {
+    border-left: 1px solid #B49A6A;
+    padding-left: 15px;
+}
+
+.menu-create-order-wrp ul li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.menu-create-order-active {
+    color: green;
+    cursor: default !important;
+    text-decoration: none !important;
+}
+
+#create_order_info_box {
+    border: 1px solid #B49A6A;
+    padding: 15px;
+}
+
+#create_order_info_box label {
+    line-height: 25px;
+}
+
+#create_order_info_box input[type="text"] {
+    height: 27px;
+    font-size: 20px;
+    padding-left: 3px; 
+}
+
+#create_order_info_box input[name="date"] {
+    width: 85px;
+    margin-right: 25px;
+    
+}
+
+#create_order_info_box input[name="number"]{
+  width: 50px; 
+  margin-right: 25px; 
+}
+
+#create_order_info_box input[name="weight_order"]{
+  width: 100px; 
+  margin-right: 25px; 
+}
+
+#create_order_info_box input[name="title"]{
+  width: 785px; 
+  margin: 15px 0; 
+  font-size: 1em;
+}
+
+#create_order_info_box select{
+    height: 25px;
+    margin-bottom: 15px;
+}
+
+#save-new-order {
+    margin: 15px 0 0 395px;
+}
+
+/*order create content*/
+
+#create_order_content_box table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#create_order_content_box table tr:first-child{
+    background: #D9CCB4;
+}
+
+#create_order_content_box table td {
+    text-align: center;
+}
+
+#create_order_content_box table input[type="radio"] {
+    margin: 2px 0 0 0;
+}
+
+#create_order_content_box td, #create_order_content_box th {
+    border:1px solid #B49A6A; 
+    height: 25px;   
+}
+
+/*order create add element*/
+
+#create_order_add_element_box {
+    width: 100%;
+    border:1px solid #B49A6A;
+}
+
+#create_order_add_element_box input[type="text"] {
+    height: 25px;
+    margin: 25px 0;
+    font-size: 16px;
+    padding-left: 3px;
+}
+
+#create_order_add_element_box label {
+    margin-left: 30px;
+}
+
+#add_element_to_content {
+    margin: 15px 0 15px 369px;
+}
+
+#create_order_add_element_box select {
+    height: 25px;
+    margin-bottom: 15px;
+}
+
+#create_order_add_element_search_box {
+    border-bottom: 1px solid #B49A6A;
+}
+
+#search_detail_equipment_database {
+    margin-right: 100px;
+    width: 70px;
+}
+
+#search_detail_order_database {
+    width: 70px;
+}
+
+#create_order_add_element_box input[name="item_elem"], #create_order_add_element_box input[name="variant_elem"] {
+    width: 50px;   
+}
+
+#create_order_add_element_box input[name="title_elem"] {
+    width: 480px;
+}
+
+#link_image_add_elem, #find_analog_material {
+    margin-left: 50px;
+}
+
+#create_order_add_element_box input[name="count_elem"], #create_order_add_element_box input[name="weight_one_elem"], #create_order_add_element_box input[name="weight_all_elem"] {
+    width: 100px;
+}
+
+#count_weight_elem {
+    margin-left: 90px;
+}
+
+#save_new_order {
+    margin: 30px 0 0 385px;
+}
+
+#create_order_add_element_box input[name="material_elem"], #create_order_add_element_box input[name="analog_elem"] {
+    width: 100px;
+    margin-right: 15px;
+}
+
+#add_elect_material, #add_elect_analog {
+    width: 85px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

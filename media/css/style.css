@@ -20,6 +20,12 @@ body
 	border: solid 1px #666;
 }
 
+.author-site {
+    text-align: center;
+    font-size: 0.9em;
+    color: #000;
+    margin-top: -10px;
+}
 
 
 .draw-not-found {
@@ -153,9 +159,19 @@ body
     margin-bottom: 15px;
     font-size: 1.2em;
 }
+/*sidebar content*/
+.sidebar-content-default li {
+    font-size: 1.2em; 
+    text-decoration: underline;
+    cursor: pointer; 
+    color: #3400F0;      
+}
+.sidebar-content-default li:hover {
+    color: red;
+}
 
 .active-item-menu-sidebar {
-    color: green;
+    color: green !important;
     cursor: default !important;
     text-decoration: none !important;
 }

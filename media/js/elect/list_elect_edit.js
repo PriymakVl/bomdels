@@ -1,0 +1,26 @@
+$(document).ready(function() {
+    $('#save_list').click(function(event) {  
+        event.preventDefault();
+        var listname = $('#form_list input[name="listname"]').val();
+        if(!listname) {alert('Вы не указали имя списка'); return;}
+        $('#form_list').attr('action', '/elect/updatelist').submit();   
+    });
+    
+    //insert data in input of form
+    $('#edit_list_box :radio').change(function() {
+        $('#save_list').show();
+        $('#delete_list').show();
+        $('#add_list').hide();
+        $('#list_form_box').slideDown();
+        
+        var listname = $(this).attr('listname');
+        var rating = $(this).attr('rating');
+        var description = $(this).attr('description');
+        var list_id = $(this).attr('list_id');
+        
+        $('#form_list input[name="list_id"]').val(list_id);
+        $('#form_list input[name="listname"]').val(listname);
+        $('#form_list input[name="rating"]').val(rating);
+        $('#form_list textarea').text(description);
+    })
+});

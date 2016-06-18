@@ -1,0 +1,38 @@
+#category_data_box, #cat_content_data_box {
+    border:1px solid #B49A6A;
+    text-align: left;  
+    margin: 15px 0;
+      
+}
+
+#category_data_box input, #cat_content_data_box input[type=text] {
+    height: 24px;
+    width: 200px;
+    margin: 0 0 15px 15px;
+}
+
+#category_data_box label, #cat_content_data_box label {
+    margin-left: 25px;
+}
+
+#category_data_box input[name=title], #cat_content_data_box input[name=code_new] {
+    margin-top: 15px;
+} 
+
+#category_data_box #add_cat, #add_content_cat{
+    margin: 0 20px 15px 200px;
+}
+
+#category_data_box #edit_cat, #edit_content_cat {
+    margin: 0 20px 15px 180px;
+}
+
+
+
+
+
+
+
+
+
+  

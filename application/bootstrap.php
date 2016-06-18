@@ -151,6 +151,12 @@ Kohana::modules(array(
 //		'directory' => 'auto',
 //        'action' => 'index'
 //	));
+
+      Route::set('software', 'software/<controller>(/<action>)', array('controller' => 'orders|order|ordercreate'))
+    ->defaults(array(
+    	'directory' => 'software',
+        'action' => 'index'
+    ));
  
   Route::set('auto', 'auto/<controller>(/<action>)', array('controller' => 'data|danieli'))
 	->defaults(array(

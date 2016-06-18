@@ -34,5 +34,20 @@ class Controller_Search extends Controller_Base {
         if(count($this->details) == 1) $this->redirect("/data?id={$this->details[0]['id']}&equipment=danieli");
         else $this->action_result();
     }
+    
+    public function action_order() {
+        $code = $this->request->post('code');
+        $equipment = $this->request->post('equipment');
+        
+        if($equipment == 'danieli') {
+            $detail = Model::factory('Danieli')->searchDetailByCode($code);
+            if(!$detail) {echo false; exit();}
+            $drawins = Model::factory('Drawing')->get($code);
+            $detail[0]['drawings'] = $drawins[0];   
+        }
+        if(!$detail) echo false;
+        else echo json_encode($detail[0]);
+        exit();
+    }
 
 }

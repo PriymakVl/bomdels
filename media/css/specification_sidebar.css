@@ -1,0 +1,60 @@
+#sort-sundbirsta-box li{
+    list-style: none;
+}
+
+#sort-sundbirsta-box li:first-child {
+    margin-bottom: 10px;
+}
+
+#sort-sundbirsta-box li span {
+    font-size: 1.2em;
+    margin-left: 10px;  
+    list-style: none;
+    line-height: 9px;  
+}
+
+#select_all + span{
+    color: #000;
+}
+
+#sort-sundbirsta-box button {
+    margin: 0 20px 15px 39px;
+}
+
+
+#sort_menu_danieli_box li{
+    list-style: none; 
+    font-size: 1.2em;  
+    position: relative;
+}
+
+#sort_menu_danieli_box li span {
+    margin-left: 25px;
+}
+
+#sort_menu_danieli_box li input[type="radio"] {
+    position: absolute;
+    top: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

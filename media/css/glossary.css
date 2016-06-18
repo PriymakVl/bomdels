@@ -1,0 +1,34 @@
+#add_translation_box {
+    border:1px solid #B49A6A;
+    margin-top: 15px;
+}
+
+#add_translation_box select {
+    width: 200px;
+    height: 24px; 
+    margin: 0 0 15px 10px;    
+}
+
+#add_translation_box p, #add_translation_box input {
+    margin-left: 25px; 
+    margin-bottom: 15px;   
+}
+
+#hide_translation_box {
+    text-align: right;
+    display: block;
+    border-bottom: 1px solid #B49A6A;
+    padding:5px 10px 15px 0;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+  
