@@ -27,7 +27,8 @@
     padding: 5px 5px 5px 20px;
     background: #fff;
     border: 1px solid #B49A6A;
-    width: 100px;
+    min-width: 150px;
+    z-index: 10;
 }
 
 .elect-lists li:hover ul {
@@ -37,6 +38,7 @@
 .elect-lists li a {
     text-decoration: none;
     color: #000;
+    display: block;
 }
 
 .elect-lists li a:hover {
@@ -151,7 +153,7 @@
     margin: 15px 25px 10px 205px;
 }
 
-#description_list_box {
+#description_list_box, #description_element_box {
 	padding:5px 0 5px 10px;
 	font-family: "Century Gothic", Arial, Helvetica, Tahoma, sans-serif;
 	border:1px solid #B49A6A;
@@ -161,23 +163,27 @@
 }
 
 #description_list_box span {
-    /*color: green;*/
+    color: green;
     font-style: italic;
     margin-left: 10px;
-    color: #000;
 }
 
-#description_list_box a {
+#description_list_box a, #description_element_box a {
     position: absolute;
     right: 10px;
     top: 3px;
-    color: #000;
+    color:#494949;
 }
+
+ #description_element_inner_box {
+    font-style: italic;
+    color: #000;
+    text-indent: 15px;
+ }
 
 #list_form_box input[type = 'submit'] {
     margin: 5px 0 10px 260px;
 }
-
 
 
 

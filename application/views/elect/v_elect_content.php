@@ -29,14 +29,13 @@
     
     <!-- start description boxes -->
     <div id="description_list_box">
-        Описание списка:<span><?=$list['description']?></span>
-        <a href="#" onclick="return false;">Подробнее</a>
+        Описание списка:<span><?=$description_list?></span>
     </div>
     
      <div id="description_element_box" style="display: none;">
+        <span>Описание элемента:<span>
         <a href="#" onclick="return false;" id="close_box_description_element">Закрыть</a>
-        <div id="description_element_inner_box">
-        </div>
+        <div id="description_element_inner_box">&nbsp;</div>
     </div>
     <!-- end description boxes -->
     
@@ -44,7 +43,7 @@
     <div id="element_form_box" style="display: none;">
         <form id="form_element" method="post" action="/elect/updateelement">
             <label>Название</label>
-            <input type="text" name="name_elem" style="width:460px;" disabled="disabled"/> 
+            <input type="text" name="name_elem" style="width:460px;" readonly="readonly"/> 
             <br />
             <label>Рейтинг</label>
             <input type="text" name="rating" />
@@ -60,7 +59,7 @@
     <!-- end element form box -->
     
     <!-- start box elect -->
-    <table id="elect_box">
+    <table id="elect_box" type_list="<?=$type_list?>" role="<?=$role?>">
         <tr>
             <td width="30"><input type="radio" disabled="disabled" /></td>
             <th >Наименование</th>
@@ -72,8 +71,7 @@
                 <tr>
                     <td>
                         <input type="radio" name="element" name_elem="<?=$element->name_elect?>" elect_id="<?=$element->elect_id?>" 
-                            type_list="<?=$type_list?>" role="<?=$role?>" description_elect="<?=$element->description_elect?>" 
-                            cut_des_elem="<?=$element->cut_des_elect?>" rating="<?=$element->rating_elect?>" 
+                             description_elect="<?=$element->description_elect?>" cut_des_elem="<?=$element->cut_des_elect?>" rating="<?=$element->rating_elect?>" 
                         />
                     </td>
                     <td style="padding-left: 5px;">

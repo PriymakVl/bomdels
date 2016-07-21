@@ -25,12 +25,15 @@ class Controller_Elect extends Controller_Base {
             $elected = Model::factory('Elect')->getEmployeeElect($this->employee->id, $list_employee_id);
             $type_list = 'employee';
             $list = Model::factory('ElectList')->getListById($list_employee_id);  
+            //$description_list = $list['description'];
         }
         else  {
             $elected = Model::factory('Elect')->getDefaultElect($list_default_id);
             $type_list = 'default'; 
-            $list = Model::factory('ElectList')->getListById($list_default_id);  
+            $list = Model::factory('ElectList')->getListById($list_default_id);
+             
         }
+         $description_list = $list['description'];
         
         $default_lists = Model::factory('ElectList')->getListsDefault();
         //Arr::_print($default_lists);
@@ -45,7 +48,7 @@ class Controller_Elect extends Controller_Base {
        // Arr::_print($info);
         $this->template->block_header = View::factory('header/v_header_auth')->bind('code', $this->code)->bind('employee_name', $employee_name);
         $this->template->block_center = View::factory('elect/v_elect_content')->set('list', $list)->bind('elements', $elements)->bind('default_lists', $default_lists)
-                                                    ->bind('employee_lists', $employee_lists)->bind('type_list', $type_list)->bind('lists_edit', $lists_for_edit);
+                                                    ->bind('employee_lists', $employee_lists)->bind('type_list', $type_list)->bind('lists_edit', $lists_for_edit)->bind('description_list', $description_list);
         $this->template->block_right = View::factory('elect/v_elect_menu');
         
     }
