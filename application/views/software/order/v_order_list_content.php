@@ -10,7 +10,7 @@
             <th width="50">Номер</th>
             <th width="70">Дата</th>
             <th >Наименование</th>
-            <th width="100">Служба</th>
+            <th width="100">Ответствен.</th>
         </tr>
         <? if (isset($orders)): ?>
             <? foreach ($orders as $order): ?>
@@ -28,7 +28,7 @@
                         <?=$order->title?>                     
                     </td>
                     <td style="text-align: center;">
-                        <?=$order->service?>
+                        <?=$order->responsible?>
                     </td>
                 </tr>
             <? endforeach; ?>

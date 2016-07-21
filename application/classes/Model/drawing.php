@@ -4,6 +4,13 @@ class Model_Drawing extends Model {
     
     private $tableName = 'drawings';
     
+    public function getAll($limit = '') {
+        if($limit) $limit = ' LIMIT '.$limit;
+        $sql = "SELECT *  FROM $this->tableName".$limit;
+        $query = DB::query(Database::SELECT, $sql);
+        return $query->execute()->as_array();    
+    }
+    
     public function get($code)
     {
        $sql = "SELECT *  FROM $this->tableName WHERE `code` = :code AND `status` = :status ORDER BY `rating`";
@@ -31,11 +38,11 @@ class Model_Drawing extends Model {
         return $res[0];  
     } 
     
-    public function add($type, $file, $code, $detail_id, $equipment, $folder) 
+    public function add($data, $folder) 
     {
-        $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`, `folder`) VALUES (:type, :file, :code, detail_id, :equipment, :folder)";
-        $query = DB::query(Database::INSERT, $sql)->bind(':code', $code)->bind(':type', $type)->bind(':file', $file)
-                            ->bind(':detail_id', $detail_id)->bind(':equipment', $equipment)->bind(':folder', $folder);
+        $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`, `folder`) VALUES (:type, :file, :code, :detail_id, :equipment, :folder)";
+        $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['code'])->bind(':type', $data['type'])->bind(':file', $data['file'])
+                            ->bind(':detail_id', $data['detail_id'])->bind(':equipment', $data['equipment'])->bind(':folder', $folder);
         return $query->execute();
     }
     
@@ -62,5 +69,21 @@ class Model_Drawing extends Model {
        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->bind(':note', $note);
        return $query->execute();
     }
+    
+    public function editFile($id, $file)
+    {
+       $sql = "UPDATE $this->tableName SET `file` = :file WHERE `id` = :id";
+       $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->bind(':file', $file);
+       return $query->execute();
+    }
+    
+      public function editCode($id, $code)
+    {
+       $sql = "UPDATE $this->tableName SET `code` = :code WHERE `id` = :id";
+       $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->bind(':code', $code);
+       return $query->execute();
+    }
+    
+    
     
 }

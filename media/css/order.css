@@ -35,7 +35,7 @@
     text-decoration: none !important;
 }
 
-#create_order_info_box {
+#create_order_info_box, #create_order_nature_work_box {
     border: 1px solid #B49A6A;
     padding: 15px;
 }
@@ -178,7 +178,30 @@
     width: 85px;
 }
 
+/*nature of work box*/
 
+#create_order_nature_work_box ol {
+    margin: 0 0 50px 15px;   
+}
+
+#create_order_nature_work_box ol li{
+    font-size: 1.2em; 
+}
+
+#create_order_nature_work_box ol li a {
+    margin-left: 10px;
+}
+
+#create_order_nature_work_box textarea {
+    width: 905px;
+    margin-bottom: 15px;
+    padding-left: 3px;
+    font-size: 1.6em;
+}
+
+#add_item_nature_work {
+    margin-left: 400px;
+}
 
 
 

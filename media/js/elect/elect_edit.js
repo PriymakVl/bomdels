@@ -1,24 +1,26 @@
 $(document).ready(function() {
-    $('#save_elem').click(function(event) {  
-        event.preventDefault();
-        $('#form_elem').submit();   
-    });
+//    $('#save_elem').click(function(event) {  
+//        event.preventDefault();
+//        $('#form_elem').submit();   
+//    });
     
     //insert data in input of form
-    $('#elect_box :radio').change(function() {
+    $('#edit_elect_element').click(function() {
+        //check selected be element 
+        if (!$('#elect_box :radio').is(':checked')) {alert('Вы не выбрали элемент'); return false;}
+        
+        var checked = $('#elect_box :radio:checked');
+        var rating = checked.attr('rating');
+        var description_elect = checked.attr('description_elect');
+        var name = checked.attr('name_elem');
+        var elect_id = checked.attr('elect_id');
+
         $('#element_form_box').slideDown();
         
-        var type_elem = $(this).attr('type_list');
-        if(type_elem == 'category') var name = $(this).attr('name_cat');
-        else var name = $(this).attr('name_det');
-        
-        var rating = $(this).attr('rating');
-        var description = $(this).attr('description');
-        var elect_id = $(this).attr('elect_id');
-        console.log(name); return;
         $('#form_element input[name="elect_id"]').val(elect_id);
-        $('#form_element input[name="title"]').val(name);
+        $('#form_element input[name="name_elem"]').val(name);
         $('#form_element input[name="rating"]').val(rating);
-        $('#form_element textarea').text(description);
-    })
+        $('#form_element textarea').text(description_elect);
+        
+    });
 });

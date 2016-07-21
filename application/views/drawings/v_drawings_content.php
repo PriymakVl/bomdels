@@ -6,16 +6,15 @@
     </div>
     <!-- end info-menu-box -->
     
-    <!-- start drawings-main-box -->
+    <!-- start full note box -->
     <div id="full_note_box" style="display: none;">
-        <span>Полный текст примечания</span>
+        <h4>Полный текст примечания</h4>
+        <p></p>
         <a href="#" onclick="return false;" id="hide_note">закрыть</a>
-        <? if($draws): ?>
-            <? foreach($draws as $draw): ?>
-                <p draw_id="<?=$draw->id?>"><?=$draw->note?></p>
-            <? endforeach; ?>
-        <? endif; ?>
     </div>
+    <!-- end full note box -->
+    
+    <!-- start drawings-main-box -->
     <div id="drawings_main_box">
         <table>        
             <tr>
@@ -38,7 +37,7 @@
                     </td>
                     <td>
                         <? if($draw->note_cut): ?>
-                            <a href="#" onclick="return false;" id="show_note" title="показать полный текст примечания"><?=$draw->note_cut?></a>
+                            <a href="#" onclick="return false;" class="show_note" note="<?=$draw->note?>" title="показать полный текст примечания"><?=$draw->note_cut?></a>
                         <? else: ?>
                             <?=$draw->note?> 
                         <? endif; ?>   
@@ -133,7 +132,7 @@
             <label>Файл</label>
             <input type="text" name="file" style="width: 200px; height: 24px;"/>
             <br />
-            <input type="hidden" name="id" value="<?=$detail->id?>" />
+            <input type="hidden" name="detail_id" value="<?=$detail->id?>" />
             <input type="hidden" name="code" value="<?=$detail->code?>" />
             <input type="hidden" name="equipment" value="<?=$detail->equipment?>" />
             <input type="submit" id="add_draw" value="Добавить чертеж" />

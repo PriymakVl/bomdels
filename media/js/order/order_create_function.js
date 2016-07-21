@@ -12,10 +12,13 @@ $(document).ready(function() {
         $('input[name="weight_all_elem"]').val(weight_elems);
 	});
     
-    //add element in of conten the order
+    //add element in of content the order
     $('#add_element_to_content').click(function() {
         var code = $('#create_order_add_element_box input[name="code_elem"]').val();
+        
         var file = $('#create_order_add_element_box input[name="drawing_elem"]').val();
+        if(!file) file = 'без чертежа';
+        
         var item = $('#create_order_add_element_box input[name="item_elem"]').val();
         var variant = $('#create_order_add_element_box input[name="variant_elem"]').val();
         var title = $('#create_order_add_element_box input[name="title_elem"]').val();

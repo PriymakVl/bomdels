@@ -12,6 +12,7 @@ class Controller_Admin_Category extends Controller_Base {
         
         $this->template->scripts = $scripts;
         $title = "Редактирование категорий";
+        $this->template->title = $title;
         
         $this->template->block_header = View::factory('header/v_header_title')->bind('title', $title);
         if(isset($this->cats))$this->template->block_center = View::factory('category_admin/v_category_content')->bind('cats', $this->cats);

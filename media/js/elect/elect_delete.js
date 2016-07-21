@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#delete_elect').click(function() {
+    $('#delete_elect_element').click(function() {
         var elect_id = $('#elect_box :radio:checked').attr('elect_id');
         var role = $('#elect_box :radio:checked').attr('role'); 
         var type_list = $('#elect_box :radio:checked').attr('type_list');

@@ -7,7 +7,7 @@ class Controller_Software_OrderCreate extends Controller_Base {
     {   
         $this->template->styles = array('style.css', 'header.css', 'order.css');
         $scripts_1 = array('jquery.js', 'order/order_create_show_box.js', 'search/search_detail_for_order.js', 'order/order_create_function.js');
-        $scripts_2 = array('order/add_new_order.js');
+        $scripts_2 = array('order/add_new_order.js', 'order/order_create_nature_work_box_functions.js');
         $scripts_3 = Arr::merge($scripts_1, $scripts_2);
         $this->template->scripts = $scripts_3;
         

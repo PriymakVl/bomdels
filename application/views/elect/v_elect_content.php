@@ -1,6 +1,6 @@
 <div class="content">
     <div class="info-menu-box">
-        Популярное - список: <span><?=$list['name']?></span>
+        Название списка: <span><?=$list['name']?></span>
         <? if($employee_lists): ?>
             <ul class="elect-lists employee-elect-lists">
                 <li>Мои списки
@@ -27,11 +27,25 @@
         </ul>
     </div>
     
+    <!-- start description boxes -->
+    <div id="description_list_box">
+        Описание списка:<span><?=$list['description']?></span>
+        <a href="#" onclick="return false;">Подробнее</a>
+    </div>
+    
+     <div id="description_element_box" style="display: none;">
+        <a href="#" onclick="return false;" id="close_box_description_element">Закрыть</a>
+        <div id="description_element_inner_box">
+        </div>
+    </div>
+    <!-- end description boxes -->
+    
      <!-- start element form box -->
     <div id="element_form_box" style="display: none;">
-        <form id="form_element" method="post" action="/elect/update">
+        <form id="form_element" method="post" action="/elect/updateelement">
             <label>Название</label>
-            <input type="text" name="elementname" disabled="disabled" /> <br />
+            <input type="text" name="name_elem" style="width:460px;" disabled="disabled"/> 
+            <br />
             <label>Рейтинг</label>
             <input type="text" name="rating" />
             <div class="textarea-wrp">
@@ -39,7 +53,7 @@
                 <textarea name="description"></textarea>
             </div>
             <input type="hidden" name="employee_id" value="<?=$employee->id?>" />
-            <input type="hidden" name="elem_id" /> 
+            <input type="hidden" name="elect_id" /> 
             <input type="submit" value="Сохранить" id="save_elem" /> 
         </form>
     </div>
@@ -49,22 +63,21 @@
     <table id="elect_box">
         <tr>
             <td width="30"><input type="radio" disabled="disabled" /></td>
-            <th width="70">Тип</th>
             <th >Наименование</th>
-            <th width="150">Описание</th>
+            <th width="200">Описание</th>
             <th width="100">Код</th>
         </tr>
         <? if (isset($elements)): ?>
             <? foreach ($elements as $element): ?>
                 <tr>
                     <td>
-                        <input type="radio" name="element" name_det="<?=$element->rus?>" name_cat="<?=$element->title?>" elect_id="<?=$element->elect_id?>" type_list="<?=$type_list?>" role="<?=$role?>" description="<?=$element->description_elect?>" rating="<?=$element->rating_elect?>" />
-                    </td>
-                    <td style="text-align: center;">
-                        <span style="text-transform: capitalize;"><?=$element->kind?></span>
+                        <input type="radio" name="element" name_elem="<?=$element->name_elect?>" elect_id="<?=$element->elect_id?>" 
+                            type_list="<?=$type_list?>" role="<?=$role?>" description_elect="<?=$element->description_elect?>" 
+                            cut_des_elem="<?=$element->cut_des_elect?>" rating="<?=$element->rating_elect?>" 
+                        />
                     </td>
                     <td style="padding-left: 5px;">
-                        <? if ($element->kind == 'category'): ?>
+                        <? if ($element->kind_elect == 'category'): ?>
                             <a href="/category?cat_id=<?=$element->id?>"><?=$element->title?></a>
                         <? elseif(!$element->sub_id): ?>
                             <a href="/data?id=<?=$element->id?>&equipment=<?=$element->equipment?>" title="<?=$element->eng?>"><?=$element->rus?></a>
@@ -72,11 +85,15 @@
                             <a href="/specification?id=<?=$element->id?>&equipment=<?=$element->equipment?>" title="<?=$element->eng?>"><?=$element->rus?></a>
                         <? endif; ?>
                     </td>
-                    <td>                       
-                        <a href="#" onclick="return false;" id="elect_description"><?=$element->description?></a>
+                    <td style="padding-left: 5px;">
+                        <? if ($element->cut_des_elect): ?>                      
+                            <a href="#" onclick="return false;" id="elect_cut_description" full_description="<?=$element->description_elect?>"><?=$element->cut_des_elect?> ...</a>
+                        <? else: ?>
+                            <?=$element->description_elect?>
+                        <? endif; ?> 
                     </td>
                     <td style="text-align: center !important;">
-                        <? if($element->kind == 'category'): ?>
+                        <? if($element->kind_elect == 'category'): ?>
                         <span>нет</span>
                         <? elseif(!$element->drawings): ?>
                             <?=$element->code?>
@@ -104,15 +121,14 @@
             <input type="hidden" name="employee_id" value="<?=$employee->id?>" />
             <input type="hidden" name="list_id" />
             <input type="submit" value="Добавить список" id="add_list" style="display: none;" /> 
-            <input type="submit" value="Удалить список" id="delete_list" style="display: none;" /> 
-            <input type="submit" value="Сохранить список" id="save_list" style="display: none;" /> 
+            <input type="submit" value="Отредактировать список" id="edit_list" style="display: none;" /> 
         </form>
     </div>
     <!-- end list form box -->
     
     <!-- start list box -->
     <table id="edit_list_box" style="width: 100%; display: none;">
-        <caption>Редактирование списков</caption>
+        <caption>Перечень списков</caption>
         <tr>
             <th width="30">
                 <input type="radio" disabled="disabled" />
@@ -125,7 +141,7 @@
             <? foreach ($lists_edit as $list): ?>
                 <tr>
                     <td>
-                        <input type="radio" name="element" list_id="<?=$list['id']?>" rating="<?=$list['rating']?>" listname="<?=$list['name']?>" description="<?=$list['description']?>" />
+                        <input type="radio" name="list" list_id="<?=$list['id']?>" rating="<?=$list['rating']?>" listname="<?=$list['name']?>" description="<?=$list['description']?>" />
                     </td>
                     <td style="padding-left: 5px;">
                        <?=$list['name']?>
@@ -153,7 +169,6 @@
             </form>
         </div>
     <!-- end regist box -->
-    
 </div>
 
 

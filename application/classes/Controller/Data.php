@@ -7,7 +7,7 @@ class Controller_Data extends Controller_Base {
     public function action_index()
     {   
         $this->template->styles = array('style.css', 'header.css', 'data.css');
-        $scripts = array('jquery.js', 'data_show_box.js', 'data_edit.js');//'auto_add_sundbirsta.js'
+        $scripts = array('jquery.js', 'data/data_show_box.js', 'data/data_edit.js', 'elect/data_elect_add.js');//'auto_add_sundbirsta.js'
         $this->template->scripts = $scripts;
         
         $detail_id = $this->request->query('id');
@@ -16,7 +16,7 @@ class Controller_Data extends Controller_Base {
         if(!(int) $detail_id) exit('id detail does not validation');
         
         if($equipment == 'sundbirsta') $detail = new Object_Sundbirsta($detail_id);
-        if($equipment == 'danieli') $detail = new Object_danieli($detail_id);
+        if($equipment == 'danieli') $detail = new Object_Danieli($detail_id);
         if(empty($detail)) exit('detail not been exist');
         //Arr::_print($detail);
         $detail->getParent();

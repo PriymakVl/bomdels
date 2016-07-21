@@ -41,6 +41,7 @@
             <!-- input hidden start -->
             <input type="hidden" id="equipment" value="<?=$detail->equipment?>"/>
             <input type="hidden" id="detail_id" value="<?=$detail->id?>" />
+            <input type="hidden" id="role" value="<?=$role?>" />
             <!-- input hidden end -->
         </tr>
         <? if($detail->variant): ?>

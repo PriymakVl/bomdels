@@ -62,23 +62,18 @@
     border: 1px solid #B49A6A;
     margin-top: 15px;
     padding: 5px;
-    text-align: right;
     position: relative;
 }
 
-#full_note_box span{
-    position: absolute;
-    left: 225px;
-    top: 7px;
-    font-size: 1.2em;
-    color: #000;
+#full_note_box h4 {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-#full_note_box p {
-    text-align: left;
-    border-top: 1px solid #B49A6A;
-    margin-top: 10px;
-    padding: 5px;    
+#full_note_box #hide_note {
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 
 #drawing_data_box {

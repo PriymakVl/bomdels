@@ -37,6 +37,7 @@ class Controller_Search extends Controller_Base {
     
     public function action_order() {
         $code = $this->request->post('code');
+        $code = trim($code);
         $equipment = $this->request->post('equipment');
         
         if($equipment == 'danieli') {

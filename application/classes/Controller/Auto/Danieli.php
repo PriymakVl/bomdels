@@ -10,9 +10,10 @@ class Controller_Auto_Danieli extends Controller_Auto_Data {
         //for show array of data file
         $check = $this->request->post('check');
 
-        $obj = new Hendler_danieli($file_name);
+        $obj = new Hendler_Danieli($file_name);
         $obj->getArrayStringFromFile();
         $obj->getArrayDanieli();
+        //Arr::_print($obj->data);
         $obj->getNameFile();
         $obj->getVariant();
         $obj->clearParentCode();
@@ -23,7 +24,6 @@ class Controller_Auto_Danieli extends Controller_Auto_Data {
         $obj->getWeight();
         $obj->getType();
         $obj->getSize();
-        
         $this->createListAddedFiles();
         
         if($check) {
@@ -56,9 +56,9 @@ class Controller_Auto_Danieli extends Controller_Auto_Data {
     
     private function addToNativeDanieli($data) {
         foreach($data as $item) {
-            $res = Model::factory('danieliNative')->getDetailByCode($item['Member']);
+            $res = Model::factory('DanieliNative')->getDetailByCode($item['Member']);
             if(!$res) {
-                $res = Model::factory('danieliNative')->addAuto($item);
+                $res = Model::factory('DanieliNative')->addAuto($item);
                 if(!$res) exit('error add full info danieli');    
             }
         }    
@@ -67,9 +67,9 @@ class Controller_Auto_Danieli extends Controller_Auto_Data {
     private function addToDanieli($data) {
         //Arr::_print($data[0]['type']);
         foreach($data as $item) {
-            $res = Model::factory('danieli')->getDetailByCode($item['code']);
+            $res = Model::factory('Danieli')->getDetailByCode($item['code']);
             if(!$res) {
-                $res = Model::factory('danieli')->addAutoDanieli($item);
+                $res = Model::factory('Danieli')->addAutoDanieli($item);
                 if(!$res) exit('error add danieli');    
             }
         }    

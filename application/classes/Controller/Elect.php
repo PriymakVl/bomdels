@@ -8,7 +8,9 @@ class Controller_Elect extends Controller_Base {
         $this->template->styles = array('style.css', 'header.css', 'elect.css');
         $scripts_1 = array('jquery.js', 'elect/elect_delete.js', 'elect/elect_edit.js', 'elect/show_box_elect.js', 'employee/employee_auth.js', 'employee/employee_registr.js');
         $scripts_2 = array('elect/list_elect_add.js', 'elect/list_elect_delete.js', 'elect/list_elect_edit.js', 'elect/show_box_list.js', 'elect/show_box_registr.js');
-        $scripts = Arr::merge($scripts_1, $scripts_2);
+        $scripts_3 = Arr::merge($scripts_1, $scripts_2);
+        $scripts_4 = array('elect/show_box_full_description_element.js');
+        $scripts = Arr::merge($scripts_3, $scripts_4);
         $this->template->scripts = $scripts;
 
         //Cookie::set('list_default', 'сандбирста');
@@ -31,13 +33,13 @@ class Controller_Elect extends Controller_Base {
         }
         
         $default_lists = Model::factory('ElectList')->getListsDefault();
-        
+        //Arr::_print($default_lists);
         $employee_lists = $this->employee->elect_lists;
         //Arr::_print($employee_lists);
         $employee_name = $this->employee->getFullNameEmployee();
         //Arr::_print($this->employee);
         $elements = $this->getArrayElectElements($elected);
-        //Arr::_print($elements);
+        //Arr::_print($list);
         
         $lists_for_edit = ($this->employee->role == 'admin') ? $default_lists : $employee_lists;
        // Arr::_print($info);
@@ -73,7 +75,7 @@ class Controller_Elect extends Controller_Base {
         $kind = $this->request->query('kind');
         $employee_id = $this->employee->id;
         
-        $res = Model::factory('elect')->add($employee_id, $elem_id, $kind, $list_id);
+        $res = Model::factory('Elect')->add($employee_id, $elem_id, $kind, $list_id);
         if(!$res) exit('error add element in elect');
         $this->redirect('/');
     }
@@ -81,7 +83,6 @@ class Controller_Elect extends Controller_Base {
         public function action_addDefault() {
 //        $user_id = Cookie::get('user_id');
 //        $user_id = $user_id ? $user_id : 1;
-        
         $list_id = Cookie::get('list_default');
         $list_id = $list_id ? $list_id : 1;
         
@@ -93,6 +94,7 @@ class Controller_Elect extends Controller_Base {
         if(!$res) exit('error add element in elect');
         $this->redirect('/');
     }
+    
     //delete the element from list elect
     public function action_delete() {
         $elect_id = $this->request->query('elect_id');
@@ -112,10 +114,15 @@ class Controller_Elect extends Controller_Base {
     }
     
     public function action_deleteList() {
-        $list_id = $this->request->post('list_id');
+        $list_id = $this->request->query('list_id');
+        $elem = Model::factory('Elect')->getElectByListId($list_id);
+        if($elem) {
+            echo 'full';
+            exit();    
+        }
         $res = Model::factory('ElectList')->delete($list_id);
-        if(!$res) exit('error - action_deleteList');
-        else $this->redirect('/');
+        echo $res;
+        exit();
     }
     
     public function action_updateList() {
@@ -128,15 +135,35 @@ class Controller_Elect extends Controller_Base {
         else $this->redirect('/');
     }
     
+    public function action_updateElement() {
+        $data = Arr::extract($_POST, array('elect_id', 'rating', 'description')); 
+        //Arr::_print($data);
+        $res = Model::factory('Elect')->update($data);
+        if(!$res) exit('error - action_updateElement');
+        else $this->redirect('/');   
+    }
+    
     private function getArrayElectElements($elected) {
         $elements = array();
         foreach ($elected as $elect) {
-            if ($elect['kind'] == 'sundbirsta') $obj = new Object_Sundbirsta($elect['elem_id']);
-            else if ($elect['kind'] == 'danieli') $obj = new Object_Danieli($elect['elem_id']);
-            else if ($elect['kind'] == 'category') $obj = new Object_Category($elect['elem_id']);
+            if ($elect['kind'] == 'sundbirsta') {
+                $obj = new Object_Sundbirsta($elect['elem_id']); 
+                $obj->setElectName($obj->rus);   
+            }
+            else if ($elect['kind'] == 'danieli') {
+                $obj = new Object_Danieli($elect['elem_id']); 
+                $obj->setElectName($obj->rus);   
+            }
+            else if ($elect['kind'] == 'category') {
+                $obj = new Object_Category($elect['elem_id']); 
+                $obj->setElectName($obj->title);   
+            } 
             else exit('erorr select equipment');
             $obj->setElectId($elect['id']);
             $obj->setKindElect($elect['kind']);//for create link on page site
+            $obj->setElectRatign($elect['rating']);
+            $obj->setElectDescription($elect['description']);
+            $obj->cutElectDescription($elect['description'], 25);
             $elements[] = $obj;
        }
         return $elements;

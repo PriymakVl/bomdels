@@ -24,13 +24,15 @@ class Controller_Glossary extends Controller_Base {
     
     public function action_updateFromDanieli() 
     {
-        $names = Model::factory('Danieli')->getAll();
-        foreach ($names as $name) {
-            $is_num = is_numeric($name['eng']);
+        //$names = Model::factory('Danieli')->getAll();
+        $data = Model::factory('Danieli')->getDetailByType('not found');
+        //Arr::_print($data);
+        foreach ($data as $item) {
+            $is_num = is_numeric($item['eng']);
             if($is_num) continue;
-            $res = Model::factory('Glossary')->getRus($name['eng']);
+            $res = Model::factory('Glossary')->getRus($item['eng']);
             if($res) continue;
-            Model::factory('Glossary')->insert($name['eng'], $name['rus']);
+            Model::factory('Glossary')->insert($item['eng'], $item['rus'], 'standart');
         }
         $this->action_index();
     }
@@ -64,7 +66,10 @@ class Controller_Glossary extends Controller_Base {
     }
     
     public function action_writeGlossaryToFile() {
-        $data = Model::factory('Glossary')->getAll();
+        //$data = Model::factory('Glossary')->getAll();
+        //$data = Model::factory('Glossary')->getDataByType('not found');
+        $data = Model::factory('Danieli')->getDetailByType('not found');
+        //Arr::_print($data);
         $path = 'media/files/glossary/translation.csv'; 
         $this->writeArrayToFile($path, $data); 
         $this->redirect($path); 

@@ -43,14 +43,13 @@ class Hendler_Danieli extends Hendler_Base
         for ($i = 0, $count = count($this->data); $i < $count; $i++)
         {
             $file = $this->data[$i]['File'];
-            if($file == 'No File Found') {
+            $pos = strpos($file, 'No');//parts string No File Found
+            if($pos) {
                 $this->data[$i]['file'] = '';    
             }
             else {
                 $file = explode('\\', $file);
-                //$file = array_pop($file);
-                //$file = explode('.', $file);
-                $this->data[$i]['file'] = strtolower(array_pop($file));      
+                $this->data[$i]['file'] = array_pop($file);      
             }
               
         } 

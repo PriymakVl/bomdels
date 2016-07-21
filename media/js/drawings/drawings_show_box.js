@@ -42,7 +42,9 @@ $(document).ready(function() {
         $('#full_note_box').hide();
     });
     //show box with by full note
-    $('#show_note').click(function() {
+    $('.show_note').click(function() {
+        var note = $(this).attr('note');
+        $('#full_note_box p').text(note);
         $('#full_note_box').show();
     });
     

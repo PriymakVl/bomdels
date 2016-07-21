@@ -234,11 +234,15 @@ body
 .footer
 {
 	padding:5px 0 5px 10px;
-	background-color: #D9CCB4;
-    border:1px solid #B49A6A;
+	background-color: #32CD32;
+    border:1px solid green;
 	text-align: center;
 	color: #000;
-	font-size: 1.0em;
+	font-size: 1.2em;
+}
+
+.footer span {
+    font-weight: bold;
 }
 
 /*-------------admin-page---------------*/

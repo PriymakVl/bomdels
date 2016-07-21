@@ -18,7 +18,7 @@ class Controller_Drawings extends Controller_Base {
         if(!$equipment) exit('error not equipment');
         
         if($equipment == 'sundbirsta') $detail = new Object_Sundbirsta($detail_id);
-        else if($equipment == 'danieli') $detail = new Object_danieli($detail_id); 
+        else if($equipment == 'danieli') $detail = new Object_Danieli($detail_id); 
         else exit('equipment not been exist');
         if(empty($detail)) exit('detail not been exist');
         //$detail->getdrawings();
@@ -60,6 +60,7 @@ class Controller_Drawings extends Controller_Base {
         if(!(int)$draw_id) exit('not id draw'); 
         $draw = Model::factory('drawing')->getDrawingById($draw_id);
         if($draw['equipment'] == 'sundbirsta') $detail = new Object_Sundbirsta($draw['detail_id']);
+        else if($draw['equipment'] == 'danieli') $detail = new Object_Danieli($draw['detail_id']);
         $res = Model::factory('drawing')->delete($draw_id);
         if(!$res) exit('error delete drawing');
         $this->redirect('/drawings?id='.$detail->id.'&equipment='.$draw['equipment']);
@@ -69,9 +70,9 @@ class Controller_Drawings extends Controller_Base {
         $draw_id = $this->request->post('draw_id');
         $note = $this->request->post('note');
         if(!(int)$draw_id) exit('not id draw'); 
-        $draw = Model::factory('drawing')->getDrawingById($draw_id);
+        $draw = Model::factory('Drawing')->getDrawingById($draw_id);
         if($draw['equipment'] == 'sundbirsta') $detail = new Object_Sundbirsta($draw['detail_id']);
-        if($draw['equipment'] == 'danieli') $detail = new Object_danieli($draw['detail_id']);
+        if($draw['equipment'] == 'danieli') $detail = new Object_Danieli($draw['detail_id']);
         if(!$detail) exit('error not create object detail');
         $res = Model::factory('drawing')->addNote($draw_id, $note);
         if(!$res) exit('error add note drawing');
@@ -79,18 +80,15 @@ class Controller_Drawings extends Controller_Base {
     }
     
     public function action_addDraw() {
-        //Arr::_print($_POST);
-        $equipment = $this->request->post('equipment');
-        $detail_id = $this->request->post('id');
-        $filename = $this->request->post('file');
-        $code = $this->request->post('code');
-        $type = $this->request->post('type');
-        $arr = explode(".", $filename);
-        $folder = end($arr); //get extension file
+        $data = Arr::extract($_POST, array('equipment', 'detail_id', 'code', 'file', 'type'));
         
-        if($equipment == 'danieli') $res = Model::factory('Drawing')->add($type, $filename, $code, $detail_id, $equipment, $folder);
+        $arr = explode(".", $_POST['file']);
+        $folder = end($arr); 
+        $folder = strtolower($folder);//get extension file
+        
+        if($data['equipment'] == 'danieli') $res = Model::factory('Drawing')->add($data, $folder);
         if(!$res) exit('error add drawing');
-        $this->redirect('/drawings?id='.$detail_id.'&equipment='.$equipment);
+        $this->redirect('/drawings?id='.$data['detail_id'].'&equipment='.$data['equipment']);
     }
     
 

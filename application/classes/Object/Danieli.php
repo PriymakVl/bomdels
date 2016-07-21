@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Object_danieli extends Object_Detail{
+class Object_Danieli extends Object_Detail{
 
-    public function __construct($id, $equipment = 'danieli') 
+    public function __construct($id, $equipment = 'Danieli') 
     {
         parent:: __construct($id, $equipment); 
         //$this->getdrawings();  

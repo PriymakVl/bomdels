@@ -49,5 +49,12 @@
                 <li id="cancel_edit"  style="display:none;">Отменить редактирование</li>
             </ul>
         </div>
+        <!-- start action box -->
+         <div id="menu_action_box" style="display: none;">
+            <ul>
+                <li id="add_elect">Добавить в популярные</li>
+            </ul>            
+        </div>
+        <!-- end action box -->
     </div>
 </div>

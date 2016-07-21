@@ -6,12 +6,29 @@ class Object_Object {
     
     //for create link on page elected
     public function setKindElect($kind) {
-        $this->data['kind'] = $kind;
+        $this->data['kind_elect'] = $kind;
         return $this;    
     }
     
     public function setElectId($elect_id) {
         $this->data['elect_id'] = $elect_id;        
+    }
+    
+    public function setElectName($name) {
+        $this->data['name_elect'] = $name;        
+    }
+    
+    public function setElectRatign($rating) {
+        $this->data['rating_elect'] = $rating;        
+    }
+    
+    public function setElectDescription($description) {
+        $this->data['description_elect'] = $description;        
+    }
+    
+    public function cutElectDescription($description, $max) {
+        $lenth = UTF8::strlen($description);
+        if($lenth > $max) $this->data['cut_des_elect'] = UTF8::substr($description, 0, $max);;        
     }
     
     public function __get($name) 

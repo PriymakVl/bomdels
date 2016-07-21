@@ -3,7 +3,8 @@
 return array(
 
 	'trusted_hosts' => array(
-        'bomdels', '\\'
+        'bomdels', '\\',
+        'prokat\.esy\.es',
 		// Set up your hostnames here
 		//
 		// Example:

@@ -151,7 +151,32 @@
     margin: 15px 25px 10px 205px;
 }
 
+#description_list_box {
+	padding:5px 0 5px 10px;
+	font-family: "Century Gothic", Arial, Helvetica, Tahoma, sans-serif;
+	border:1px solid #B49A6A;
+	text-align: left;
+    position: relative;
+    margin-top: 10px;
+}
 
+#description_list_box span {
+    /*color: green;*/
+    font-style: italic;
+    margin-left: 10px;
+    color: #000;
+}
+
+#description_list_box a {
+    position: absolute;
+    right: 10px;
+    top: 3px;
+    color: #000;
+}
+
+#list_form_box input[type = 'submit'] {
+    margin: 5px 0 10px 260px;
+}
 
 
 

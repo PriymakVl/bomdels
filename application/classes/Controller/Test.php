@@ -2,13 +2,33 @@
 
 class Controller_Test extends Controller {
     
-
-    
-	public function action_index()
+    //
+    public function action_ex()
     {
-        $obj = new Object_Drawing(1);
-        Arr::_print($obj->code);
-          
+        $draws = Model::factory('Drawing')->getAll();
+        //Arr::_print($draws);
+        foreach ($draws as $draw) {
+                $arr = explode('.', $draw['file']);
+                $file = $arr[0].'.TIF';
+                Model::factory('Drawing')->editFile($draw['id'], $file);
+            }
+
+         exit('end'); 
+	}
+    
+	public function action_clearcode()
+    {
+        $draws = Model::factory('Drawing')->getAll();
+        foreach ($draws as &$draw) {
+            $res = stripos($draw['code'], '/');
+            if($res) {
+                $arr = explode('/', $draw['code']);
+                Model::factory('Drawing')->editCode($draw['id'], $arr[0]);
+            }
+                
+        }
+        
+         exit('end'); 
 	}
     
 }

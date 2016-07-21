@@ -38,8 +38,9 @@ return array
 			 * string   username    database username
 			 * string   password    database password
 			 * boolean  persistent  use persistent connections?
-             * server name database = u879162935_draws
+             * server name database = u879162935_mill
              * server name user = u879162935_admin
+             * server password = 1q2w3e 
 			 */
 			'dsn'        => 'mysql:host=localhost;dbname=mill',
 			'username'   => 'root',

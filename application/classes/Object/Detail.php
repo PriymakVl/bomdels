@@ -5,6 +5,7 @@ class Object_Detail extends Object_Object {
 
     public function __construct($id, $equipment) {
         $this->data = Model::factory($equipment)->getDetailById($id);
+        if(!$this->data) exit('object_detail __contsruct');
         $this->translateTitle();
         $this->getIdSub($equipment);
         $this->getDrawings();  

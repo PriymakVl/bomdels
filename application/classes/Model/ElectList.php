@@ -43,8 +43,8 @@ class Model_ElectList extends Model {
     
     public function delete($id)
     {
-        $sql = "UPDATE $this->tableName SET `status` = '0' WHERE `id` = :id AND `name` != :name";
-        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->param(':name', 'мой список');
+        $sql = "UPDATE $this->tableName SET `status` = '0' WHERE `id` = :id";
+        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id);
         return $query->execute();
     }
     

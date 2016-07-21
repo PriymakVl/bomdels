@@ -6,7 +6,7 @@ class Model_Glossary extends Model {
     
      public function getAll()
     {
-       $sql = "SELECT * FROM $this->tableName WHERE `status` = :status ORDER BY `eng`";
+       $sql = "SELECT * FROM $this->tableName WHERE `status` = :status";
        $query = DB::query(Database::SELECT, $sql)->param(':status', 1);
        return $query->execute()->as_array();
     }
@@ -25,10 +25,10 @@ class Model_Glossary extends Model {
        return $query->execute()->as_array();
     }
     
-    public function insert($eng, $rus)
+    public function insert($eng, $rus, $type)
     {
-       $sql = "INSERT INTO $this->tableName (`eng`, `rus`) VALUES (:eng, :rus)";
-       $query = DB::query(Database::INSERT, $sql)->bind(':eng', $eng)->bind(':rus', $rus);
+       $sql = "INSERT INTO $this->tableName (`eng`, `rus`, `type`) VALUES (:eng, :rus, :type)";
+       $query = DB::query(Database::INSERT, $sql)->bind(':eng', $eng)->bind(':rus', $rus)->bind(':type', $type);
        return $query->execute();
     }
     
@@ -44,6 +44,13 @@ class Model_Glossary extends Model {
         $sql = "UPDATE $this->tableName SET `status` = '0' WHERE `id` = :id";
         $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id);
         return $query->execute();
+    }
+    
+    public function getDataByType($type)
+    {
+        $sql = "SELECT * FROM $this->tableName WHERE `status` = :status AND `type` = :type ORDER BY `eng`";
+        $query = DB::query(Database::SELECT, $sql)->param(':status', 1)->bind(':type', $type);
+        return $query->execute()->as_array();    
     }
     
 }
