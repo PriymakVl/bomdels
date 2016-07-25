@@ -3,7 +3,9 @@
         <ul>
             <li id="add_data" class="active-item-menu-sidebar">Страницы</li>
             <li id="manager_link">Управление</li>
-            <li id="add_data">Добавление данных sundbirsta</li>
+            <? if($role == 'admin'): ?>
+                <li id="add_data">Добавление данных sundbirsta</li>
+            <? endif; ?>
         </ul>
     </div>
     <div class="sidebar-content-wrp">

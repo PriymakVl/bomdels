@@ -24,14 +24,16 @@
             </td>
         </tr>
         <tr>
-        <td>
-            <input type="radio" name="detail" disabled="disabled" />
-            </td>
-            <td style="padding-left: 5px;">Name</td>
-            <td style="padding-left: 5px;">
-                <span><?=$detail->eng?></span>
-            </td>
-        </tr>
+        <? if($role == 'admin'): ?>
+            <td>
+                <input type="radio" name="detail" disabled="disabled" />
+                </td>
+                <td style="padding-left: 5px;">Name</td>
+                <td style="padding-left: 5px;">
+                    <span><?=$detail->eng?></span>
+                </td>
+            </tr>
+        <? endif; ?>
         <tr>
             <td>
                 <input type="radio" name="detail" disabled="disabled" />
@@ -60,6 +62,19 @@
             <td>
                 <input type="radio" name="detail" />
             </td>
+            <td style="padding-left: 5px;">Пометки</td>
+            <td style="padding-left: 5px;">
+                <? if($detail->cut_note): ?>
+                    <a href="#" onclick="return: false;" note="<?=$detail->note?>"><?=$detail->cut_note?></a>
+                <? else: ?>
+                    <span><?=$detail->note?></span>
+                <? endif; ?>        
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="radio" name="detail" />
+            </td>
             <td style="padding-left: 5px;">Входит в состав</td>
             <td style="padding-left: 5px;">
                 <a href="/specification?id=<?=$detail->parent['id']?>&equipment=<?=$detail->equipment?>"><?=$detail->parent['rus']?>
@@ -69,7 +84,7 @@
             <td>
                 <input type="radio" name="detail" />
             </td>
-            <td style="padding-left: 5px;">Количество</td>
+            <td style="padding-left: 5px;">Количество в узле</td>
             <td style="padding-left: 5px;">
                 <span><?=$detail->qty?></span>
                 <input type="text" value="<?=$detail->qty?>" id="qty" style="display: none;" />
@@ -183,15 +198,6 @@
                 <td style="padding-left: 5px;">Заявка</td>
                 <td style="padding-left: 5px;">
                     <a href="#">исх №048/27т-754 (пример)</a>        
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" name="detail" />
-                </td>
-                <td style="padding-left: 5px;">Пометки</td>
-                <td style="padding-left: 5px;">
-                    <a href="#">Какой то текст о детали</a>        
                 </td>
             </tr>
     </table>

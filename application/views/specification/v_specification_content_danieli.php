@@ -16,7 +16,7 @@
             <? foreach ($details as $det): ?>
                 <tr>
                     <td class="cat-data">    
-                        <input type="radio"  name="detail" detail_id="<?=$det->id?>" type_elem="<?=$det->type?>" equipment="<?=$det->equipment?>" role="<?=$employee->role?>"/>
+                        <input type="radio"  name="detail" detail_id="<?=$det->id?>" type_elem="<?=$det->type?>" equipment="<?=$det->equipment?>" role="<? if(isset($employee)) echo $employee->role; ?>"/>
                     </td>
                     <td></td>
                     <td></td>

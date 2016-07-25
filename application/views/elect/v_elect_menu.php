@@ -2,7 +2,7 @@
     <div class="right-sidebar-header">
         <ul>
             <li id="sections" class="active-item-menu-sidebar">Разделы</li>
-            <li id="elect">Управление списками</li>
+            <li id="elect">Списки</li>
             <? if ($role == 'admin'): ?>
                 <li id="admin">Админка</li>
             <? endif; ?>
@@ -25,8 +25,9 @@
         <!-- start elect box -->
         <div id="menu_elect_box" style="display: none;">
             <ul id="menu_elect_main_box">
-                <li id="elect_elements_management">Управление  элем. списков</li>
-                <li id="elect_lists_management">Управление  списками</li>    
+                <li id="elect_elements_management">Управл. элем. ваших списков</li>
+                <li id="elect_lists_management">Управление вашими списками</li> 
+                <li><a href="/electlist">Перечень всех списков</a></li>   
             </ul>   
             <ul style="display: none;" id="menu_elect_elements_box">
                 <li id="delete_elect_element">Удалить элемент</li>

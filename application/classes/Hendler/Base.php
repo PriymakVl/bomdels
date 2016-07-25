@@ -35,6 +35,9 @@ class Hendler_Base {
             }
             fclose($handle);
         }
+        $first_str = substr($this->str_arr[0],0,-2);
+        $first_str = $first_str.";\n";
+        $this->str_arr[0] = $first_str;
         return $this;
     }
 

@@ -20,25 +20,34 @@ class Model_ElectList extends Model {
         else false;
     }
     
-    public function getListsOfEmployee($employee_id)
+    //public function getListsOfEmployee($employee_id)
+//    {
+//        $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status";
+//        $query = DB::query(Database::SELECT, $sql)->bind(':employee_id', $employee_id)->param(':status', 1);
+//        return $query->execute()->as_array();
+//    }
+//    
+//    public function getIdDefaultListOfEmployee($employee_id) 
+//    {
+//        $sql = "SELECT `id` FROM $this->tableName WHERE `employee_id` = :employee_id AND `name` = :name AND `status` = :status";
+//        $query = DB::query(Database::SELECT, $sql)->bind(':employee_id', $employee_id)->param(':name', 'мой список')->param(':status', 1); 
+//        return $query->execute()->get('id');   
+//    }
+//    
+//    public function getListsDefault()
+//    {
+//       $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status";
+//       $query = DB::query(Database::SELECT, $sql)->param(':employee_id', '1')->param(':status', 1);
+//       return $query->execute()->as_array();
+//    }
+
+    public function checkListIsEmployee($employee_id, $list_id) 
     {
-        $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status";
-        $query = DB::query(Database::SELECT, $sql)->bind(':employee_id', $employee_id)->param(':status', 1);
-        return $query->execute()->as_array();
-    }
-    
-    public function getIdDefaultListOfEmployee($employee_id) 
-    {
-        $sql = "SELECT `id` FROM $this->tableName WHERE `employee_id` = :employee_id AND `name` = :name AND `status` = :status";
-        $query = DB::query(Database::SELECT, $sql)->bind(':employee_id', $employee_id)->param(':name', 'мой список')->param(':status', 1); 
-        return $query->execute()->get('id');   
-    }
-    
-    public function getListsDefault()
-    {
-       $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status";
-       $query = DB::query(Database::SELECT, $sql)->param(':employee_id', '1')->param(':status', 1);
-       return $query->execute()->as_array();
+        $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `id` = :list_id LIMIT 1";
+        $query = DB::query(Database::SELECT, $sql)->bind(':employee_id', $employee_id)->bind(':list_id', $list_id);
+        $res = $query->execute()->as_array();
+        if($res) return true;
+        else return false;    
     }
     
     public function delete($id)
@@ -61,6 +70,8 @@ class Model_ElectList extends Model {
         $sql = "INSERT INTO $this->tableName (name, rating, employee_id, description) VALUES (:name, :rating, :employee_id, :description)";
         $query = DB::query(Database::INSERT, $sql)->bind(':name', $name)->bind(':rating', $rating)->bind(':employee_id', $employee_id)
                             ->bind(':description', $description);
-        return $query->execute();
+        $res = $query->execute();
+        if($res) return $res[0];
+        else return false;
     }
 }

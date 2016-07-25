@@ -1,13 +1,13 @@
 <div class="content">
     <div class="info-menu-box">
-        Название списка: <span><?=$list['name']?></span>
+        Название списка: <span><?=$list->name?></span>
         <? if($employee_lists): ?>
             <ul class="elect-lists employee-elect-lists">
                 <li>Мои списки
                     <ul id="elect_lists_employee">
-                        <? foreach($employee_lists as $list): ?>
+                        <? foreach($employee_lists as $list_emp): ?>
                             <li>
-                                <a href="/elect/changeemployeelist?list_id=<?=$list['id']?>"><?=$list['name']?></a>
+                                <a href="/elect/changelist?list_id=<?=$list_emp->id?>"><?=$list_emp->name?></a>
                             </li>
                         <? endforeach; ?>
                     </ul>
@@ -17,9 +17,9 @@
         <ul class="elect-lists default-elect-lists">
             <li>Списки
                 <ul id="elect_lists_default">
-                    <? foreach($default_lists as $list): ?>
+                    <? foreach($default_lists as $list_def): ?>
                         <li>
-                            <a href="/elect/changedefaultlist?list_id=<?=$list['id']?>"><?=$list['name']?></a>
+                            <a href="/elect/changelist?list_id=<?=$list_def->id?>"><?=$list_def->name?></a>
                         </li>
                     <? endforeach; ?>
                 </ul>
@@ -29,7 +29,7 @@
     
     <!-- start description boxes -->
     <div id="description_list_box">
-        Описание списка:<span><?=$description_list?></span>
+        Описание списка:<span><?=$list->description?></span>
     </div>
     
      <div id="description_element_box" style="display: none;">
@@ -51,7 +51,7 @@
                 <label>Описание</label>
                 <textarea name="description"></textarea>
             </div>
-            <input type="hidden" name="employee_id" value="<?=$employee->id?>" />
+            <input type="hidden" name="employee_id" value="<? if(isset($employee)) echo $employee->id; ?>" />
             <input type="hidden" name="elect_id" /> 
             <input type="submit" value="Сохранить" id="save_elem" /> 
         </form>
@@ -59,7 +59,7 @@
     <!-- end element form box -->
     
     <!-- start box elect -->
-    <table id="elect_box" type_list="<?=$type_list?>" role="<?=$role?>">
+    <table id="elect_box" role="<?=$role?>">
         <tr>
             <td width="30"><input type="radio" disabled="disabled" /></td>
             <th >Наименование</th>
@@ -109,14 +109,14 @@
     <div id="list_form_box" style="display: none;">
         <form id="form_list" method="post">
             <label>Название списка</label>
-            <input type="text" name="listname" /> <br />
+            <input type="text" name="listname" maxlength="25" placeholder="максимальный размер 30 символов"/> <br />
             <label>Рейтинг списка</label>
             <input type="text" name="rating" />
             <div class="textarea-wrp">
                 <label>Описание списка</label>
                 <textarea name="description"></textarea>
             </div>
-            <input type="hidden" name="employee_id" value="<?=$employee->id?>" />
+            <input type="hidden" name="employee_id" value="<? if(isset($employee)) echo $employee->id; ?>" />
             <input type="hidden" name="list_id" />
             <input type="submit" value="Добавить список" id="add_list" style="display: none;" /> 
             <input type="submit" value="Отредактировать список" id="edit_list" style="display: none;" /> 
@@ -126,7 +126,7 @@
     
     <!-- start list box -->
     <table id="edit_list_box" style="width: 100%; display: none;">
-        <caption>Перечень списков</caption>
+        <caption>Перечень ваших списков</caption>
         <tr>
             <th width="30">
                 <input type="radio" disabled="disabled" />
@@ -135,20 +135,20 @@
             <th width="290">Описание</th>
             <th width="90">Рейтинг</th>
         </tr>
-        <? if ($lists_edit): ?>
-            <? foreach ($lists_edit as $list): ?>
+        <? if ($employee_lists): ?>
+            <? foreach ($employee_lists as $list): ?>
                 <tr>
                     <td>
-                        <input type="radio" name="list" list_id="<?=$list['id']?>" rating="<?=$list['rating']?>" listname="<?=$list['name']?>" description="<?=$list['description']?>" />
+                        <input type="radio" name="list" list_id="<?=$list->id?>" rating="<?=$list->rating?>" listname="<?=$list->name?>" description="<?=$list->description?>" />
                     </td>
                     <td style="padding-left: 5px;">
-                       <?=$list['name']?>
+                       <?=$list->name?>
                     </td>
                     <td style="padding-left: 5px;">
-                       <?=$list['description']?>
+                       <?=$list->description?>
                     </td>
                     <td style="text-align: center;">
-                       <?=$list['rating']?>
+                       <?=$list->rating?>
                     </td>
                 </tr>
             <? endforeach; ?>

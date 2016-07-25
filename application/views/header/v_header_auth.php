@@ -6,7 +6,9 @@
         <input type="text" name="password"  placeholder="Введите пароль" />
         <a href="#" onclick="return false;" id="auth">Авторизация</a>
         <a href="#" onclick="return false;" id="registr">Регистрация</a>
-        <a href="#">Забыли?</a>
+        <!--
+<a href="#">Забыли?</a>
+-->
     </form>
     <div class="wellcome" <? if(!$role) echo 'style="display: none;"' ?>>
         <a href="/employee/cancel">Выйти</a>
