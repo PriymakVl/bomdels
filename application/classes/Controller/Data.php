@@ -20,6 +20,7 @@ class Controller_Data extends Controller_Base {
         if(empty($detail)) exit('detail not been exist');
         //Arr::_print($detail);
         $detail->getParent();
+        $detail->cutNote(38);
         //Arr::_print($detail);
         $breadcrumbs = $this->getBreadcrumbs($detail->code, $equipment);
         
@@ -36,6 +37,19 @@ class Controller_Data extends Controller_Base {
         else if($equipment == 'danieli') $res = Model::factory('Danieli')->update($_POST);
         echo $res;
         exit();
+    }
+    
+    public function action_addNote() {
+        $detail_id = $this->request->post('detail_id');
+        $note = $this->request->post('note');
+        $equipment = $this->request->post('equipment');
+        
+        $res = false;
+        if($equipment == 'sundbirsta') $res = Model::factory('Sandbirsta')->addNote($detail_id, $note);
+        if($equipment == 'danieli') $res = Model::factory('Danieli')->addNote($detail_id, $note);
+        if(!$res) exit('error action addNote');
+        
+        $this->redirect('/data?id='.$detail_id.'&equipment='.$equipment);    
     }
    
     

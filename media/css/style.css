@@ -86,7 +86,7 @@ body
 .content table {
 	width: 100%;
 	border-collapse: collapse;
-	margin: 15px 0 15px; 
+	margin: 15px 0 0; 
 }
 
 .content table tr:first-child {
@@ -207,9 +207,9 @@ body
 	padding-bottom: 5px;
 }
 
-.sidebar-content-wrp ul li a {
+/*.sidebar-content-wrp ul li a {
 	font-size: 1.2em;
-}
+}*/
 
 #sidebar-glossary a {
     font-size: 1em;
@@ -221,7 +221,7 @@ body
 
 /* sidebar menu action box */
 #menu_action_box li, #menu_elect_box li{
-    font-size: 1.2em; 
+    font-size: 1em; 
     text-decoration: underline;
     cursor: pointer; 
     color: #3400F0;  

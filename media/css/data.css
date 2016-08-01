@@ -8,7 +8,42 @@
     cursor: pointer;
 }
 
+.content #detail_form_note {
+    border: 1px solid #B49A6A;
+    margin-top: 15px;
+    padding-bottom: 20px;
+} 
 
+.content #detail_form_note textarea {
+    width: 595px;
+    height: 200px;
+    margin: 20px 0 0 20px;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.content #detail_form_note input[type="submit"] {
+    text-align: center;
+    margin: 20px 90px 0 155px;   
+} 
+
+#full_note_box {
+    border: 1px solid #B49A6A;
+    margin-top: 15px;
+    padding: 5px;
+    position: relative;
+}
+
+#full_note_box h4 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#full_note_box #hide_note {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
 
 
 

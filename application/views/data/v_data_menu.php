@@ -46,7 +46,8 @@
         </div>
         <div id="data_edit_box">
             <ul>
-                <li id="edit_item">Редактирвание</li>
+                <li id="edit_item">Редактирвание элемента</li>
+                <li id="add_note">Добавить(редак) примечание</li>
                 <li id="save_edit" style="display:none;">Сохранить редактирование</li>
                 <li id="cancel_edit"  style="display:none;">Отменить редактирование</li>
             </ul>
@@ -54,7 +55,7 @@
         <!-- start action box -->
          <div id="menu_action_box" style="display: none;">
             <ul>
-                <li id="add_elect">Добавить в популярные</li>
+                <li id="add_elect">Добавить в список</li>
             </ul>            
         </div>
         <!-- end action box -->

@@ -50,7 +50,7 @@
         </div>
         <div id="menu_action_box" style="display: none;">
             <ul>
-                <li id="add_elect">Добавить в популярные</li>
+                <li id="add_elect">Добавить в список</li>
             </ul>            
         </div>
     </div>

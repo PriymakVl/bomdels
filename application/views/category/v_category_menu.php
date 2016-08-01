@@ -7,7 +7,7 @@
     <div class="sidebar-content-wrp">
         <div id="menu_action_box">   
             <ul>
-                <li id="add_elect">Добавить в популярные</li>
+                <li id="add_elect">Добавить в список</li>
             </ul>
         </div>
     </div>

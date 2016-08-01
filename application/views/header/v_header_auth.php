@@ -1,5 +1,5 @@
 <div class="header">
-    <span class="logo">ЦРМО СПС</span>
+    <span class="logo"><a href="/">РСЦ</a></span>
      <form id="auth-form" method="post" action="user" <? if($role) echo 'style="display: none;"' ?> >
         <label><input type="checkbox" id="remember"/> Запомнить</label>
         <input type="text" name="login" placeholder="Введите логин" />

@@ -26,8 +26,7 @@ class Controller_Elect extends Controller_Base {
         $default_menu_lists = $this->getArrayOfObjects($default_lists_ids, 'Object_Electlist');
 
         if($this->employee) {
-            if($this->employee->elect_lists != false)$employee_menu_lists = $this->getArrayOfObjects($this->employee->elect_lists, 'Object_Electlist');
-            $employee_name = $this->employee->getFullNameEmployee();    
+            if($this->employee->elect_lists != false)$employee_menu_lists = $this->getArrayOfObjects($this->employee->elect_lists, 'Object_Electlist');    
         }
         
         $elements = $this->getArrayElectElements($elected);
@@ -35,7 +34,7 @@ class Controller_Elect extends Controller_Base {
         
         //$lists_for_edit = ($this->employee->role == 'admin') ? $default_lists : $employee_lists;
        // Arr::_print($info);
-        $this->template->block_header = View::factory('header/v_header_auth')->bind('code', $this->code)->bind('employee_name', $employee_name);
+        $this->template->block_header = View::factory('header/v_header_auth')->bind('code', $this->code);
         $this->template->block_center = View::factory('elect/v_elect_content')->set('list', $list)->bind('elements', $elements)->bind('default_lists', $default_menu_lists)
                                                     ->bind('employee_lists', $employee_menu_lists);
         $this->template->block_right = View::factory('elect/v_elect_menu');

@@ -1,9 +1,21 @@
 <div class="content">
     <? if(isset($detail)): ?>
+    <!-- start info-menu-box -->
     <div class="info-menu-box">
          <?=$detail->rus?> - <span>информация</span>
          <a id="history-back-link" href="javascript:history.back();">назад</a>
     </div>
+    <!-- end info-menu-box -->
+    
+    <!-- start full note box -->
+    <div id="full_note_box" style="display: none;">
+        <h4>Полный текст примечания</h4>
+        <p></p>
+        <a href="#" onclick="return false;" id="hide_note">закрыть</a>
+    </div>
+    <!-- end full note box -->
+    
+    <!-- start detail data box -->
     <table class="detail-info">
         <tr>
             <td width="30">
@@ -60,12 +72,12 @@
         <? endif; ?>
         <tr>
             <td>
-                <input type="radio" name="detail" />
+                <input type="radio" name="detail" disabled="disabled"/>
             </td>
-            <td style="padding-left: 5px;">Пометки</td>
-            <td style="padding-left: 5px;">
-                <? if($detail->cut_note): ?>
-                    <a href="#" onclick="return: false;" note="<?=$detail->note?>"><?=$detail->cut_note?></a>
+            <td style="padding-left: 5px;">Примечание</td>
+            <td style="padding-left: 5px;" id="full_note_field" note="<?=$detail->note?>">
+                <? if($detail->note_cut): ?>
+                    <a href="#" onclick="return false;" id="link_full_note" note="<?=$detail->note?>"><?=$detail->note_cut?></a>
                 <? else: ?>
                     <span><?=$detail->note?></span>
                 <? endif; ?>        
@@ -201,5 +213,18 @@
                 </td>
             </tr>
     </table>
+    <!-- end data box -->
+    
+    <!-- start drawings-form-note -->
+    <div id="detail_form_note_box" style="display: none;">
+        <form method="post" id="detail_form_note" action="/data/addnote">
+            <textarea name="note"></textarea>
+            <input type="hidden" name="detail_id" value="<?=$detail->id?>"/>
+            <input type="hidden" name="equipment" value="<?=$detail->equipment?>" />
+            <input type="submit" id="save_note" value="Сохранить запись" />
+            <input type="button" id="cancel_note" value="Отменить" />
+        </form>
+    </div>
+    <!-- end drawings-form-note -->
     <? endif; ?>
 </div>

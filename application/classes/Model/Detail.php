@@ -73,4 +73,11 @@ class Model_Detail extends Model {
                     ->bind(':qty', $data['qty'])->bind(':material', $data['material']);
         return $query->execute();
     }
+    
+    public function addNote($id, $note)
+    {
+       $sql = "UPDATE $this->tableName SET `note` = :note WHERE `id` = :id";
+       $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->bind(':note', $note);
+       return $query->execute();
+    }
 }

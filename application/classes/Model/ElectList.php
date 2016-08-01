@@ -20,12 +20,12 @@ class Model_ElectList extends Model {
         else false;
     }
     
-    //public function getListsOfEmployee($employee_id)
-//    {
-//        $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status";
-//        $query = DB::query(Database::SELECT, $sql)->bind(':employee_id', $employee_id)->param(':status', 1);
-//        return $query->execute()->as_array();
-//    }
+    public function getListsOfEmployee($employee_id)
+    {
+        $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status";
+        $query = DB::query(Database::SELECT, $sql)->bind(':employee_id', $employee_id)->param(':status', 1);
+        return $query->execute()->as_array();
+    }
 //    
 //    public function getIdDefaultListOfEmployee($employee_id) 
 //    {

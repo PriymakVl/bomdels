@@ -17,6 +17,13 @@ class Model_ElectEmployeeList extends Model {
         return $query->execute()->as_array();
     }
     
+    public function getListsOfEmployee($employee_id)
+    {
+        $sql = "SELECT * FROM $this->tableName WHERE `employee_id` = :employee_id AND `status` = :status";
+        $query = DB::query(Database::SELECT, $sql)->bind(':employee_id', $employee_id)->param(':status', 1);
+        return $query->execute()->as_array();
+    }
+    
     public function getDefoltListIds()
     {
         $sql = "SELECT `list_id` as 'id' FROM $this->tableName WHERE `employee_id` = '1' AND `status` = :status";

@@ -20,11 +20,12 @@ abstract class Controller_Base extends Controller_Template {
             $this->employee = new Object_Employee($employee_id); 
             $employee = $this->employee; 
             $role = $this->employee->role;  
+            $employee_name = $this->employee->getFullNameEmployee();
         }
-
+        
+        View::bind_global('employee_name', $employee_name);
         View::bind_global('employee', $employee);
         View::bind_global('role', $role);    
-        
         
         $this->template->styles = array('style.css', 'header.css');
         $this->template->scripts = array('jquery.js');
