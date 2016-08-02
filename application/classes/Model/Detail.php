@@ -68,9 +68,9 @@ class Model_Detail extends Model {
     
     public function update($data)
     {
-        $sql = "UPDATE $this->tableName SET `rus` = :rus, `weight` = :weight, `qty` = :qty, `material` = :material WHERE `id` = :id";
+        $sql = "UPDATE $this->tableName SET `rus` = :rus, `weight` = :weight, `qty` = :qty, `material` = :material, `ens` = :ens WHERE `id` = :id";
         $query = DB::query(Database::UPDATE, $sql)->bind(':id', $data['id'])->bind(':rus', $data['rus'])->bind(':weight', $data['weight'])
-                    ->bind(':qty', $data['qty'])->bind(':material', $data['material']);
+                    ->bind(':qty', $data['qty'])->bind(':material', $data['material'])->bind(':variant', $data['variant'])->bind(':ens', $data['ens']);
         return $query->execute();
     }
     

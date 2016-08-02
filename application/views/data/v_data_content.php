@@ -212,6 +212,16 @@
                     <a href="#">исх №048/27т-754 (пример)</a>        
                 </td>
             </tr>
+             <tr>
+                <td>
+                    <input type="radio" name="detail" />
+                </td>
+                <td style="padding-left: 5px;">Код ЕНС</td>
+                <td style="text-align: center;">
+                    <?=$detail->ens?>  
+                    <input type="text" value="<?=$detail->ens?>" id="ens" style="display: none;" />         
+                </td>
+            </tr>
     </table>
     <!-- end data box -->
     

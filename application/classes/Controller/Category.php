@@ -43,6 +43,36 @@ class Controller_Category extends Controller_Base {
         $this->template->block_center = View::factory('category/v_category_content')->bind('cats', $cats);  
     }
     
+    public function action_sundbirsta()
+    {   
+        $this->template->scripts = array('jquery.js', 'equipment_search_placeholder.js', 'equipment_check_search_form.js', 'elect/category_elect_add.js');
+        
+        $equipment = 'sundbirsta';
+
+        $cat_id = $this->request->query('cat_id');
+
+        if(isset($cat_id)) {          
+            $cats = Model::factory('Category')->getCategoriesByParentId($cat_id);
+            $cat =  Model::factory('Category')->getCategoryById($cat_id); 
+            $info = $cat['title'];   
+        }
+        else {
+            $cats = Model::factory('Category')->getMainCategories($equipment);
+            $info = 'перечень основного оборудования';    
+        }
+
+        if(isset($cats)) $cats = $this->getArrayOfObjects($cats, 'Object_Category');
+        else exit('error - action_danieli');
+        //Arr::_print($cats);
+        View::bind_global('info', $info);
+        View::bind_global('cat', $cat);
+        View::bind_global('equipment', $equipment);
+
+        $this->template->block_header = View::factory('header/v_header_search'); 
+        $this->template->block_right = View::factory('category/v_category_menu');
+        $this->template->block_center = View::factory('category/v_category_content')->bind('cats', $cats);  
+    }
+    
      public function action_content()
     {   
         $this->template->scripts = array('jquery.js', 'equipment_search_placeholder.js', 'equipment_check_search_form.js', 'elect/cat_content_elect_add.js');

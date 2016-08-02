@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('#elect_cut_description').click(function() {
+	$('.elect_cut_description').click(function() {
 	   var description = $(this).attr('full_description');
        $('#description_element_inner_box').html(description);
        $('#description_element_box').show();

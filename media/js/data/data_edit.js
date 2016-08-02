@@ -29,7 +29,9 @@ $(document).ready(function() {
         var qty = $('#qty').val();
         var material = $('#material').val();
         var analog = $('#analog').val();
-        $.post('/data/edit', {equipment: equipment, id: detail_id, rus: rus, weight: weight, qty: qty, material: material, analog: analog}, resultEdit);   
+        var variant = $('#variant').val();
+        var ens = $('#ens').val();// код ЕНС в программе снабжения
+        $.post('/data/edit', {equipment: equipment, id: detail_id, rus: rus, weight: weight, qty: qty, material: material, analog: analog, variant: variant, ens: ens}, resultEdit);   
    });
 });
 

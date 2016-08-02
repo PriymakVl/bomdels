@@ -11,7 +11,7 @@
                     <a href="/admin/category/danieli">Danieli</a>
                 </li>
                 <li id="show_sundbirsta">
-                    <a href="/admin/category/danieli">Sundbirsta</a>
+                    <a href="/admin/category/sundbirsta">Sundbirsta</a>
                 </li>
             </ul>
         </div>

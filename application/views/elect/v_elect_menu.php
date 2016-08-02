@@ -12,8 +12,8 @@
         <div id="menu_sections_box">   
             <ul>
                 <li><a href="/category/danieli">Danieli</a></li>
-                <!--<li><a href="/category/sundbirsta">Sundbirsta</a></li>
-                <li><a href="#">Краны</a></li>
+                <li><a href="/category/sundbirsta">Sundbirsta</a></li>
+                <!--<li><a href="#">Краны</a></li>
                 <li><a href="/software/orders">Заказы</a></li>-->
                 <li><a href="/standart">Стандартные изделия</a></li>
                 <li><a href="/bearing">Подшипники</a></li>

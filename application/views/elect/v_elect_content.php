@@ -85,7 +85,7 @@
                     </td>
                     <td style="padding-left: 5px;">
                         <? if ($element->cut_des_elect): ?>                      
-                            <a href="#" onclick="return false;" id="elect_cut_description" full_description="<?=$element->description_elect?>"><?=$element->cut_des_elect?> ...</a>
+                            <a href="#" onclick="return false;" class="elect_cut_description" full_description="<?=$element->description_elect?>"><?=$element->cut_des_elect?> ...</a>
                         <? else: ?>
                             <?=$element->description_elect?>
                         <? endif; ?> 
