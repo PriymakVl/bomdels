@@ -77,10 +77,8 @@
                     <td style="padding-left: 5px;">
                         <? if ($element->kind_elect == 'category'): ?>
                             <a href="/category?cat_id=<?=$element->id?>"><?=$element->title?></a>
-                        <? elseif(!$element->sub_id): ?>
-                            <a href="/data?id=<?=$element->id?>&equipment=<?=$element->equipment?>" title="<?=$element->eng?>"><?=$element->rus?></a>
                         <? else: ?>
-                            <a href="/specification?id=<?=$element->id?>&equipment=<?=$element->equipment?>" title="<?=$element->eng?>"><?=$element->rus?></a>
+                            <a href="/data?id=<?=$element->id?>&equipment=<?=$element->equipment?>" title="<?=$element->eng?>"><?=$element->rus?></a>
                         <? endif; ?>
                     </td>
                     <td style="padding-left: 5px;">

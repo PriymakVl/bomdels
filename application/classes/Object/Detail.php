@@ -49,6 +49,14 @@ class Object_Detail extends Object_Object {
     
     public function getDrawings() {
         $this->data['drawings'] = Model::factory('Drawing')->get($this->code);
+        return $this;
+    }
+    
+    public function countDrawings() 
+    {
+        if($this->data['drawings']) $this->data['count_draws'] = count($this->data['drawings']);
+        else $this->data['count_draws'] = null;
+        return $this;
     }
     
     public function updateRating($rating, $equipment) {

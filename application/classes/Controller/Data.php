@@ -21,6 +21,7 @@ class Controller_Data extends Controller_Base {
         //Arr::_print($detail);
         $detail->getParent();
         $detail->cutNote(38);
+        $detail->countDrawings();
         //Arr::_print($detail);
         $breadcrumbs = $this->getBreadcrumbs($detail->code, $equipment);
         

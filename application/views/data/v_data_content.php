@@ -30,7 +30,11 @@
             </td>
             <td style="padding-left: 5px;">Название</td>
             <td style="padding-left: 5px;">
-                <span><?=$detail->rus?></span>
+                <? if($detail->sub_id): ?>
+                    <a href="/specification?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>"><?=$detail->rus?></a>
+                <? else: ?>
+                    <span><?=$detail->rus?></span>
+                <? endif; ?>
                 <!-- for edit title -->
                 <input type="text" value="<?=$detail->rus?>" id="rus" style="display: none;" />
             </td>
@@ -51,7 +55,13 @@
                 <input type="radio" name="detail" disabled="disabled" />
             </td>
             <td style="padding-left: 5px;">Код</td>
-            <td style="padding-left: 5px;"><?=$detail->code?></td>
+            <td style="padding-left: 5px;">
+                <? if($detail->count_draws): ?>
+                    <a href="/drawings?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>"><?=$detail->code?></a>
+                <? else: ?>
+                    <?=$detail->code?>
+                <? endif; ?>
+            </td>
             <!-- input hidden start -->
             <input type="hidden" id="equipment" value="<?=$detail->equipment?>"/>
             <input type="hidden" id="detail_id" value="<?=$detail->id?>" />
@@ -151,7 +161,7 @@
                 <td style="padding-left: 5px;">Чертежи</td>
                 <td style="padding-left: 5px;">
                     <? if($detail->drawings): ?>
-                        <? echo count($detail->drawings); ?>
+                        <?=$detail->count_draws?> шт.
                         <? else: ?>
                         <span>нет</span>
                      <? endif; ?>  
