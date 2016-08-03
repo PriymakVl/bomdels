@@ -18,10 +18,9 @@ class Controller_Data extends Controller_Base {
         if($equipment == 'sundbirsta') $detail = new Object_Sundbirsta($detail_id);
         if($equipment == 'danieli') $detail = new Object_Danieli($detail_id);
         if(empty($detail)) exit('detail not been exist');
-        //Arr::_print($detail);
         $detail->getParent();
         $detail->cutNote(38);
-        $detail->countDrawings();
+        //Arr::_print($detail);
         //Arr::_print($detail);
         $breadcrumbs = $this->getBreadcrumbs($detail->code, $equipment);
         

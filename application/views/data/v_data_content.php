@@ -56,7 +56,9 @@
             </td>
             <td style="padding-left: 5px;">Код</td>
             <td style="padding-left: 5px;">
-                <? if($detail->count_draws): ?>
+                <? if($detail->count_draws == 1): ?>
+                    <a target="_blank" href="media/drawings/<?=$detail->equipment?>/<?=$detail->drawings[0]['folder']?>/<?=$detail->drawings[0]['file']?>"><?=$detail->code?></a>
+                <? elseif($detail->count_draws): ?>   
                     <a href="/drawings?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>"><?=$detail->code?></a>
                 <? else: ?>
                     <?=$detail->code?>
@@ -99,7 +101,17 @@
             </td>
             <td style="padding-left: 5px;">Входит в состав</td>
             <td style="padding-left: 5px;">
-                <a href="/specification?id=<?=$detail->parent['id']?>&equipment=<?=$detail->equipment?>"><?=$detail->parent['rus']?>
+                <a href="/specification?id=<?=$detail->parent['id']?>&equipment=<?=$detail->equipment?>"><?=$detail->parent['rus']?></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="radio" name="detail" />
+            </td>
+            <td style="padding-left: 5px;">Code parent</td>
+            <td style="padding-left: 5px;">
+                <?=$detail->parent['code']?>
+                <input type="text" value="<?=$detail->parent['code']?>" id="parent" style="display: none;" />
             </td>
         </tr>
         <tr>

@@ -71,7 +71,7 @@ abstract class Controller_Base extends Controller_Template {
         foreach ($details as $key => $detail) {
             if(!$detail['rus']) $detail['rus'] = $detail['eng'];
             if($key == $count - 1) $str .= "<span>{$detail['rus']}</span>";
-            else $str .= "<a href='/specification?id={$detail['id']}&equipment={$detail['equipment']}'>{$detail['rus']}</a>";    
+            else $str .= "<a href='/data?id={$detail['id']}&equipment={$detail['equipment']}'>{$detail['rus']}</a>";    
         }
         return $str;
     }

@@ -21,19 +21,17 @@
                     <td></td>
                     <td></td>
                     <td style="padding-left: 5px;">
-                        <? if(!$det->sub_id): ?>
-                            <a href="/data?id=<?=$det->id?>&equipment=<?=$det->equipment?>" title="<?=$det->eng?>"><?=$det->rus?></a>
-                        <? else: ?>
-                            <a href="/specification?id=<?=$det->id?>&equipment=<?=$det->equipment?>" title="<?=$det->eng?>"><?=$det->rus?></a>
-                        <? endif; ?>
+                        <a href="/data?id=<?=$det->id?>&equipment=<?=$det->equipment?>" title="<?=$det->eng?>"><?=$det->rus?></a>
                     </td>
                     <td style="text-align: center;"><?=$det->item?></td>
                     <td style="text-align: center;">
-                        <? if(!$det->drawings): ?>
-                            <?=$det->code?>
+                        <? if($det->count_draws == 1): ?>
+                            <a target="_blank" href="media/drawings/<?=$det->equipment?>/<?=$det->drawings[0]['folder']?>/<?=$det->drawings[0]['file']?>"><?=$det->code?></a>
+                        <? elseif($det->count_draws): ?>   
+                            <a href="/drawings?id=<?=$det->id?>&equipment=<?=$det->equipment?>"><?=$det->code?></a>
                         <? else: ?>
-                            <a href="/drawings?id=<?=$det->id?>&equipment=<?=$det->equipment?>" ><?=$det->code?></a>
-                        <? endif; ?>                      
+                            <?=$det->code?>
+                        <? endif; ?>                    
                     </td>
                 </tr>
             <? endforeach; ?>

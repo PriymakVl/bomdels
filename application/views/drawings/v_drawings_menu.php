@@ -46,6 +46,9 @@
                 <li id="show_add_draw_box">Добавить чертеж</li>
                 <li id="delete_draw">Удалить чертеж</li>
                 <li id="add_note">Добавить примечание</li>
+                <li id="edit_rating">Редактирование рейтинга</li>
+                <li id="save_rating" style="display: none;">Сохранить рейтинг</li>
+                <li id="cancel_edit_rating" style="display: none;">Отменить редакт. рейтинга</li>
             </ul>
         </div>
     </div>

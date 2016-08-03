@@ -20,7 +20,8 @@
             <tr>
                 <td width="30"><input type="radio" disabled="disabled" /></td>
                 <th width="120">Информация</th>
-                <th width="250">Файл</th>
+                <th width="120">Файл</th>
+                <th width="60">Рейтинг</th>
                 <th>Примечание</th>
             </tr>
             <? if($draws): ?>
@@ -35,7 +36,11 @@
                     <td>
                         <a target="_blank" href="media/drawings/<?=$draw->equipment?>/<?=$draw->folder?>/<?=$draw->file?>"><?=$draw->file?></a>
                     </td>
-                    <td>
+                    <td class="draw_rating" style="text-align: center;">
+                        <span><?=$draw->rating?></span>
+                        <input type="text" id="draw_rating"  value="<?=$draw->rating?>" style="display: none; width: 30px;"/>    
+                    </td>
+                    <td style="text-align: left; padding-left: 3px;">
                         <? if($draw->note_cut): ?>
                             <a href="#" onclick="return false;" class="show_note" note="<?=$draw->note?>" title="показать полный текст примечания"><?=$draw->note_cut?></a>
                         <? else: ?>

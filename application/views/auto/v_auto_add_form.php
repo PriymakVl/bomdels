@@ -10,14 +10,23 @@
                     <li><?=$file?></li>
                 <? endforeach; ?>
             </ul>
-            <a href="/auto/data/deletelistfiles" style="margin-left: 50px;">удлить список файлов</a>
+            <a href="/auto/data/deletelistfiles" style="margin-left: 50px;">удалить список файлов</a>
         <? endif; ?>
         <form action="/auto/danieli/add" method="post" enctype="multipart/form-data">
-            <p>выберите файл с данными Danieli</p>
+            <p>выберите файл exel с данными Danieli</p>
             <input type="file" name="table"/>
             <br />
             <input type="submit" value="добавить данные"/>
             <input type="submit" name="check" value="показать данные"/>
+        </form>
+    </div>
+    <div class="auto_add_table_box add_detail">
+        <form action="/data/adddetail" method="post">
+            <p>Добавление детали в базу Danieli</p>
+            <label>Код детали:<input type="text" id="code"/></label>
+            <br />
+            <label>Код родителя:<input type="text" id="parent"/></label>
+            <input type="submit" value="добавить" />
         </form>
     </div>
 </div>

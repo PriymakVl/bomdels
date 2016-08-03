@@ -7,7 +7,7 @@ class Controller_Drawings extends Controller_Base {
     {   
         $this->template->styles = array('style.css', 'drawings.css', 'header.css');
         $script_1 = array('jquery.js', 'drawings/drawings_show_box.js', 'drawings/drawings_delete.js', 'drawings/drawings_add_note.js');
-        $script_2 = array('drawings/drawings_add_draw.js');
+        $script_2 = array('drawings/drawings_add_draw.js', 'drawings/drawings_edit_rating.js');
         $script = array_merge($script_1, $script_2);
         $this->template->scripts = $script;
         
@@ -89,6 +89,14 @@ class Controller_Drawings extends Controller_Base {
         if($data['equipment'] == 'danieli') $res = Model::factory('Drawing')->add($data, $folder);
         if(!$res) exit('error add drawing');
         $this->redirect('/drawings?id='.$data['detail_id'].'&equipment='.$data['equipment']);
+    }
+    
+    public function action_updateRating() {
+        $draw_id = $this->request->post('draw_id');
+        $rating = $this->request->post('rating');
+        $res = Model::factory('Drawing')->editRating($draw_id, $rating);
+        echo $res;
+        exit();       
     }
     
 

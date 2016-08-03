@@ -13,7 +13,7 @@ class Model_Drawing extends Model {
     
     public function get($code)
     {
-       $sql = "SELECT *  FROM $this->tableName WHERE `code` = :code AND `status` = :status ORDER BY `rating`";
+       $sql = "SELECT *  FROM $this->tableName WHERE `code` = :code AND `status` = :status ORDER BY `rating` DESC";
        $query = DB::query(Database::SELECT, $sql)->bind(':code', $code)->param(':status', 1);
        return $query->execute()->as_array();
     }
@@ -77,10 +77,17 @@ class Model_Drawing extends Model {
        return $query->execute();
     }
     
-      public function editCode($id, $code)
+    public function editCode($id, $code)
     {
        $sql = "UPDATE $this->tableName SET `code` = :code WHERE `id` = :id";
        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->bind(':code', $code);
+       return $query->execute();
+    }
+    
+     public function editRating($id, $rating)
+    {
+       $sql = "UPDATE $this->tableName SET `rating` = :rating WHERE `id` = :id";
+       $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->bind(':rating', $rating);
        return $query->execute();
     }
     

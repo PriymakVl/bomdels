@@ -31,6 +31,10 @@ class Object_Drawing extends Object_Object {
         else return false;        
     }
     
+    public function cutNote($max = 50) {
+        return parent::cutNote($max);
+    }
+    
 }
 
 

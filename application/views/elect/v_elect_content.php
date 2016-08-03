@@ -90,11 +90,13 @@
                     </td>
                     <td style="text-align: center !important;">
                         <? if($element->kind_elect == 'category'): ?>
-                        <span>нет</span>
-                        <? elseif(!$element->drawings): ?>
-                            <?=$element->code?>
-                        <? else: ?>
+                            <span>нет</span>
+                        <? elseif($element->count_draws == 1): ?>
+                            <a target="_blank" href="media/drawings/<?=$element->equipment?>/<?=$element->drawings[0]['folder']?>/<?=$element->drawings[0]['file']?>"><?=$element->code?></a>    
+                        <? elseif($element->count_draws): ?>
                             <a href="/drawings?id=<?=$element->id?>&equipment=<?=$element->equipment?>" title="Переход на страницу с чертежами"><?=$element->code?></a>
+                        <? else: ?>    
+                            <?=$element->code?>
                         <? endif; ?>
                     </td>
                 </tr>

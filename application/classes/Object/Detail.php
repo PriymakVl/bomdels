@@ -8,7 +8,8 @@ class Object_Detail extends Object_Object {
         if(!$this->data) exit('error object_detail __contsruct');
         $this->translateTitle();
         $this->getIdSub($equipment);
-        $this->getDrawings();  
+        $this->getDrawings(); 
+        $this->countDrawings(); 
     } 
     
 //    private function checkdrawing() 

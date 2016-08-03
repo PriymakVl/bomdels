@@ -20,17 +20,15 @@
                         <?=$detail->equipment ?>
                     </td>
                     <td style="padding-left: 5px;">
-                        <? if($detail->sub_id): ?>
-                            <a href="/specification?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>" title="<?=$detail->eng?>"><?=$detail->rus?></a>
-                        <? else: ?>
-                            <a href="/data?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>" title="<?=$detail->eng?>"><?=$detail->rus?></a>
-                        <? endif; ?>
+                        <a href="/data?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>" title="<?=$detail->eng?>"><?=$detail->rus?></a>
                     </td> 
                     <td style="text-align: center;">
-                         <? if(!$detail->drawings): ?>
-                            <?=$detail->code?>
+                        <? if($detail->count_draws == 1): ?>
+                            <a target="_blank" href="media/drawings/<?=$detail->equipment?>/<?=$detail->drawings[0]['folder']?>/<?=$detail->drawings[0]['file']?>"><?=$detail->code?></a>
+                        <? elseif($detail->count_draws): ?>   
+                            <a href="/drawings?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>"><?=$detail->code?></a>
                         <? else: ?>
-                            <a href="/drawings?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>" ><?=$detail->code?></a>
+                            <?=$detail->code?>
                         <? endif; ?>
                     </td>
                 </tr>

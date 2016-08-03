@@ -20,6 +20,18 @@
     border:1px solid #B49A6A;
 }
 
+.add_detail {
+    margin-top: 15px;
+}
+
+.add_detail label{
+    margin-left: 15px;
+}
+
+.add_detail input[type = 'text'] {
+    margin-left: 10px;
+}
+
 
 
 
