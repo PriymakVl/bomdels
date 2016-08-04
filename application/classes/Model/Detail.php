@@ -12,7 +12,7 @@ class Model_Detail extends Model {
     
     public function getDetailById($id)
     {
-       $sql = "SELECT * FROM $this->tableName WHERE `id` = :id AND `status` = :status";
+       $sql = "SELECT * FROM $this->tableName WHERE `id` = :id AND `status` = :status LIMIT 1" ;
        $query = DB::query(Database::SELECT, $sql)->bind(':id', $id)->param(':status', 1);
        $res = $query->execute()->as_array();
        if(empty($res)) return false;
@@ -79,5 +79,13 @@ class Model_Detail extends Model {
        $sql = "UPDATE $this->tableName SET `note` = :note WHERE `id` = :id";
        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->bind(':note', $note);
        return $query->execute();
+    }
+    
+    public function addDetail($data) {
+        $sql = "INSERT INTO $this->tableName (`code`, `parent_code`, `rus`) VALUES (:code, :parent, :rus)";
+        $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['code'])->bind(':parent', $data['parent'])->bind(':rus', $data['rus']);
+        $res = $query->execute();
+        if($res) return $res[0];
+        else return false;
     }
 }

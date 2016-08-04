@@ -51,6 +51,16 @@ class Controller_Data extends Controller_Base {
         
         $this->redirect('/data?id='.$detail_id.'&equipment='.$equipment);    
     }
+    
+    public function action_addDetail() {
+        $data = Arr::extract($_POST, array('code', 'parent', 'equipment', 'rus'));
+        //Arr::_print($data);
+        if($data['equipment'] == 'sundbirsta') $detail_id = Model::factory('Sandbirsta')->addDetail($data);
+        else if($data['equipment'] == 'danieli') $detail_id = Model::factory('Danieli')->addDetail($data);
+        if(!$detail_id) exit('error action addDetail');
+        
+        $this->redirect('/data?id='.$detail_id.'&equipment='.$data['equipment']); 
+    }
    
     
 

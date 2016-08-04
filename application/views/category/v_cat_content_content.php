@@ -24,7 +24,7 @@
                     </td> 
                     <td style="text-align: center;">
                         <? if($detail->count_draws == 1): ?>
-                            <a target="_blank" href="media/drawings/<?=$detail->equipment?>/<?=$detail->drawings[0]['folder']?>/<?=$detail->drawings[0]['file']?>"><?=$detail->code?></a>
+                            <a target="_blank" href="/media/drawings/<?=$detail->equipment?>/<?=$detail->drawings[0]['folder']?>/<?=$detail->drawings[0]['file']?>"><?=$detail->code?></a>
                         <? elseif($detail->count_draws): ?>   
                             <a href="/drawings?id=<?=$detail->id?>&equipment=<?=$detail->equipment?>"><?=$detail->code?></a>
                         <? else: ?>

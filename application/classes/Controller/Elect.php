@@ -54,13 +54,17 @@ class Controller_Elect extends Controller_Base {
         $employee_id = $this->employee->id;
         
         $check = Model::factory('ElectList')->checkListIsEmployee($employee_id, $list_id); 
-        if(!$check) exit('Вы не можете добавить элемент не в свой список');
+        if(!$check) exit('error action_addElectElement - check list');
        
         $elem_id = $this->request->query('elem_id');
         $kind = $this->request->query('kind');
+        //add description from note detail
+
+        if($kind  == 'danieli') $detail = Model::factory('Danieli')->getDetailById($elem_id);
+        else if($kind  == 'sundbirsta') $detail = Model::factory('Sandbirsta')->getDetailById($elem_id);
+        else $detail['note'] = '';
         
-        
-        $res = Model::factory('Elect')->add($employee_id, $elem_id, $kind, $list_id);
+        $res = Model::factory('Elect')->add($employee_id, $elem_id, $kind, $list_id, $detail['note']);
         if(!$res) exit('error add element in elect');
         $this->redirect('/');
     }
@@ -137,7 +141,7 @@ class Controller_Elect extends Controller_Base {
             $obj->setKindElect($elect['kind']);//for create link on page site
             $obj->setElectRatign($elect['rating']);
             $obj->setElectDescription($elect['description']);
-            $obj->cutElectDescription($elect['description'], 35);
+            $obj->cutElectDescription($elect['description'], 28);
             $elements[] = $obj;
        }
         return $elements;

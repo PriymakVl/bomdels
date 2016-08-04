@@ -23,9 +23,12 @@
     <div class="auto_add_table_box add_detail">
         <form action="/data/adddetail" method="post">
             <p>Добавление детали в базу Danieli</p>
-            <label>Код детали:<input type="text" id="code"/></label>
+            <label>Код детали:<input type="text" name="code" /></label>
             <br />
-            <label>Код родителя:<input type="text" id="parent"/></label>
+            <label>Код родителя:<input type="text" name="parent" /></label>
+            <br />
+            <label>Наименование:<input type="text" name="rus" /></label>
+            <input type="hidden" name="equipment" value="danieli" />
             <input type="submit" value="добавить" />
         </form>
     </div>
