@@ -3,28 +3,28 @@
 abstract class Controller_Base extends Controller_Template {
 
     public $template = 'total/v_base';
-    protected $employee;
+    protected $user;
     
     public function before()
     {
         parent::before();
         
-        $this->template->title = 'ЦРМO СПС';
+        $this->template->title = 'Прокат';
         
-        $employee_id = Cookie::get('employee_id');
+        $user_id = Cookie::get('user_id');
         
         $role = null;
-        $employee = null;
+        $user = null;
         
-        if($employee_id) {
-            $this->employee = new Object_Employee($employee_id); 
-            $employee = $this->employee; 
-            $role = $this->employee->role;  
-            $employee_name = $this->employee->getFullNameEmployee();
+        if($user_id) {
+            $this->user = new Object_User($user_id); 
+            $user = $this->user; 
+            $role = $this->user->role; 
+            $user_name = $this->user->getFullNameuser();
         }
         
-        View::bind_global('employee_name', $employee_name);
-        View::bind_global('employee', $employee);
+        View::bind_global('user_name', $user_name);
+        View::bind_global('user', $user);
         View::bind_global('role', $role);    
         
         $this->template->styles = array('style.css', 'header.css');
@@ -34,16 +34,6 @@ abstract class Controller_Base extends Controller_Template {
         $this->template->block_right = null;
         $this->template->block_center = null;
         $this->template->block_footer = View::factory('total/v_footer');
-    }
-    
-    protected function getNameCategory($cat_id) 
-    {
-        switch ($cat_id) {
-            case 1: return 'Механика';
-            case 2: return 'Гидравлика';
-            case 3: return 'Смазка';
-            case 4: return 'Узлы';
-        }
     }
     
     protected function getArrayOfObjects($array, $class, $methods = false) 

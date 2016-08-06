@@ -1,11 +1,11 @@
 <div class="content">
     <div class="info-menu-box">
         Название списка: <span><?=$list->name?></span>
-        <? if($employee_lists): ?>
+        <? if($user_lists): ?>
             <ul class="elect-lists employee-elect-lists">
                 <li>Мои списки
                     <ul id="elect_lists_employee">
-                        <? foreach($employee_lists as $list_emp): ?>
+                        <? foreach($user_lists as $list_emp): ?>
                             <li>
                                 <a href="/elect/changelist?list_id=<?=$list_emp->id?>"><?=$list_emp->name?></a>
                             </li>
@@ -51,7 +51,7 @@
                 <label>Описание</label>
                 <textarea name="description"></textarea>
             </div>
-            <input type="hidden" name="employee_id" value="<? if(isset($employee)) echo $employee->id; ?>" />
+            <input type="hidden" name="employee_id" value="<? if(isset($user)) echo $user->id; ?>" />
             <input type="hidden" name="elect_id" /> 
             <input type="submit" value="Сохранить" id="save_elem" /> 
         </form>
@@ -135,8 +135,8 @@
             <th width="290">Описание</th>
             <th width="90">Рейтинг</th>
         </tr>
-        <? if ($employee_lists): ?>
-            <? foreach ($employee_lists as $list): ?>
+        <? if ($user_lists): ?>
+            <? foreach ($user_lists as $list): ?>
                 <tr>
                     <td>
                         <input type="radio" name="list" list_id="<?=$list->id?>" rating="<?=$list->rating?>" listname="<?=$list->name?>" description="<?=$list->description?>" />
@@ -159,10 +159,10 @@
     <!-- start registr box -->
         <div id="registr_box" style="display: none;">
             <h2>Регистрация</h2>
-            <form method="post" action="employee/registr" id="form_registr">
+            <form method="post" action="user/registr" id="form_registr">
                 <label>Логин: <input type="text" name="login" /></label><br />
                 <label>Пароль: <input type="text" name="password" /></label><br />
-                <input type="button" value="Зарегистрироваться" id="registr_employee"/>
+                <input type="button" value="Зарегистрироваться" id="registr_user"/>
                 <input type="button" value="Отменить" id="registr_cancel"/>
             </form>
         </div>

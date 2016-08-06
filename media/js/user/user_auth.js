@@ -7,7 +7,7 @@ $(document).ready(function() {
        check = document.querySelector('#remember');
        if(check.checked) var remember = true;
        else remember = false;
-       $.post('/employee/auth', {login: login, password: password, remember: remember}, resultAuth);
+       $.post('/user/auth', {login: login, password: password, remember: remember}, resultAuth);
 	})
 });
 

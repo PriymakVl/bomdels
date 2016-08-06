@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Created by PhpStorm.
  * User: Priymak Vladimir
  * Date: 03.02.2016
- * Time: 10:11
  */
+ 
 class Hendler_Base {
     
     private $file;
     public $str_arr = array();
+    public $data = array();
 
     /**
      * HendlerFile constructor.
@@ -35,7 +35,7 @@ class Hendler_Base {
             }
             fclose($handle);
         }
-        $first_str = substr($this->str_arr[0],0,-2);
+        $first_str = substr($this->str_arr[0],0,-2);//add in end fils string file ';'
         $first_str = $first_str.";\n";
         $this->str_arr[0] = $first_str;
         return $this;
@@ -57,8 +57,6 @@ class Hendler_Base {
         }
         return $data;
     }
-    
-    public $data = array();
 
     //create array data from table exel
     public function getArrayDataWithTable($separator = ';')

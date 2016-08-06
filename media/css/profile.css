@@ -1,35 +1,44 @@
-#employee_edit_box {
+#user_edit_box {
     padding: 5px; 
     border: 1px solid #B49A6A;
     /*width: 100%;*/   
 }
 
-#employee_edit_box {
+#user_edit_box {
     margin-top: 15px;
 }
 
-#employee_edit_box label {
+#user_edit_box label {
     margin: 15px 20px 15px 170px;
 }
 
-#employee_edit_box input[type="text"], #employee_edit_box input[type="email"] {
+#user_edit_box input[type="text"], #user_edit_box input[type="email"] {
     height: 24px;
     font-size: 16px;
     margin-top: 15px;
     padding-left: 3px;
 }
 
-#employee_edit_box input[name="firstname"] {
+#user_edit_box input[name="firstname"] {
     margin-left: 38px;
 }
 
-#employee_edit_box input[name="email"] {
+#user_edit_box input[name="email"] {
     margin-bottom: 15px;
     margin-left: 29px;
 }
 
-#employee_edit_box #save_profile {
+#user_edit_box #save_profile {
     margin: 10px 15px 15px 205px;
+}
+
+#user_data_box tr {
+    height: 30px;
+}
+
+#user_data_box td {
+    padding-left: 5px;
+    width: 200px;
 }
 
 

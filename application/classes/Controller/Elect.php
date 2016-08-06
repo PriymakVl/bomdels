@@ -6,7 +6,7 @@ class Controller_Elect extends Controller_Base {
     public function action_index()
     {       
         $this->template->styles = array('style.css', 'header.css', 'elect.css');
-        $scripts_1 = array('jquery.js', 'elect/elect_delete.js', 'elect/elect_edit.js', 'elect/show_box_elect.js', 'employee/employee_auth.js', 'employee/employee_registr.js');
+        $scripts_1 = array('jquery.js', 'elect/elect_delete.js', 'elect/elect_edit.js', 'elect/show_box_elect.js', 'user/user_auth.js', 'user/user_registr.js');
         $scripts_2 = array('elect/list_elect_add.js', 'elect/list_elect_delete.js', 'elect/list_elect_edit.js', 'elect/show_box_list.js', 'elect/show_box_registr.js');
         $scripts_3 = Arr::merge($scripts_1, $scripts_2);
         $scripts_4 = array('elect/show_box_full_description_element.js');
@@ -22,21 +22,19 @@ class Controller_Elect extends Controller_Base {
         $list = new Object_Electlist($list_id);  
 
         //get array default list for create of the menu
-        $default_lists_ids = Model::factory('ElectEmployeeList')->getDefoltListIds();
+        $default_lists_ids = Model::factory('ElectUserList')->getDefoltListIds();
         $default_menu_lists = $this->getArrayOfObjects($default_lists_ids, 'Object_Electlist');
 
-        if($this->employee) {
-            if($this->employee->elect_lists != false)$employee_menu_lists = $this->getArrayOfObjects($this->employee->elect_lists, 'Object_Electlist');    
+        if($this->user) {
+            if($this->user->elect_lists != false)$user_menu_lists = $this->getArrayOfObjects($this->user->elect_lists, 'Object_Electlist');    
         }
         
         $elements = $this->getArrayElectElements($elected);
-        //Arr::_print($elected);
-        
-        //$lists_for_edit = ($this->employee->role == 'admin') ? $default_lists : $employee_lists;
+
        // Arr::_print($info);
         $this->template->block_header = View::factory('header/v_header_auth')->bind('code', $this->code);
         $this->template->block_center = View::factory('elect/v_elect_content')->set('list', $list)->bind('elements', $elements)->bind('default_lists', $default_menu_lists)
-                                                    ->bind('employee_lists', $employee_menu_lists);
+                                                    ->bind('user_lists', $user_menu_lists);
         $this->template->block_right = View::factory('elect/v_elect_menu');
         
     }
@@ -51,9 +49,9 @@ class Controller_Elect extends Controller_Base {
         $list_id = Cookie::get('list_id');
         
         if(!$list_id) exit('error action_addElectElement - not list id');
-        $employee_id = $this->employee->id;
+        $user_id = $this->user->id;
         
-        $check = Model::factory('ElectList')->checkListIsEmployee($employee_id, $list_id); 
+        $check = Model::factory('ElectList')->checkListIsEmployee($user_id, $list_id); 
         if(!$check) exit('error action_addElectElement - check list');
        
         $elem_id = $this->request->query('elem_id');
@@ -64,7 +62,7 @@ class Controller_Elect extends Controller_Base {
         else if($kind  == 'sundbirsta') $detail = Model::factory('Sandbirsta')->getDetailById($elem_id);
         else $detail['note'] = '';
         
-        $res = Model::factory('Elect')->add($employee_id, $elem_id, $kind, $list_id, $detail['note']);
+        $res = Model::factory('Elect')->add($user_id, $elem_id, $kind, $list_id, $detail['note']);
         if(!$res) exit('error add element in elect');
         $this->redirect('/');
     }
@@ -81,11 +79,11 @@ class Controller_Elect extends Controller_Base {
         $list_name = trim($this->request->post('listname'));
         $rating = trim($this->request->post('rating'));
         $description = trim($this->request->post('description'));
-        if(!$this->employee->id) exit('error - action_addList - not eployee');
+        if(!$this->employee->id) exit('error - action_addList - not user');
         
-        $list_id = Model::factory('ElectList')->add($this->employee->id, $list_name, $rating, $description);
+        $list_id = Model::factory('ElectList')->add($this->user->id, $list_name, $rating, $description);
 
-        $res = Model::factory('ElectEmployeeList')->add($this->employee->id, $list_id);
+        $res = Model::factory('ElectUserList')->add($this->user->id, $list_id);
         if(!$res) exit('error - action_addList - add list');
         else $this->redirect('/');
     }
@@ -141,7 +139,7 @@ class Controller_Elect extends Controller_Base {
             $obj->setKindElect($elect['kind']);//for create link on page site
             $obj->setElectRatign($elect['rating']);
             $obj->setElectDescription($elect['description']);
-            $obj->cutElectDescription($elect['description'], 28);
+            $obj->cutElectDescription($elect['description'], 25);
             $elements[] = $obj;
        }
         return $elements;

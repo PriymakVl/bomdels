@@ -1,10 +1,10 @@
 $(document).ready(function() {
-	$('#registr_employee').click(function() {
+	$('#registr_user').click(function() {
 	   var login = $('#form_registr input[name="login"]').val();
        if(!login) {alert('Вы не указали логин'); return;}
        var password = $('#form_registr input[name="password"]').val();
        if(!password) {alert('Вы не указали пароль'); return;}
-       $.post('/employee/checkexistlogin', {login: login}, checkExistLogin);
+       $.post('/user/checkexistlogin', {login: login}, checkExistLogin);
 	})
 });
 

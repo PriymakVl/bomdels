@@ -5,12 +5,12 @@ class Controller_Test extends Controller {
     //
     public function action_ex()
     {
-        $draws = Model::factory('Drawing')->getAll();
+        $draws = Model::factory('Drawing')->getPdf();
         //Arr::_print($draws);
         foreach ($draws as $draw) {
                 $arr = explode('.', $draw['file']);
-                $file = $arr[0].'.TIF';
-                Model::factory('Drawing')->editFile($draw['id'], $file);
+                $file = $arr[0].'.pdf';
+                Model::factory('Drawing')->editPdf($draw['id'], $file);
             }
 
          exit('end'); 

@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_Employee extends Model {
+class Model_User extends Model {
     
-    private $tableName = 'employees';
+    private $tableName = 'users';
     
     public function getAll() {
         $sql = "SELECT * FROM $this->tableName";
@@ -37,9 +37,9 @@ class Model_Employee extends Model {
     
       public function updateData($data)
     {
-        $sql = "UPDATE $this->tableName SET `firstname` = :firstname, `patronymic` = :patronymic, `email` = :email WHERE `id` = :id";
+        $sql = "UPDATE $this->tableName SET `firstname` = :firstname, `patronymic` = :patronymic, `email` = :email WHERE `id` = :user_id";
         $query = DB::query(Database::UPDATE, $sql)->bind(':firstname', $data['firstname'])->bind(':patronymic', $data['patronymic'])
-                                            ->bind(':email', $data['email'])->bind(':id', $data['employee_id']);
+                                            ->bind(':email', $data['email'])->bind(':user_id', $data['user_id']);
         return $query->execute();
     }
     
@@ -52,7 +52,7 @@ class Model_Employee extends Model {
         else false;
     }
     
-    public function getEmployeeByLogin($login) 
+    public function getUserByLogin($login) 
     {
         $sql = "SELECT * FROM $this->tableName WHERE `login` = :login LIMIT 1";
         $query = DB::query(Database::SELECT, $sql)->bind(':login', $login);

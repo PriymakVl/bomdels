@@ -6,10 +6,7 @@
  * Time: 10:11
  */
  
-class Hendler_Danieli extends Hendler_Base
-{
-    
-    public $data = array();
+class Hendler_Danieli extends Hendler_Base {
 
     //create array data from table exel
     public function getArrayDanieli($separator = ';')
