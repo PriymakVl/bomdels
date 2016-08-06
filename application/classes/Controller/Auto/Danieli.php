@@ -4,21 +4,14 @@ class Controller_Auto_Danieli extends Controller_Auto_Data {
 
     public function action_add() {
         $file_name = $_FILES['table']['tmp_name'];
-//        $data = file($file_name);
-//        Arr::_print($data);
-        //add ; in end of first string file;
+
         //$this->changeFirstStringFile($file_name);
         //for show array of data file
         $check = $this->request->post('check');
 
         $obj = new Hendler_Application($file_name);
-       // $obj->getArrayStringFromFile();
-//        $obj->getArrayDanieli();
-   //     foreach ($obj->data[0] as $key => $value) {
-//            echo mb_convert_encoding($key, "UTF-8", "windows-1251");
-//            exit('end');
-//        }
-        Arr::_print($obj->data[0]);
+        $obj->getArrayStringFromFile();
+        $obj->getArrayDanieli();
         
         $obj->getNameFile();
         $obj->getVariant();

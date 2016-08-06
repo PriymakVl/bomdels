@@ -12,7 +12,7 @@
                 </li>
                 <li id="show_sundbirsta">Sundbirsta</li>
                 <li id="show_danieli">
-                    <a href="/auto/data/application">Заявки</a>
+                    <a href="/auto/data/application" onclick="return false;" style="color: red;">Заявки</a>
                 </li>
             </ul>
         </div>

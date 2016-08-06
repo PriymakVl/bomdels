@@ -32,6 +32,23 @@
     margin-left: 10px;
 }
 
+select {
+    width: 150px;
+    height: 20px;
+    font-size: 1em;
+}
+
+input[type="text"] {
+    width: 150px;
+    height: 20px;
+    font-size: 1em;
+}
+
+#application_form_box p{
+    font-size: 1em;
+}
+
+
 
 
 

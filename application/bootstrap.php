@@ -158,7 +158,7 @@ Kohana::modules(array(
         'action' => 'index'
     ));
  
-  Route::set('auto', 'auto/<controller>(/<action>)', array('controller' => 'data|danieli'))
+  Route::set('auto', 'auto/<controller>(/<action>)', array('controller' => 'data|danieli|application'))
 	->defaults(array(
 		'directory' => 'auto',
         'action' => 'index'
