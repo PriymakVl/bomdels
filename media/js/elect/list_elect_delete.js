@@ -5,16 +5,16 @@ $(document).ready(function() {
         console.log(list_id);
         if(!list_id) {
             alert('Вы не выбрали список'); 
-            return false;    
+            return;    
         }
-        
+        $agree = confirm('Вы уверены что хотите удалить список?');
+        if(!$agree) return;
         $.get('/elect/deleteList', {list_id: list_id}, resultDeleteList);
         
     });
 });
 
 function resultDeleteList(data) {
-    alert(data); return;
     if(data == 'full'){
         alert('Список не возможно удалить так как в нем имеются элементы');
     }

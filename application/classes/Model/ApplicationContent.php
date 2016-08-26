@@ -10,22 +10,28 @@ class Model_ApplicationContent extends Model {
         return $query->execute()->as_array();
     }
     
-    public function checkExitGoodInApplication($app_id, $good_id)
-    {
-       $sql = "SELECT * FROM $this->tableName WHERE `app_id` = :app_id AND `good_id` = :good_id AND `status` = :status";
-       $query = DB::query(Database::SELECT, $sql)->bind(':app_id', $app_id)->bind(':good_id', $good_id)->param(':status', 1);
-       $res = $query->execute()->as_array();
-       if(!$res) return false;
-       else return $true;
+    public function get($id) {
+        $sql = "SELECT * FROM $this->tableName WHERE `id` = :id AND `status` = :status LIMIT 1";
+        $query = DB::query(Database::SELECT, $sql)->bind(':id', $id)->param(':status', 1);
+        $res = $query->execute()->as_array();
+        if(!$res) return false;
+        else return $res[0];    
     }
     
-    public function getGoodsByIdApplication($app_id)
+    public function getItemApplication($app_id, $product_id)
+    {
+       $sql = "SELECT * FROM $this->tableName WHERE `app_id` = :app_id AND `product_id` = :product_id AND `status` = :status LIMIT 1";
+       $query = DB::query(Database::SELECT, $sql)->bind(':app_id', $app_id)->bind(':product_id', $product_id)->param(':status', 1);
+       $res = $query->execute()->as_array();
+       if(!$res) return false;
+       else return $res[0];
+    }
+    
+    public function getContentOfApplication($app_id)
     {
        $sql = "SELECT * FROM $this->tableName WHERE `app_id` = :app_id AND `status` = :status";
        $query = DB::query(Database::SELECT, $sql)->bind(':app_id', $app_id)->param(':status', 1);
-       $res = $query->execute()->as_array();
-       if(empty($res)) return false;
-       return $res[0];
+       return $query->execute()->as_array();
     }
  
     public function delete($id)
@@ -43,10 +49,10 @@ class Model_ApplicationContent extends Model {
 //        return $query->execute();
 //    }
     
-    public function add($app_id, $good_id)
+    public function add($app_id, $product_id, $data)
     {
-        $sql = "INSERT INTO $this->tableName (app_id, good_id)  VALUES (:app_id, :good_id)";
-        $query = DB::query(Database::INSERT, $sql)->bind(':app_id', $app_id)->bind(':good_id', $good_id); 
+        $sql = "INSERT INTO $this->tableName (app_id, product_id, need, price)  VALUES (:app_id, :product_id, :need, :price)";
+        $query = DB::query(Database::INSERT, $sql)->bind(':app_id', $app_id)->bind(':product_id', $product_id)->bind(':need', $data['need'])->bind(':price', $data['price']); 
         return $query->execute();
     }
 }

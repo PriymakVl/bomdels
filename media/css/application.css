@@ -1,0 +1,12 @@
+#menu_app_main_box ul li:hover, #menu_app_manager_box ul li:hover{
+    cursor: pointer;
+    text-decoration: underline;        
+}
+
+.info-menu-box label {
+    margin: 0 5px 0 30px;
+}
+
+.info-menu-box select {
+    height: 20px;
+}

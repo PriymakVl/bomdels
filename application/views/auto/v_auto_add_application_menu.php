@@ -7,12 +7,9 @@
     <div class="sidebar-content-wrp">
        <div id="menu_action_box">
             <ul>
-                <li id="show_danieli">
-                    <a href="/equipment/danieli">Danieli</a>
-                </li>
-                <li id="show_sundbirsta">Sundbirsta</li>
-                <li id="show_danieli">
-                    <a href="/auto/data/application" onclick="return false;" style="color: red;">Заявки</a>
+                <li id="add_app">Добавить заявку</li>
+                <li>
+                    <a href="/auto/data">Главное меню</a>
                 </li>
             </ul>
         </div>

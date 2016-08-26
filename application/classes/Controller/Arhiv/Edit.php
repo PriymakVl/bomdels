@@ -8,7 +8,7 @@ class Controller_Admin_Edit extends Controller_Base {
         $code = Arr::get($_POST, 'code');
         
         if(isset($code)) {
-            $draw = Model::factory('drawing')->search($code);
+            $draw = Model::factory('Drawingdanieli')->search($code);
             if(!empty($draw['id'])) $draw_options = Model::factory('drawoptions')->get($draw['id']);    
         }
         

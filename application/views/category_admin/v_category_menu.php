@@ -5,17 +5,7 @@
         </ul>
     </div>
     <div class="sidebar-content-wrp">
-       <div id="menu_equipment_box" <? if(isset($equipment)) echo 'style="display: none;"';?> >
-            <ul>
-                <li>
-                    <a href="/admin/category/danieli">Danieli</a>
-                </li>
-                <li id="show_sundbirsta">
-                    <a href="/admin/category/sundbirsta">Sundbirsta</a>
-                </li>
-            </ul>
-        </div>
-         <div id="menu_action_box" <? if(!isset($equipment)) echo 'style="display: none;"'; ?> >
+         <div id="menu_action_box" <? //if(!isset($equipment)) echo 'style="display: none;"'; ?> >
             <ul>
                 <li id="show_edit_box">Редактировать категорию</li>
                 <li id="show_add_box">Добавить категорию</li>

@@ -4,7 +4,9 @@ class Object_Detail extends Object_Object {
     
 
     public function __construct($id, $equipment) {
-        $this->data = Model::factory($equipment)->getDetailById($id);
+        if($equipment == 'danieli') $this->data = Model::factory('Danieli')->getDetailById($id);
+        else if($equipment == 'sundbirsta') $this->data = Model::factory('Sundbirsta')->getDetailById($id);
+        else if($equipment == 'crane') $this->data = Model::factory('Crane')->getDetailById($id);
         if(!$this->data) exit('error object_detail __contsruct');
         $this->translateTitle();
         $this->getIdSub($equipment);
@@ -35,21 +37,28 @@ class Object_Detail extends Object_Object {
     private function getIdSub($equipment) 
     {
         $this->data['sub_id'] = Model::factory($equipment)->getIdSubdetailsByCode($this->data['code']);
+        if($equipment = 'danieli') $this->data['sub_id'] = Model::factory('Danieli')->getIdSubdetailsByCode($this->data['code']);
+        if($equipment = 'sundbirsta') $this->data['sub_id'] = Model::factory('Sundbirsta')->getIdSubdetailsByCode($this->data['code']);
+        if($equipment = 'crane') $this->data['sub_id'] = Model::factory('Crane')->getIdSubdetailsByCode($this->data['code']);
         return $this;
     }
     //get data of parent
     public function getParent() 
     {
-        $detail = Model::factory($this->equipment)->getDetailByCode($this->data['parent_code']);
-        if (empty($detail)) $this->data['parent'] = false;    
-        else {
-            $this->data['parent'] = $detail[0];
-            if (!$this->data['parent']['rus']) $this->data['parent']['rus'] = $this->data['parent']['eng'];
+        if($data['equipment'] = 'danieli') $parent = Model::factory('Danieli')->getDetailByCode($this->data['parent_code']);
+        if($data['equipment'] = 'sundbirsta') $parent = Model::factory('Sundbirsta')->getDetailByCode($this->data['parent_code']);
+        if($data['equipment'] = 'crane') $parent = Model::factory('Crane')->getDetailByCode($this->data['parent_code']);
+        if($parent) {
+            $this->data['parent'] = $parent;  
+            if (!$this->data['parent']['rus']) $this->data['parent']['rus'] = $this->data['parent']['eng'];  
         }
+        else $this->data['parent'] = false; 
     }
     
     public function getDrawings() {
-        $this->data['drawings'] = Model::factory('Drawing')->get($this->code);
+        if($this->data['equipment'] == 'danieli') $this->data['drawings'] = Model::factory('Drawingdanieli')->get($this->code);
+        if($this->data['equipment'] == 'sundbirsta') $this->data['drawings'] = Model::factory('Drawingssunbirsta')->get($this->code);
+        if($this->data['equipment'] == 'crane') $this->data['drawings'] = Model::factory('Drawingcrane')->get($this->code);
         return $this;
     }
     
@@ -66,7 +75,6 @@ class Object_Detail extends Object_Object {
     }
 
 }
-
 
 
 

@@ -20,11 +20,36 @@
 } 
 
 #category_data_box #add_cat, #add_content_cat{
-    margin: 0 20px 15px 200px;
+    margin: 0 20px 15px 115px;
 }
 
 #category_data_box #edit_cat, #edit_content_cat {
     margin: 0 20px 15px 180px;
+}
+
+.info-menu-box a {
+    margin-right: 2px; 
+    background: url('../images/style/breadcrumbs_arrow4.png') no-repeat right 4px;
+    padding-right: 20px;
+}
+
+.info-menu-box span a {
+    margin-right: 2px; 
+    background: url('../images/style/breadcrumbs_arrow4.png') no-repeat right 4px;
+    padding-right: 20px;
+}
+
+.info-menu-box span a:last-child {
+    margin-right: 0; 
+    background: none;
+    padding-right: 0;
+    text-decoration: none;
+    color: green;
+}
+
+#history-back-link {
+    background: none;
+    margin: 0;
 }
 
 

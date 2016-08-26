@@ -10,51 +10,52 @@
             <a href="/auto/data/deletelistfiles" style="margin-left: 50px;">удалить список файлов</a>
         <? endif; ?>
         <br /><br /><hr color="#B49A6A" size="1"/>
-        <form action="/auto/application/add" method="post" enctype="multipart/form-data">
+        <form action="/auto/application/add" method="post" enctype="multipart/form-data" id="form_add_app">
             <p>выберите файл exel с данными заявки</p>
             <input type="file" name="table"/>
+        
             <p>
                 <label>Оборудование:</label>
                 <select name="equipment">
-                    <option>Не выбрано</option> 
+                    <option value="">Не выбрано</option> 
                     <option  value="danieli">Danieli</option>  
                     <option value="sundbirsta">Sundbirsta</option>  
                 </select>
             </p>
             
+    
+            
             <p>
                 <label>Вид ремонта:</label>
                 <select name="type_repair">
-                    <option>Не выбран</option> 
-                    <option  value="capital">Текущий</option>  
-                    <option value="current">Капитальный</option>  
+                    <option value="">Не выбран</option> 
+                    <option>Текущий</option>  
+                    <option>Капитальный</option>  
                 </select>
             </p>
-            
             <p>
                 <label>Период выполнения:</label>
                 <select name="period">
-                    <option>Не выбран</option> 
-                    <option  value="year">Годовая</option>  
-                    <option value="mounth">Месячная</option>  
+                    <option value="">Не выбран</option> 
+                    <option selected="selected">Год</option>  
+                    <option>Месяц</option>  
                 </select>
             </p>
-            
             <p>
                 <label>Служба цеха:</label>
                 <select name="service">
-                    <option>Не выбрана</option>
-                    <option  value="мechanics">Механики</option>  
-                    <option value="technology">Технологи</option>
-                    <option value="electrician">Электирики</option> 
-                    <option value="energetics">Энергетики</option> 
+                    <option value="">Не выбрана</option>
+                    <option selected="selected">Механики</option>  
+                    <option>Технологи</option>
+                    <option>Электирики</option> 
+                    <option>Энергетики</option> 
                 </select>
             </p>
             
              <p>
                 <label>Кто заказал:</label>
                 <select name="customer">
-                    <option>Не выбран</option>
+                    <option value="">Не выбран</option>
                     <option value="Лисецкий">Лисецкий</option>
                     <option  value="Костырко">Костырко</option>  
                     <option value="Саенко">Саенко</option>
@@ -68,7 +69,7 @@
             <p>
                 <label>Кто выдал заявку:</label>
                 <select name="created">
-                    <option>Не выбран</option>
+                    <option value="">Не выбран</option>
                     <option value="Меркулова">Меркулова</option>
                     <option  value="Битюква">Битюква</option>  
                     <option value="Приймак">Приймак</option>
@@ -78,9 +79,10 @@
             <p>
                 <label>Кто приобретает:</label>
                 <select name="department">
-                    <option>Не выбрано</option>
+                    <option value="">Не выбрано</option>
                     <option value="ОМТС">ОМТС</option>
-                    <option  value="OO">Отдел оборудования</option>  
+                    <option  value="OO">Отдел оборудования</option>
+                    <option  value="OСиТ">Отдел сырья и топлива</option>  
                     <option  value="not">Не определен</option>  
                 </select>
             </p>
@@ -88,35 +90,38 @@
             <p>
                  <label>Исполнитель:</label>
                  <select name="executor">
-                    <option>Не выбран</option>
+                    <option value="">Не выбран</option>
                     <option  value="Лесная">Лесная</option>  
-                    <option value="Одут">Одут</option> 
-                    <option value="Шарбатали">Шарбатали</option> 
+                    <option value="Одут">Одут</option>  
                 </select>
              </p>
             
              <p>
                  <label>Год приобретения:</label>
                  <select name="year">
-                    <option>Не выбран</option>
-                    <option  value="2015">2015</option>  
-                    <option value="2016">2016</option> 
-                    <option value="2017">2017</option> 
+                    <option value="">Не выбран</option>
+                    <option>2015</option>  
+                    <option selected="selected">2016</option> 
+                    <option>2017</option> 
                 </select>
              </p>
-            
-            <p>
-                <label>Название заявки:</label>
-                <textarea name="title" style="width: 450px;"></textarea>
-            </p>
-                
             <p>
                 <label>Номер в ЕНС:</label>
                 <input type="text" name="number_ens"/>   
             </p>
-            
-            <input type="submit" value="добавить данные" id="add_application"/>
+
+             <p>
+                <label>Исходящий №:</label>
+                <input type="text" name="outbound"/>   
+            </p>
+            <p>
+                <label>Название заявки:</label>
+                <textarea name="title" style="width: 450px;"></textarea>
+            </p>
+          <!--
+  <input type="submit" value="добавить данные" id="add_application"/>-->
             <input type="submit" name="check" value="показать данные"/>
+
         </form>
     </div>
 </div>

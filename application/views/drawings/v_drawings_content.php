@@ -1,7 +1,7 @@
 <div class="content">
     <!-- start info-menu-box -->
     <div class="info-menu-box">
-        <?=$detail->rus?> - <span>чертежи</span>
+        <?=$detail->rus?> (код: <?=$detail->code?>) - <span>чертежи</span>
         <a id="history-back-link" href="javascript:history.back();">назад</a>
     </div>
     <!-- end info-menu-box -->
@@ -125,21 +125,26 @@
     
     <!-- start drawings-form-draw -->
     <div id="drawings_form_draw_box" style="display: none;">
-        <form method="post" id="drawings_form_draw" action="/drawings/adddraw">
+        <form method="post" id="drawings_form_draw" action="/drawings/adddraw" enctype="multipart/form-data" >
+            <label>Кто начертил чертеж:</label>
             <select name="type" style="width: 150px; height: 26px;">
-                <option value="производитель">производитель</option>
-                <option value="пко">ПКО</option>
-                <option value="цех">цех</option>
-                <option value="стандарт">стандарт</option>
-                <option value="другое">другое</option>
+                <option value="">Не выбран</option>
+                <option value="vender">Производитель</option>
+                <option value="works">ПКО</option>
+                <option value="draft">Цех - эскиз</option>
+                <option value="standard">Стандарт</option>
+                <option value="other">Другое</option>
             </select>
-            <br />
-            <label>Файл</label>
-            <input type="text" name="file" style="width: 200px; height: 24px;"/>
-            <br />
+            <br /> <br />
+            <label>Введите название файла чертежа:</label>
+            <input type="text" name="file" style="width: 200px; height: 24px;" />
+            <br /> <br />
+            <label>Выберите файл чертежа:</label>
+            <input type="file" name="draw" />
             <input type="hidden" name="detail_id" value="<?=$detail->id?>" />
             <input type="hidden" name="code" value="<?=$detail->code?>" />
             <input type="hidden" name="equipment" value="<?=$detail->equipment?>" />
+            <br /> <br />
             <input type="submit" id="add_draw" value="Добавить чертеж" />
             <input type="button" id="cancel_draw" value="Отменить" />
         </form>

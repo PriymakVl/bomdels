@@ -1,8 +1,13 @@
 <div class="content">
     <div class="info-menu-box">
-        <?=$equipment?> - <span><?=$info?></span>
+        <? if(isset($cat)): ?>
+            <a href="/category?equipment=<?=$cat->equipment?>"><?=$section?></a>
+            <span><?=$info?></span>
+        <? else: ?>
+            <?=$section?> - <span><?=$info?></span>
+        <? endif; ?>
         <a id="history-back-link" href="javascript:history.back();">назад</a>
-    </div>
+    </div>  
     <table>
         <tr>
             <td width="30"><input type="radio" disabled="disabled" /></td>
@@ -17,7 +22,7 @@
                     </td>
                     <td style="padding-left: 5px;">
                         <? if($cat->sub_id): ?>
-                            <a href="/category/danieli?cat_id=<?=$cat->id?>"><?=$cat->title?></a>
+                            <a href="/category?cat_id=<?=$cat->id?>"><?=$cat->title?></a>
                         <? elseif($cat->details): ?>
                             <a href="/category/content?cat_id=<?=$cat->id?>"><?=$cat->title?></a>
                         <? else: ?>

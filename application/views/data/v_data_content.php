@@ -118,6 +118,16 @@
             <td>
                 <input type="radio" name="detail" />
             </td>
+            <td style="padding-left: 5px;">Позиция</td>
+            <td style="padding-left: 5px;">
+                <span><?=$detail->item?></span>
+                <input type="text" value="<?=$detail->item?>" id="item" style="display: none;" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="radio" name="detail" />
+            </td>
             <td style="padding-left: 5px;">Количество в узле</td>
             <td style="padding-left: 5px;">
                 <span><?=$detail->qty?></span>

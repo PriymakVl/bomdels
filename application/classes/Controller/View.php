@@ -15,7 +15,7 @@ class Controller_View extends Controller_Base {
         
         
         $detail = new Object_Detail($draw[0]['detail_id']);
-        $draw = Model::factory('drawing')->getDrawingByCode($detail->code);
+        $draw = Model::factory('Drawingdanieli')->getDrawingByCode($detail->code);
         
         //get children for of list specification
         if($detail->sub_id) $details = $this->getArrayOfObjects($detail->sub_id, 'Object_Detail');

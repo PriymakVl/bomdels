@@ -11,15 +11,14 @@
     <div class="sidebar-content-wrp">
         <div id="menu_sections_box">   
             <ul>
-                <li><a href="/category/danieli">Danieli</a></li>
-                <li><a href="/category/sundbirsta">Sundbirsta</a></li>
-                <!--<li><a href="#">Краны</a></li>
-                <li><a href="/software/orders">Заказы</a></li>-->
+                <li><a href="/category?equipment=danieli">Danieli</a></li>
+                <li><a href="/category?equipment=sundbirsta">Sundbirsta</a></li>
+                <li><a href="/category?equipment=crane">Грузоподъемное</a></li>
+                <li>
+                    <a href="/software/application">Заявки</a>
+                </li>
                 <li><a href="/standart">Стандартные изделия</a></li>
                 <li><a href="/bearing">Подшипники</a></li>
-                <? if ($role == 'admin'): ?>
-                    <li><a href="/admin/category">Редактирование категорий</a></li>
-                <? endif; ?>
             </ul>
         </div>
         <!-- start elect box -->
@@ -48,6 +47,9 @@
             <ul>
                 <li><a href="/auto/data">Добавление данных в базу</a></li>
                 <li><a href="/glossary">Глоссарий</a></li>
+                <li><a href="/admin/category?equipment=danieli">Ред. категорий Danieli</a></li>
+                <li><a href="/admin/category?equipment=sundbirsta">Ред. категорий Sundbirsta</a></li>
+                <li><a href="/admin/category?equipment=crane">Ред. категорий Грузоподъемное</a></li>
             </ul>
         </div>
         <!-- end admin box -->

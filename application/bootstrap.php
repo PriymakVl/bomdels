@@ -152,7 +152,7 @@ Kohana::modules(array(
 //        'action' => 'index'
 //	));
 
-      Route::set('software', 'software/<controller>(/<action>)', array('controller' => 'orders|order|ordercreate'))
+      Route::set('software', 'software/<controller>(/<action>)', array('controller' => 'product|applicationcontent|application|orders|order|ordercreate'))
     ->defaults(array(
     	'directory' => 'software',
         'action' => 'index'

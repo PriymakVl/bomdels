@@ -2,8 +2,8 @@ $(document).ready(function() {
     $('#delete_list_menu').click(function(event) {  
             event.preventDefault();
 
-            var employee_id = $(this).attr('employee_id');
-            if (!employee_id) {alert('Для удаления списка из меню вам необходимо авторизоваться'); return;}
+            var user_id = $(this).attr('user_id');
+            if (!user_id) {alert('Для удаления списка из меню вам необходимо авторизоваться'); return;}
             
             var list_id = $('#edit_list_box :radio:checked').attr('list_id');
             if (!list_id) {alert('Вы не выбрали список'); return;}

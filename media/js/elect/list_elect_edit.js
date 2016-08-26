@@ -12,12 +12,14 @@ $(document).ready(function() {
         var rating = checked.attr('rating');
         var description = checked.attr('description');
         var listname = checked.attr('listname');
-        var list_id = checked.attr('list_id'); 
+        var list_id = checked.attr('list_id');
+        var typelist = checked.attr('typelist'); 
 
         $('#form_list input[name="list_id"]').val(list_id);
         $('#form_list input[name="listname"]').val(listname);
         $('#form_list input[name="rating"]').val(rating);
-        $('#form_list textarea').text(description);    
+        $('#form_list textarea').text(description); 
+        $('#form_list select [value="' + typelist + '"]').attr('selected', 'selected');   
     });
     
       $('#edit_list').click(function(event) {  

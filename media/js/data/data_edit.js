@@ -27,12 +27,13 @@ $(document).ready(function() {
         var rus = $('#rus').val(); 
         var weight = $('#weight').val();
         var qty = $('#qty').val();
+        var item = $('#item').val();
         var material = $('#material').val();
         var analog = $('#analog').val();
         var variant = $('#variant').val();
         var ens = $('#ens').val();// код ЕНС в программе снабжения
         var parent = $('#parent').val();//parent code
-        $.post('/data/edit', {parent: parent, equipment: equipment, id: detail_id, rus: rus, weight: weight, qty: qty, material: material, analog: analog, variant: variant, ens: ens}, resultEdit);   
+        $.post('/data/edit', {parent: parent, equipment: equipment, id: detail_id, rus: rus, weight: weight, item: item, qty: qty, material: material, analog: analog, variant: variant, ens: ens}, resultEdit);   
    });
 });
 

@@ -105,9 +105,22 @@
     padding-left: 5px;
 }
 
+#drawings_form_draw_box {
+    border: 1px solid #B49A6A;  
+    margin-top: 15px;  
+}
 
+#drawings_form_draw_box select {
+   margin-left: 10px; 
+}
 
+#drawings_form_draw_box label {
+   margin-left: 15px; 
+}
 
+#drawings_form_draw_box #add_draw {
+    margin: 0 30px 0 190px;
+}
 
 
 

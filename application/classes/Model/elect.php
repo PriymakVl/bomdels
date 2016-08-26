@@ -11,10 +11,10 @@ class Model_Elect extends Model {
        return $query->execute()->as_array();
     }
     
-    public function add($employee_id, $elem_id, $kind, $list_id, $description)
+    public function add($user_id, $elem_id, $kind, $list_id, $description)
     {
-       $sql = "INSERT INTO $this->tableName (`employee_id`, `elem_id`, `kind`, `list_id`, `description`) VALUES (:employee_id, :elem_id, :kind, :list_id, :description)";
-       $query = DB::query(Database::INSERT, $sql)->bind(':employee_id', $employee_id)->bind(':elem_id', $elem_id)
+       $sql = "INSERT INTO $this->tableName (`user_id`, `elem_id`, `kind`, `list_id`, `description`) VALUES (:user_id, :elem_id, :kind, :list_id, :description)";
+       $query = DB::query(Database::INSERT, $sql)->bind(':user_id', $user_id)->bind(':elem_id', $elem_id)
        ->bind(':kind', $kind)->bind(':list_id', $list_id)->bind(':description', $description);
        return $query->execute();
     }

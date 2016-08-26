@@ -2,7 +2,7 @@
 
 class Model_Drawing extends Model {
     
-    private $tableName = 'drawings';
+    protected $tableName;
     
     public function getAll($limit = '') {
         if($limit) $limit = ' LIMIT '.$limit;
@@ -38,29 +38,35 @@ class Model_Drawing extends Model {
         return $res[0];  
     } 
     
-    public function add($data, $folder) 
+    public function add($data) 
     {
         $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`, `folder`) VALUES (:type, :file, :code, :detail_id, :equipment, :folder)";
         $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['code'])->bind(':type', $data['type'])->bind(':file', $data['file'])
-                            ->bind(':detail_id', $data['detail_id'])->bind(':equipment', $data['equipment'])->bind(':folder', $folder);
+                            ->bind(':detail_id', $data['detail_id'])->bind(':equipment', $data['equipment'])->bind(':folder', $data['folder']);
         return $query->execute();
     }
     
-     public function addDanieli($data, $detail_id) 
-    {
-        $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`, `sheet`, `sheets`, `size`, `folder`)
-                         VALUES (:type, :file, :code, :detail_id, :equipment, :sheet, :sheets, :size, :folder)";
-        $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['Member'])->param(':type', 'производитель')
-                            ->bind(':file', $data['file'])->param(':folder', 'tif')->bind(':size', $data['size'])
-                            ->bind(':detail_id', $detail_id)->param(':equipment', 'danieli')->bind(':sheet', $data['sheet'])->bind(':sheets', $data['sheets']);
-        return $query->execute();
-    }
+//     public function addDanieli($data, $detail_id) 
+//    {
+//        $sql = "INSERT INTO $this->tableName (`type`, `file`, `code`, `detail_id`, `equipment`, `sheet`, `sheets`, `size`, `folder`)
+//                         VALUES (:type, :file, :code, :detail_id, :equipment, :sheet, :sheets, :size, :folder)";
+//        $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['Member'])->param(':type', 'производитель')
+//                            ->bind(':file', $data['file'])->param(':folder', 'tif')->bind(':size', $data['size'])
+//                            ->bind(':detail_id', $detail_id)->param(':equipment', 'danieli')->bind(':sheet', $data['sheet'])->bind(':sheets', $data['sheets']);
+//        return $query->execute();
+//    }
     
     public function delete($id)
     {
        $sql = "UPDATE $this->tableName SET `status` = :status WHERE `id` = :id";
        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id)->param(':status', 0);
        return $query->execute();
+    }
+    
+    public function deleteDrawByDetail($detail_id){
+        $sql = "UPDATE $this->tableName SET `status` = :status WHERE `detail_id` = :id";
+        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $detail_id)->param(':status', 0);
+        return $query->execute();    
     }
     
     public function addNote($id, $note)

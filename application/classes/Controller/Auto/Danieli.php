@@ -9,20 +9,8 @@ class Controller_Auto_Danieli extends Controller_Auto_Data {
         //for show array of data file
         $check = $this->request->post('check');
 
-        $obj = new Hendler_Application($file_name);
-        $obj->getArrayStringFromFile();
-        $obj->getArrayDanieli();
-        
-        $obj->getNameFile();
-        $obj->getVariant();
-        $obj->clearParentCode();
-        $obj->getEngName();
-        $obj->getItem();
-        $obj->getSheets();
-        $obj->getQuantity();
-        $obj->getWeight();
-        $obj->getType();
-        $obj->getSize();
+        $obj = new Hendler_Danieli($file_name);
+
         $this->createListAddedFiles();
         
         if($check) {
@@ -64,8 +52,10 @@ class Controller_Auto_Danieli extends Controller_Auto_Data {
     }
     
     private function addToDanieli($data) {
-        //Arr::_print($data[0]['type']);
+        
         foreach($data as $item) {
+            //Arr::_print($item['code']);
+            if(empty($item['code'])) continue;
             $res = Model::factory('Danieli')->getDetailByCode($item['code']);
             if(!$res) {
                 $res = Model::factory('Danieli')->addAutoDanieli($item);
@@ -77,20 +67,20 @@ class Controller_Auto_Danieli extends Controller_Auto_Data {
     private function addDrawingDanieli($data) {
         //Arr::_print($data[0]['type']);
         foreach($data as $item) {
+            if(empty($item['code'])) continue;
             if(!trim($item['file'])) continue;//detail has not drawing
             $detail = Model::factory('Danieli')->getDetailByCode($item['code']);
             if(!$detail) exit('not detail - addDrawingDanieli');
-            $draw = Model::factory('Drawing')->getDrawingByNameFile($item['file']);
+            $draw = Model::factory('Drawingdanieli')->getDrawingByNameFile($item['file']);
             if($draw) continue;
             else {
-                $res = Model::factory('Drawing')->addDanieli($item, $detail[0]['id']);
+                $res = Model::factory('Drawingdanieli')->addDanieli($item, $detail[0]['id']);
                 if(!$res) exit('error add danieli');    
             }
         }    
     }
       
 }
-
 
 
 

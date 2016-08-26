@@ -27,12 +27,12 @@ class Controller_Admin extends Controller_Base {
     
     public function action_addDrawing() 
     {
-            //$res = Model::factory('drawing')->add($_POST); 
+            //$res = Model::factory('Drawingdanieli')->add($_POST); 
 //            if($res[0] == 1) Cookie::set('message', Kohana::message('message', 'success_add_drawing'));
 //            else Cookie::set('message', Kohana::message('message', 'unknow_error'));
 //            $this->redirect('/admin/add'); 
         try {
-            $res = Model::factory('drawing')->add($_POST); 
+            $res = Model::factory('Drawingdanieli')->add($_POST); 
             if(!empty($res[0])) Cookie::set('message', Kohana::message('message', 'success_add_drawing'));
             else Cookie::set('message', Kohana::message('message', 'unknow_error'));
             $this->redirect('/admin/add'); 
@@ -55,7 +55,7 @@ class Controller_Admin extends Controller_Base {
         
         $code = Arr::get($_POST, 'code');
         
-        if(isset($code)) $draw = Model::factory('drawing')->search($code);
+        if(isset($code)) $draw = Model::factory('Drawingdanieli')->search($code);
         Arr::_print($draw);
         
         $this->template->block_header = null;

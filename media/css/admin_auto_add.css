@@ -48,6 +48,26 @@ input[type="text"] {
     font-size: 1em;
 }
 
+.form-admin-add-wrp {
+    border:1px solid #B49A6A;
+    padding: 15px 0;  
+    margin-top: 15px;  
+}
+
+.form-admin-add-wrp label {
+    margin-left: 25px;
+}
+
+.form-admin-add-wrp input[type='text'], .form-admin-add-wrp input[type='file'], .form-admin-add-wrp select {
+    margin: 0  0 20px 20px;
+}
+
+.form-admin-add-wrp input[type='submit'] {
+    margin-left: 285px;
+}
+.form-admin-add-wrp input[name="rus"] {
+    width: 480px;    
+}
 
 
 

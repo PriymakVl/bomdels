@@ -2,14 +2,9 @@
 
 class Object_Drawing extends Object_Object {
     
-    public function __construct($id) {
-        $this->data = Model::factory('drawing')->getDrawingById($id);
-        //$this->cutNote();
-    }
-    
-    public static function moveFile($folder, $file_name) 
+    public static function moveFile($data) 
     { 
-        $path = "media/drawings/{$folder}/".$file_name;
+        $path = "media/drawings/{$data['equipment']}/{$data['folder']}/".$data['file'];
         if(is_uploaded_file($_FILES["draw"]["tmp_name"]))
         {
             move_uploaded_file($_FILES["draw"]["tmp_name"], $path);
@@ -18,21 +13,15 @@ class Object_Drawing extends Object_Object {
         else return false;        
     }
     
-    public static function moveFilePDF($folder, $file_name) 
-    { 
-        $path = "media/drawings/{$folder}/pdf/".$file_name;
-        if(file_exists($path)) return true; 
-        
-        if(is_uploaded_file($_FILES["draw"]["tmp_name"]))
-        {
-            move_uploaded_file($_FILES["draw"]["tmp_name"], $path);
-            return true;
-        } 
-        else return false;        
-    }
-    
-    public function cutNote($max = 50) {
-        return parent::cutNote($max);
+    protected function getType()
+    {
+        switch($this->data['type']){
+            case 'vender': $this->data['type'] = 'Произодитель'; break;
+            case 'works': $this->data['type'] = 'ПКО'; break;
+            case 'draft': $this->data['type'] = 'Цех'; break;
+            case 'standard': $this->data['type'] = 'Стандарт'; break;
+            case 'other': $this->data['type'] = 'Другое'; break; 
+        }
     }
     
 }

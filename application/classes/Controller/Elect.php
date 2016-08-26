@@ -31,7 +31,7 @@ class Controller_Elect extends Controller_Base {
         
         $elements = $this->getArrayElectElements($elected);
 
-       // Arr::_print($info);
+        //Arr::_print($elements);
         $this->template->block_header = View::factory('header/v_header_auth')->bind('code', $this->code);
         $this->template->block_center = View::factory('elect/v_elect_content')->set('list', $list)->bind('elements', $elements)->bind('default_lists', $default_menu_lists)
                                                     ->bind('user_lists', $user_menu_lists);
@@ -51,8 +51,8 @@ class Controller_Elect extends Controller_Base {
         if(!$list_id) exit('error action_addElectElement - not list id');
         $user_id = $this->user->id;
         
-        $check = Model::factory('ElectList')->checkListIsEmployee($user_id, $list_id); 
-        if(!$check) exit('error action_addElectElement - check list');
+        $check = Model::factory('ElectList')->checkListIsUser($user_id, $list_id); 
+        if(!$check) exit('error action_addElectElement - Добавить элемент можно только в свой список');
        
         $elem_id = $this->request->query('elem_id');
         $kind = $this->request->query('kind');
@@ -60,6 +60,7 @@ class Controller_Elect extends Controller_Base {
 
         if($kind  == 'danieli') $detail = Model::factory('Danieli')->getDetailById($elem_id);
         else if($kind  == 'sundbirsta') $detail = Model::factory('Sandbirsta')->getDetailById($elem_id);
+        else if($kind  == 'crane') $detail = Model::factory('Crane')->getDetailById($elem_id);
         else $detail['note'] = '';
         
         $res = Model::factory('Elect')->add($user_id, $elem_id, $kind, $list_id, $detail['note']);
@@ -76,15 +77,18 @@ class Controller_Elect extends Controller_Base {
     }
     //add new list to lists elect
     public function action_addList() {
-        $list_name = trim($this->request->post('listname'));
-        $rating = trim($this->request->post('rating'));
-        $description = trim($this->request->post('description'));
-        if(!$this->employee->id) exit('error - action_addList - not user');
+        $data = Arr::extract($_POST, array('listname', 'rating', 'description', 'typelist'));
+        //Arr::_print($data);
+        //$data['name'] = trim($this->request->post('listname'));
+//        $rating = trim($this->request->post('rating'));
+//        $description = trim($this->request->post('description'));
+//        $type = $this->reques->post('type');
+        if(!$this->user->id) exit('error - action_addList - not user');
         
-        $list_id = Model::factory('ElectList')->add($this->user->id, $list_name, $rating, $description);
+        $list_id = Model::factory('ElectList')->add($this->user->id, $data);
 
         $res = Model::factory('ElectUserList')->add($this->user->id, $list_id);
-        if(!$res) exit('error - action_addList - add list');
+        if(!$res) exit('error - action_addList');
         else $this->redirect('/');
     }
     
@@ -96,16 +100,13 @@ class Controller_Elect extends Controller_Base {
             exit();    
         }
         $res = Model::factory('ElectList')->delete($list_id);
-        if($res) $res = Model::factory('ElectEmployeeList')->delete($list_id);
+        if($res) $res = Model::factory('ElectUserList')->delete($list_id);
         echo $res;
         exit();
     }
     
     public function action_updateList() {
-        $data = Arr::extract($_POST, array('list_id', 'listname', 'rating', 'description'));
-        $data['rating'] = trim($data['rating']);
-        $data['listname'] = trim($data['listname']);
-        $data['description'] = trim($data['description']);
+        $data = Arr::extract($_POST, array('list_id', 'listname', 'rating', 'description', 'typelist'));
         $res = Model::factory('ElectList')->update($data);
         if(!$res) exit('error - action_updateList');
         else $this->redirect('/');
@@ -134,12 +135,16 @@ class Controller_Elect extends Controller_Base {
                 $obj = new Object_Category($elect['elem_id']); 
                 $obj->setElectName($obj->title);   
             } 
-            else exit('erorr select equipment');
+            else if ($elect['kind'] == 'crane') {
+                $obj = new Object_Crane($elect['elem_id']); 
+                $obj->setElectName($obj->title);   
+            }
+            else exit('erorr class Elect getArrayElectElements');
             $obj->setElectId($elect['id']);
             $obj->setKindElect($elect['kind']);//for create link on page site
             $obj->setElectRatign($elect['rating']);
             $obj->setElectDescription($elect['description']);
-            $obj->cutElectDescription($elect['description'], 25);
+            $obj->cutElectDescription($elect['description'], 23);
             $elements[] = $obj;
        }
         return $elements;

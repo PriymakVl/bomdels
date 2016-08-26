@@ -16,7 +16,7 @@ class Controller_Hendler extends Controller {
         //Arr::_print($arr);
         
         foreach ($arr->data as $data) {
-            $draw_id = Model::factory('drawing')->add($data); 
+            $draw_id = Model::factory('Drawingdanieli')->add($data); 
             //$arr[] = $draw_id;
             //$draw_id = $res[1];
             //Arr::_print($draw_id);

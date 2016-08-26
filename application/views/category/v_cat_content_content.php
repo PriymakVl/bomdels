@@ -1,6 +1,7 @@
 <div class="content">
     <div class="info-menu-box">
-        <?=$equipment?> - <span><?=$info?></span>
+        <a href="/category?equipment=<?=$cat->equipment?>"><?=$section?>
+        </a><span><?=$info?></span>
         <a id="history-back-link" href="javascript:history.back();">назад</a>
     </div>
     <table>

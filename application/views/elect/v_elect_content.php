@@ -51,7 +51,7 @@
                 <label>Описание</label>
                 <textarea name="description"></textarea>
             </div>
-            <input type="hidden" name="employee_id" value="<? if(isset($user)) echo $user->id; ?>" />
+            <input type="hidden" name="user_id" value="<? if(isset($user)) echo $user->id; ?>" />
             <input type="hidden" name="elect_id" /> 
             <input type="submit" value="Сохранить" id="save_elem" /> 
         </form>
@@ -83,7 +83,7 @@
                     </td>
                     <td style="padding-left: 5px;">
                         <? if ($element->cut_des_elect): ?>                      
-                            <a href="#" onclick="return false;" class="elect_cut_description" full_description="<?=$element->description_elect?>"><?=$element->cut_des_elect?> ...</a>
+                            <a href="#" onclick="return false;" class="elect_cut_description" full_description="<?=$element->description_elect?>"><?=$element->cut_des_elect?></a>
                         <? else: ?>
                             <?=$element->description_elect?>
                         <? endif; ?> 
@@ -108,15 +108,28 @@
     <!-- start list form box -->
     <div id="list_form_box" style="display: none;">
         <form id="form_list" method="post">
-            <label>Название списка</label>
+            <label>Название списка:</label>
             <input type="text" name="listname" maxlength="25" placeholder="максимальный размер 30 символов"/> <br />
-            <label>Рейтинг списка</label>
+            <label>Рейтинг списка:</label>
             <input type="text" name="rating" />
+            <label>Тип списка:</label>
+            <select name="typelist">
+                <option value="">Не выбран</option>
+                <option value="mill">Стан</option>
+                <option value="slit">Слиттинг</option>
+                <option value="sort">Сортовая</option>
+                <option value="bunt">Бунтовая</option>
+                <option value="sund">Sundbirsta</option>
+                <option value="crane">Краны</option>
+                <option value="hydra">Гидравлика</option>
+                <option value="grease">Смазка</option>
+                <option value="other">Разное</option>    
+            </select>
             <div class="textarea-wrp">
-                <label>Описание списка</label>
+                <label>Описание списка:</label>
                 <textarea name="description"></textarea>
             </div>
-            <input type="hidden" name="employee_id" value="<? if(isset($employee)) echo $employee->id; ?>" />
+            <input type="hidden" name="user_id" value="<? if(isset($user)) echo $user->id; ?>" />
             <input type="hidden" name="list_id" />
             <input type="submit" value="Добавить список" id="add_list" style="display: none;" /> 
             <input type="submit" value="Отредактировать список" id="edit_list" style="display: none;" /> 
@@ -125,35 +138,38 @@
     <!-- end list form box -->
     
     <!-- start list box -->
-    <table id="edit_list_box" style="width: 100%; display: none;">
-        <caption>Перечень ваших списков</caption>
-        <tr>
-            <th width="30">
-                <input type="radio" disabled="disabled" />
-            </th>
-            <th width="290">Наименование</th>
-            <th width="290">Описание</th>
-            <th width="90">Рейтинг</th>
-        </tr>
-        <? if ($user_lists): ?>
-            <? foreach ($user_lists as $list): ?>
-                <tr>
-                    <td>
-                        <input type="radio" name="list" list_id="<?=$list->id?>" rating="<?=$list->rating?>" listname="<?=$list->name?>" description="<?=$list->description?>" />
-                    </td>
-                    <td style="padding-left: 5px;">
-                       <?=$list->name?>
-                    </td>
-                    <td style="padding-left: 5px;">
-                       <?=$list->description?>
-                    </td>
-                    <td style="text-align: center;">
-                       <?=$list->rating?>
-                    </td>
-                </tr>
-            <? endforeach; ?>
-        <? endif; ?>
-    </table>
+    <div id="edit_list_box" style="display: none;" >
+        <div class="title-list-user">Перечень ваших списков</div>
+        <table  style="width: 100%;" >
+            <tr>
+                <th width="30">
+                    <input type="radio" disabled="disabled" />
+                </th>
+                <th width="290">Наименование</th>
+                <th width="290">Описание</th>
+                <th width="90">Рейтинг</th>
+            </tr>
+            <? if ($user_lists): ?>
+                <? foreach ($user_lists as $list): ?>
+                    <tr>
+                        <td>
+                            <input type="radio" name="list" list_id="<?=$list->id?>" rating="<?=$list->rating?>" listname="<?=$list->name?>" 
+                                        description="<?=$list->description?>" typelist="<?=$list->type?>"/>
+                        </td>
+                        <td style="padding-left: 5px;">
+                           <?=$list->name?>
+                        </td>
+                        <td style="padding-left: 5px;">
+                           <?=$list->description?>
+                        </td>
+                        <td style="text-align: center;">
+                           <?=$list->rating?>
+                        </td>
+                    </tr>
+                <? endforeach; ?>
+            <? endif; ?>
+        </table>
+    </div>
     <!-- end list box -->
     
     <!-- start registr box -->

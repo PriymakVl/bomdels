@@ -14,28 +14,27 @@ class Controller_Admin_Category extends Controller_Base {
         $title = "Редактирование категорий";
         $this->template->title = $title;
         
+        $cat_id = $this->request->query('cat_id', null);
+        $equipment = $this->request->query('equipment', null);
+        
+        if($cat_id) {
+            $cat = new Object_Category($cat_id);
+            $cats = $cat->sub_id; 
+            $equipment = $cat->equipment;    
+        }
+        else if($equipment) $cats = Model::factory('Category')->getMainCategories($equipment);
+        else exit('error action_index');
+        
+        $this->cats = $this->getArrayOfObjects($cats, 'Object_Category');
+
+        View::set_global('equipment', $equipment); 
+        View::bind_global('category', $cat);
+        View::set_global('info', "Перечень основных категорий <span>$equipment</span>");
+        
         $this->template->block_header = View::factory('header/v_header_title')->bind('title', $title);
         if(isset($this->cats))$this->template->block_center = View::factory('category_admin/v_category_content')->bind('cats', $this->cats);
         else $this->template->block_center = View::factory('category_admin/v_category_not_content');
         $this->template->block_right = View::factory('category_admin/v_category_menu');
-    }
-    
-    public function action_danieli() {
-        $cat_id = $this->request->query('cat_id');
-        
-        if($cat_id) {
-            $cat = new Object_Category($cat_id);
-            $cats = $cat->sub_id;     
-        }
-        else $cats = Model::factory('Category')->getMainCategories('danieli');
-        
-        $this->cats = $this->getArrayOfObjects($cats, 'Object_Category');
-        
-        View::set_global('equipment', 'danieli'); 
-        View::bind_global('category', $cat);
-        View::set_global('info', 'Danieli - перечень основных категорий');
-        //Arr::_print($this->cats); 
-        $this->action_index();  
     }
     
     public function action_delete() {

@@ -3,19 +3,28 @@
         <? echo isset($category) ? $category->title : $info ?>
         <a id="history-back-link" href="javascript:history.back();">назад</a>
     </div>
+    <!-- start form add category -->
     <div id="category_data_box" style="display: none;">
-        <label>Наименование</label>
-        <input type="text" name="title" /><br />
-        <label>Рейтинг</label>
-        <input type="text" name="rating" /><br />
-        <label>Alias</label>
-        <input type="text" name="alias" /><br />
-        <input type="hidden" name="equipment" value="<?=$equipment?>" />
-        <input type="hidden" name="parent" value="<? echo (empty($category)) ? 0 : $category->id; ?>" />
+        <label>Name:</label>
+        <input type="text" name="title" />
+        <br />
+        <label>Rating:</label>
+        <input type="text" name="rating" />
+        <br />
+        <label>Alias:</label>
+        <input type="text" name="alias" />
+        <br />
+        <label>Equipment:</label>
+        <input type="text" name="equipment" value="<?=$equipment?>" readonly />
+        <br />
+        <label>Id parent:</label>
+        <input type="text" name="parent" value="<? echo (empty($category)) ? 0 : $category->id; ?>" readonly />
+        <br />
         <input type="submit" id="add_cat" value="создать"/>
         <input type="submit" id="edit_cat" value="сохранить"/>
         <input type="button" id="cancel" value="отменить"/>
     </div>
+    <!-- end form add category -->
     <div id="category_content_box">
         <table>
             <tr>
@@ -34,7 +43,7 @@
                         <td style="text-align: center;"><?=$cat->equipment?></td>
                         <td style="padding-left: 5px;">
                             <? if($cat->sub_id): ?>
-                                <a href="/admin/category/danieli?cat_id=<?=$cat->id?>"><?=$cat->title?></a>
+                                <a href="/admin/category?cat_id=<?=$cat->id?>"><?=$cat->title?></a>
                             <? elseif($cat->details): ?>
                                 <a href="/admin/categorycontent?cat_id=<?=$cat->id?>"><?=$cat->title?></a>
                             <? else: ?>

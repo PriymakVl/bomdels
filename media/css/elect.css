@@ -85,7 +85,7 @@
 }
 
 #list_form_box #add_list {
-    margin: 10px 0 15px 255px;
+    margin: 10px 0 15px 270px;
 }
 
 #list_form_box #delete_list {
@@ -111,6 +111,11 @@
     position: absolute;
     top:20%;
     left: 0;
+}
+
+#list_form_box select {
+    height: 24px;
+    font-size: 16px;
 }
 
 #element_form_box #save_elem {
@@ -185,7 +190,26 @@
     margin: 5px 0 10px 260px;
 }
 
+#sort_list_box {
+    padding-top: 10px;
+}
+#sort_list_box select[name = 'typelist'] {
+    margin: 2px 0 0 14px;   
+    width: 170px; 
+}
 
+#sort_list_box label {
+    margin-left: 14px;  
+}
+
+.title-list-user {
+    padding:5px 0 5px 10px;
+	font-family: "Century Gothic", Arial, Helvetica, Tahoma, sans-serif;
+	border:1px solid #B49A6A;
+	text-align: left;
+	font-size: 1.3em;
+    position: relative;
+}
 
 
 

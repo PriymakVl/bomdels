@@ -33,7 +33,8 @@ class Model_Detail extends Model {
         $sql = "SELECT * FROM $this->tableName WHERE `code` = :code LIMIT 1";
         $query = DB::query(Database::SELECT, $sql)->bind(':code', $code); 
         $res = $query->execute()->as_array();
-        return $res;
+        if($res) return $res[0];
+        return false;
     }
     
     public function getIdSubDetailsByCode($code) 
@@ -59,18 +60,18 @@ class Model_Detail extends Model {
         return $res->execute()->as_array();
     }
     
-    public function delete($id)
+    public function delete($data)
     {
-        $sql = "UPDATE $this->tableName SET `status` = '0' WHERE `id` = :id";
-        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $id);
+        $sql = "UPDATE $this->tableName SET `status` = '0' WHERE `id` = :id AND `parent_code` = :parent_code";
+        $query = DB::query(Database::UPDATE, $sql)->bind(':id', $data['detail_id'])->bind(':parent_code', $data['parent_code']);
         return $query->execute();
     }
     
     public function update($data)
     {
-        $sql = "UPDATE $this->tableName SET `parent_code` = :parent, `rus` = :rus, `weight` = :weight, `qty` = :qty, `material` = :material, `ens` = :ens WHERE `id` = :id";
+        $sql = "UPDATE $this->tableName SET `parent_code` = :parent, `rus` = :rus, `weight` = :weight, `item` = :item, `qty` = :qty, `material` = :material, `ens` = :ens WHERE `id` = :id";
         $query = DB::query(Database::UPDATE, $sql)->bind(':id', $data['id'])->bind(':rus', $data['rus'])->bind(':weight', $data['weight'])->bind(':parent', $data['parent'])
-                    ->bind(':qty', $data['qty'])->bind(':material', $data['material'])->bind(':variant', $data['variant'])->bind(':ens', $data['ens']);
+                    ->bind(':qty', $data['qty'])->bind(':material', $data['material'])->bind(':variant', $data['variant'])->bind(':ens', $data['ens'])->bind(':item', $data['item']);
         return $query->execute();
     }
     
@@ -82,8 +83,8 @@ class Model_Detail extends Model {
     }
     
     public function addDetail($data) {
-        $sql = "INSERT INTO $this->tableName (`code`, `parent_code`, `rus`) VALUES (:code, :parent, :rus)";
-        $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['code'])->bind(':parent', $data['parent'])->bind(':rus', $data['rus']);
+        $sql = "INSERT INTO $this->tableName (`code`, `rus`) VALUES (:code, :rus)";
+        $query = DB::query(Database::INSERT, $sql)->bind(':code', $data['code'])->bind(':rus', $data['rus']);
         $res = $query->execute();
         if($res) return $res[0];
         else return false;

@@ -11,7 +11,9 @@
             </th>
             <th width="150">Наименование</th>
             <th>Описание</th>
-            <th width="100">Создал</th>
+            <? if ($role = 'admin'): ?>
+                <th width="100">Создал</th>
+            <? endif; ?>
         </tr>
         <? if ($lists): ?>
             <? foreach ($lists as $list): ?>
@@ -25,9 +27,11 @@
                     <td style="padding-left: 5px;">
                        <?=$list->description?>
                     </td>
-                    <td style="padding-left: 5px;">
-                       <?=$list->login?>
-                    </td>
+                    <? if ($role = 'admin'): ?>
+                        <td style="padding-left: 5px;">
+                           <?=$list->login?>
+                        </td>
+                    <? endif; ?>
                 </tr>
             <? endforeach; ?>
         <? endif; ?>

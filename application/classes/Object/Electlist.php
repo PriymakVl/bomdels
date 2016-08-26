@@ -7,9 +7,9 @@ class Object_Electlist extends Object_Object {
         $this->data = Model::factory('ElectList')->getListById($id);
     } 
     
-    public function getLoginEmployee() {
-         $employee = Model::factory('Employee')->get($this->data['employee_id']);
-         $this->data['login'] = $employee['login'];
+    public function getLoginUser() {
+         $user = Model::factory('User')->get($this->data['user_id']);
+         $this->data['login'] = $user['login'];
     }
     
 }

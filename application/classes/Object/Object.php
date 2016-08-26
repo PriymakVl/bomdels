@@ -28,7 +28,10 @@ class Object_Object {
     
     public function cutElectDescription($description, $max) {
         $lenth = UTF8::strlen($description);
-        if($lenth > $max) $this->data['cut_des_elect'] = UTF8::substr($description, 0, $max);;        
+        if($lenth > $max) {
+            $description = UTF8::substr($description, 0, $max);
+            $this->data['cut_des_elect'] = $description. ' ...';
+        }      
     }
     
     public function __get($name) 
@@ -39,15 +42,20 @@ class Object_Object {
         return false;        
     } 
     
-     public function cutNote($max = 30) {
+     public function cutNote($max = 30, $postfix = false) {
         $lenth = UTF8::strlen($this->data['note']);
         if($lenth > $max) $this->data['note_cut'] = UTF8::substr($this->data['note'], 0, $max);
+        if($postfix && isset($this->data['note_cut'])) $this->data['note_cut'] = $this->data['note_cut']. ' ...';
         return $this;     
     }
     
     public function getExtensionFile($filename) {
         $info = new SplFileInfo($filename);
         return $info->getExtension();
+    }
+    
+    public function transformDate($time, $format = 'd.m.y', $postfix = 'г.') {
+        return date($format, $time).$postfix;    
     }
 
 }

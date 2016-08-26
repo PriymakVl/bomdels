@@ -10,6 +10,7 @@
 <a href="#">Забыли?</a>
 -->
     </form>
+    
     <div class="wellcome" <? if(!$role) echo 'style="display: none;"' ?>>
         <a href="/user/cancel">Выйти</a>
         <a href="/profile">Кабинет</a>

@@ -8,9 +8,14 @@
        <div id="menu_action_box">
             <ul>
                 <li id="show_danieli">
-                    <a href="/equipment/danieli">Danieli</a>
+                    <a href="/auto/data/danieli">Danieli</a>
                 </li>
-                <li id="show_sundbirsta">Sundbirsta</li>
+                <li id="show_sundbirsta">
+                    <a href="/auto/data/danieli">Sundbirsta</a>
+                </li>
+                <li id="show_sundbirsta">
+                    <a href="/auto/data/crane">Краны</a>
+                </li>
                 <li id="show_danieli">
                     <a href="/auto/data/application">Заявки</a>
                 </li>
